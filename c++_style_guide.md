@@ -1,7 +1,7 @@
 # Инструкция по оформлению кода
 ## Headers
 * Используем зашиту
-```
+``` C++
 #ifndef FOO_BAR_BAZ_H_
 #define FOO_BAR_BAZ_H_
 
