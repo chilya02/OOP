@@ -1,0 +1,4 @@
+#ifndef IMPASSABLE_CELL_H
+#define IMPASSABLE_CELL_H
+
+#endif //IMPASSABLE_CELL_H

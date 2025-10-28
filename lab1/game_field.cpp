@@ -1,5 +1,4 @@
-#include "game_field.h"
-#include "cell.h"
+#include "game_field.hpp"
 
 GameField::GameField(int width, int height){
   width_ = width;
