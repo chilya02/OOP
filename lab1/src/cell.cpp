@@ -1,0 +1,80 @@
+#include "cell.hpp"
+
+Cell::Cell(){
+  this->top = NULL;
+  this->bottom = NULL;
+  this->right = NULL;
+  this->left = NULL;
+}
+
+Cell::~Cell(){
+
+}
+
+Cell::Cell(const Cell& other){
+
+  this->impassable = false;
+  this->slow = false;
+
+  this->top = other.top;
+  if (this->top)
+    this->top->bottom = this;
+
+  this->bottom = other.bottom;
+  if (this->bottom)
+    this->bottom->top = this;
+
+  this->right = other.right;
+  if (this->right)
+    this->right->left = this;
+
+  this->left = other.left;
+  if (this->left)
+    this->left->right = this;
+}
+
+
+std::string Cell::view(){
+  return std::string{"\x1B[42m  \033[0m"};
+}
+
+bool Cell::is_impassable(){
+  return this->impassable;
+}
+
+bool Cell::is_slow(){
+  return this->slow;
+}
+
+Cell* Cell::get_top(){
+  return this->top;
+}
+Cell* Cell::get_bottom(){
+  return this->bottom;
+}
+Cell* Cell::get_right(){
+  return this->right;
+}
+Cell* Cell::get_left(){
+  return this->left;
+}
+
+Cell*** Cell::create_matrix(int height, int width){
+    Cell*** cells = new Cell ** [height];
+    for (int y = 0; y < height; y++){
+      cells[y] = new Cell * [width];
+      for (int x = 0; x < width; x++){
+        cells[y][x] = new Cell();
+        if (y >= 1){
+          cells[y-1][x]->bottom = cells[y][x];
+          cells[y][x]->top = cells[y-1][x];
+        }
+        if (x >= 1){
+          cells[y][x-1]->right = cells[y][x];
+          cells[y][x]->left = cells[y][x-1];
+        }
+      }
+    }
+    return cells;
+  }
+
