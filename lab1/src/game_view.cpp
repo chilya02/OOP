@@ -77,13 +77,13 @@ void GameView::draw(){
 }
 
 
-void GameView::calc_coordinates(){
+bool GameView::calc_coordinates(){
   int row, col;
 
   getmaxyx(stdscr, row, col);
   
   if (this->row == row && this->col == col)
-    return;
+    return false;
   
   this->col = col;
   this->row = row;
@@ -92,7 +92,12 @@ void GameView::calc_coordinates(){
   this->y_start = (row - this->field->height * 2) / 2;
 
   wclear(stdscr);
+  return true;
+}
 
+void GameView::check_size(){
+  if (this->calc_coordinates())
+    this->draw();
 }
 
 void GameView::invalidate(){

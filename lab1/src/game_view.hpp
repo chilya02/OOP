@@ -8,6 +8,7 @@ class GameView{
   public:
     GameView(GameField* field, Player* player);
     void invalidate();
+    void check_size();
 
   private:
     GameField* field;
@@ -19,7 +20,7 @@ class GameView{
     void draw();
     void draw_cell(int x, int y, Cell* cell);
     void draw_player(int x, int y);
-    void calc_coordinates();
+    bool calc_coordinates();
 };
 
 #endif

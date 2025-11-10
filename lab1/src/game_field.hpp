@@ -5,7 +5,7 @@
 
 class GameField{
   public:
-    GameField(int height, int width);
+    GameField(int height, int width, int period);
     int size();
   private:
     int width;
@@ -13,6 +13,7 @@ class GameField{
     Cell ***cells;
     void create_impassable_cells();
     void create_slow_cells();
+    void create_enemy_build(int period);
     Cell** get_random_cell();
   friend class GameView;
   friend class GameProcess;

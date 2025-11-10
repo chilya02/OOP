@@ -5,9 +5,7 @@
 
 class ImpassableCell: public Cell {
   public:
-    ImpassableCell();
+    ImpassableCell(int y, int x);
     ImpassableCell(const Cell&);
-    std::string view() override;
-    
 };
 #endif //IMPASSABLE_CELL_H

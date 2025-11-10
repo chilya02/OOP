@@ -16,6 +16,7 @@ class GameProcess{
     ~GameProcess();
     void create_user_game();
     void create_random_game();
+    void create_game(int height=10, int width=10, int period=3);
     void start();
   private:
     GameField* field;

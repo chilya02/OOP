@@ -6,10 +6,6 @@ bool Entity::is_alive(){
   return this->HP > 0;
 }
 
-std::string Entity::view(){
-  return std::string{""};
-}
-
 bool Entity::move(Cell* target){
   if (!target || target->is_impassable())
     return false;

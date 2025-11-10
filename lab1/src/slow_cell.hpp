@@ -5,9 +5,8 @@
 
 class SlowCell : public Cell{
   public:
-    SlowCell();
+    SlowCell(int y, int x);
     SlowCell(const Cell&);
-    std::string view() override;
 };
 
 #endif //SLOW_CELL_H

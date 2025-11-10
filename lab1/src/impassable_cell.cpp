@@ -1,13 +1,10 @@
 #include "impassable_cell.hpp"
 
-ImpassableCell::ImpassableCell(){
+ImpassableCell::ImpassableCell(int y, int x):Cell(y, x){
   this->impassable = true;
 }
-ImpassableCell::ImpassableCell(const Cell& other): Cell::Cell(other){
+ImpassableCell::ImpassableCell(const Cell& other):Cell(other){
   this->impassable = true;
   this->slow = false;
 }
 
-std::string ImpassableCell::view(){
-  return std::string{"\x1B[4;41;37mMM\033[0m"};
-}

@@ -1,6 +1,6 @@
 #include "cell.hpp"
 
-Cell::Cell(){
+Cell::Cell(int y, int x):y(y), x(x){
   this->top = NULL;
   this->bottom = NULL;
   this->right = NULL;
@@ -11,7 +11,7 @@ Cell::~Cell(){
 
 }
 
-Cell::Cell(const Cell& other){
+Cell::Cell(const Cell& other):y(other.y), x(other.x){
 
   this->impassable = false;
   this->slow = false;
@@ -33,10 +33,6 @@ Cell::Cell(const Cell& other){
     this->left->right = this;
 }
 
-
-std::string Cell::view(){
-  return std::string{"\x1B[42m  \033[0m"};
-}
 
 bool Cell::is_impassable(){
   return this->impassable;
@@ -64,7 +60,7 @@ Cell*** Cell::create_matrix(int height, int width){
     for (int y = 0; y < height; y++){
       cells[y] = new Cell * [width];
       for (int x = 0; x < width; x++){
-        cells[y][x] = new Cell();
+        cells[y][x] = new Cell(y, x);
         if (y >= 1){
           cells[y-1][x]->bottom = cells[y][x];
           cells[y][x]->top = cells[y-1][x];
@@ -77,4 +73,3 @@ Cell*** Cell::create_matrix(int height, int width){
     }
     return cells;
   }
-

@@ -22,7 +22,6 @@ class Entity{
     int damage;
     int HP; // Health points
     Cell* cell;
-    virtual std::string view();
 
   friend class GameProcess;
   friend class GameView;

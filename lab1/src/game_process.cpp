@@ -19,19 +19,22 @@ GameProcess::~GameProcess(){
 void GameProcess::create_random_game(){
   srand(time(NULL));
   int size = 10 +  rand() % 16;
-  this->player = new Player();
-  this->field = new GameField(size, size);
+  this->create_game(size, size);
 }
 
 void GameProcess::create_user_game(){
-  try{
     std::cout << "Enter field height" << std::endl;
     int height;
     std::cin >> height;
     std::cout << "Enter field width" << std::endl;
     int width;
     std::cin >> width;
-    this->field = new GameField(height, width);
+    this->create_game(width, height);
+}
+
+void GameProcess::create_game(int width, int height, int period){
+  try{  
+    this->field = new GameField(height, width, period);
     this->player = new Player();
   }
   catch (const char* error_msg){
@@ -87,6 +90,8 @@ void GameProcess::loop(){
     if (command == 'q')
       this->state = GameState::GameOver;
 
+    this->view->check_size();
+    
     switch (this->state){
 
       case GameState::AwaitPlayer:

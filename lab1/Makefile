@@ -4,7 +4,7 @@ CXX_FLAGS = -Wall -Wextra -std=c++20
 CFLAGS = -c
 OBJ_DIR = obj
 SRC_DIR = src
-OBJ = game_field.o main.o cell.o impassable_cell.o slow_cell.o game_process.o player.o entity.o game_view.o
+OBJ = game_field.o main.o cell.o impassable_cell.o slow_cell.o game_process.o player.o entity.o game_view.o enemy_build.o
 LIB = -lncurses
 
 all: $(OBJ_DIR) $(EXECUTABLE) 

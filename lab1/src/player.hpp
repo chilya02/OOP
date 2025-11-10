@@ -10,7 +10,6 @@ class Player: public Entity{
     bool hit(int damage);
   private:
     int points;
-    std::string view() override;
 
   friend class GameView;
 };
