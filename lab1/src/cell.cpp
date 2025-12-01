@@ -33,6 +33,13 @@ Cell::Cell(const Cell& other):y(other.y), x(other.x){
     this->left->right = this;
 }
 
+int Cell::get_y(){
+  return this->y;
+}
+
+int Cell::get_x(){
+  return this->x;
+}
 
 bool Cell::is_impassable(){
   return this->impassable;

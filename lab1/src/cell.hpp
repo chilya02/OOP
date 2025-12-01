@@ -10,6 +10,8 @@ class Cell{
     Cell& operator=(const Cell& other);
     bool is_impassable();
     bool is_slow();
+    int get_y();
+    int get_x();
     Cell* get_top();
     Cell* get_bottom();
     Cell* get_right();
