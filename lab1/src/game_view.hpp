@@ -2,9 +2,11 @@
 #define GAME_VIEW_H
 
 #include "game_field.hpp"
+
 #include "player.hpp"
 
 #include <ncurses.h>
+#include <vector>
 
 class GameView{
   public:
@@ -21,11 +23,15 @@ class GameView{
     int row;
     int x_start;
     int y_start;
-    int scr_width;
-    int scr_height;
+    int field_scr_width;
+    int field_scr_height;
     void draw();
-    void draw_cell(int x, int y, Cell* cell);
-    void draw_player(int x, int y);
+    void draw_area();
+    std::vector<Cell*> get_move_area();
+    void draw_cell(int, int, Cell*);
+    void draw_area_cell(Cell*);
+    void draw_player(int, int);
+    void print(int, int, const char*, int);
     void del_windows();
     void create_windows();
     bool calc_coordinates();

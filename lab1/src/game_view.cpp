@@ -1,5 +1,8 @@
 #include "game_view.hpp"
 #include "player.hpp"
+#include "player_mode.hpp"
+
+#include <vector>
 
 #define DEFAULT_COLOR       0
 #define CELL_COLOR          1
@@ -9,9 +12,17 @@
 #define AWAIT_COLOR         5
 #define SLOWED_COLOR        6
 
+#define PLAYER_SYM          "/\\"
+#define SLOW_SYM            "~~"
+#define IMPASSABLE_SYM      "MM"
+#define CELL_SYM            "  "
+
+#define CELL_WIDTH          2
+#define CELL_HEIGHT         1
+
 GameView::GameView(GameField* field, Player* player):field(field), player(player){
-  this->scr_width = field->width * 4;
-  this->scr_height = field->height * 2;
+  this->field_scr_width = field->width * CELL_WIDTH * 2;
+  this->field_scr_height = field->height * CELL_HEIGHT * 2;
 
   this->field_window = nullptr;
   this->q_menu_window = nullptr;
@@ -25,7 +36,7 @@ GameView::GameView(GameField* field, Player* player):field(field), player(player
   init_pair(DEFAULT_COLOR, COLOR_WHITE, COLOR_BLACK);
   init_pair(CELL_COLOR, COLOR_BLACK, COLOR_GREEN);
   init_pair(IMPASSABLE_COLOR, COLOR_WHITE, COLOR_RED);
-  init_pair(SLOW_COLOR, COLOR_BLACK, COLOR_BLUE);
+  init_pair(SLOW_COLOR, COLOR_WHITE, COLOR_BLUE);
   init_pair(PLAYER_COLOR, COLOR_BLACK, COLOR_YELLOW);
   init_pair(AWAIT_COLOR, COLOR_WHITE, COLOR_MAGENTA);
   init_pair(SLOWED_COLOR, COLOR_BLACK, COLOR_BLUE);
@@ -37,66 +48,112 @@ GameView::~GameView(){
 }
 
 void GameView::draw_player(int y, int x){
-  int pair = 0;
+  const char* text = PLAYER_SYM;
+  int attr = 0;
   switch (this->player->get_status()) {
     case EntityStatus::Await:
-      pair = COLOR_PAIR(AWAIT_COLOR);
+      attr = COLOR_PAIR(AWAIT_COLOR) | A_BLINK;
       break;
     case EntityStatus::Slowed:
-      pair = COLOR_PAIR(SLOWED_COLOR);
+      attr = COLOR_PAIR(SLOWED_COLOR);
       break;
     default:
-      pair = COLOR_PAIR(PLAYER_COLOR);
+      attr = COLOR_PAIR(PLAYER_COLOR);
   }
-  wattron(this->field_window, pair);
-  mvwprintw(this->field_window, y, x, "/\\");
+  this->print(y, x, text, attr);
 }
 
 void GameView::draw_cell(int y, int x, Cell* cell){
-
-  const char* imp_text = "MM";
-  const char* slow_text = "~~";
-  const char* clean_text = "  ";
   const char* text;
-
-  int pair = 0;
+  int attr = 0;
   if (cell->is_impassable()){
-    pair = COLOR_PAIR(IMPASSABLE_COLOR);
-    text = imp_text;
+    attr = COLOR_PAIR(IMPASSABLE_COLOR);
+    text = IMPASSABLE_SYM;
   }
   else if (cell->is_slow()){
-    pair = COLOR_PAIR(SLOW_COLOR);
-    text = slow_text;
+    attr = COLOR_PAIR(SLOW_COLOR);
+    text = SLOW_SYM;
   }
   else{
-    pair = COLOR_PAIR(CELL_COLOR);
-    text = clean_text;
+    attr = COLOR_PAIR(CELL_COLOR);
+    text = CELL_SYM;
   }
-  wattron(this->field_window, pair | A_NORMAL);
-  mvwprintw(this->field_window, y, x, text);
+  this->print(y, x, text, attr);
+}
+
+void GameView::print(int y, int x, const char* text, int attr){
+  int y_scr = y * CELL_HEIGHT * 2;
+  int x_scr = x * CELL_WIDTH * 2;
+  if (y >= this->field_scr_height | x >= this->field_scr_width)
+    return;
+  wattron(this->field_window, attr);
+  mvwprintw(this->field_window, y_scr, x_scr, text);
+  wattroff(this->field_window, attr);
 }
 
 void GameView::draw(){
   if (!this->is_visible)
     return;
-  int x_scr = 0;
-  int y_scr = 0;
 
   for (int y = 0; y < this->field->height; y++){
-    x_scr = 0;
     for (int x = 0; x < this->field->width; x++){
       Cell* cell = this->field->cells[y][x];
       if (this->player->get_cell() == cell)
-        this->draw_player(y_scr, x_scr);
+        this->draw_player(y, x);
       else
-        this->draw_cell(y_scr, x_scr, cell);
-      x_scr += 4;
+        this->draw_cell(y, x, cell);
     }
-    y_scr += 2;
   }
+  if (this->player->can_act())
+    this->draw_area();
   move(0, 0);
   wrefresh(this->field_window);
   wrefresh(stdscr);
+}
+
+void GameView::draw_area(){
+  std::vector<Cell*> res;
+  switch (this->player->get_mode()){
+  case PlayerMode::Move:
+    res = this->get_move_area();
+    break;
+  case PlayerMode::NearFight:
+    break;
+  case PlayerMode::FarFight:
+    break;
+  default:
+    break;
+  }
+  for (auto cell: res){
+    draw_area_cell(cell);
+  }
+}
+
+void GameView::draw_area_cell(Cell* cell){
+  if (cell->is_impassable())
+    return;
+  const char* text = CELL_SYM;
+  if (cell->is_slow())
+    text = SLOW_SYM;
+  this->print(cell->get_y(), cell->get_x(), text, COLOR_PAIR(PLAYER_COLOR));
+}
+
+std::vector<Cell*> GameView::get_move_area(){
+  Cell* anchor = this->player->get_cell();
+  std::vector<Cell*> res;
+  Cell* cell = anchor->get_bottom();
+  if (cell)
+    res.push_back(cell);
+  cell = anchor->get_top();
+  if (cell)
+    res.push_back(cell);
+  cell = anchor->get_left();
+  if (cell)
+    res.push_back(cell);
+  cell = anchor->get_right();
+  if (cell)
+    res.push_back(cell);
+  return res;
 }
 
 void GameView::del_windows(){
@@ -109,7 +166,7 @@ void GameView::del_windows(){
 
 void GameView::create_windows(){
   if (!this->field_window)
-    this->field_window = newwin(this->scr_height, this->scr_width, this->y_start, this->x_start);
+    this->field_window = newwin(this->field_scr_height, this->field_scr_width, this->y_start, this->x_start);
     this->draw();
 }
 
@@ -124,10 +181,10 @@ bool GameView::calc_coordinates(){
   this->col = col;
   this->row = row;
   
-  this->x_start = (col - this->scr_width) / 2;
-  this->y_start = (row - this->scr_height) / 2;
+  this->x_start = (col - this->field_scr_width) / 2;
+  this->y_start = (row - this->field_scr_height) / 2;
   
-  if (col < this->scr_width + 5 || row < this->scr_height + 5){
+  if (col < this->field_scr_width + 5 || row < this->field_scr_height + 5){
     del_windows();
     this->is_visible = false;
   } else {
@@ -139,8 +196,6 @@ bool GameView::calc_coordinates(){
 }
 
 void GameView::move_field(){
-  if (!this->is_visible)
-    return;
   mvwin(this->field_window, this->y_start, this->x_start);
   wclear(stdscr);
   wrefresh(stdscr);
@@ -150,7 +205,8 @@ void GameView::move_field(){
 
 void GameView::check_size(){
   if (this->calc_coordinates()){
-    this->move_field();
+    if (this->is_visible)
+      this->move_field();
   }
 }
 
