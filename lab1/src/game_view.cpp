@@ -1,6 +1,6 @@
-#include "game_view.hpp"
-#include "player.hpp"
-#include "player_mode.hpp"
+#include "../include/game_view.hpp"
+#include "../include/player.hpp"
+#include "../include/player_mode.hpp"
 
 #include <vector>
 

@@ -1,4 +1,4 @@
-#include "slow_cell.hpp"
+#include "../include/slow_cell.hpp"
 
 SlowCell::SlowCell(int y, int x):Cell(y, x){
   this->impassable = false;

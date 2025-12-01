@@ -1,4 +1,4 @@
-#include "game_process.hpp"
+#include "../include/game_process.hpp"
 
 int main(){
     GameProcess game = GameProcess();

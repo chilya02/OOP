@@ -1,9 +1,9 @@
-#include "game_process.hpp"
-#include "entity_status.hpp"
-#include "game_field.hpp"
-#include "game_view.hpp"
-#include "command_controller.hpp"
-#include "game_commands.hpp"
+#include "../include/game_process.hpp"
+#include "../include/entity_status.hpp"
+#include "../include/game_field.hpp"
+#include "../include/game_view.hpp"
+#include "../include/command_controller.hpp"
+#include "../include/game_commands.hpp"
 
 #include <iostream>
 #include <ctime>

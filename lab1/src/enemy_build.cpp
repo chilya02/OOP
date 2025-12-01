@@ -1,4 +1,4 @@
-#include "enemy_build.hpp"
+#include "../include/enemy_build.hpp"
 
 EnemyBuild::EnemyBuild(Cell* cell, int period):cell(cell), tick_period(period){
 

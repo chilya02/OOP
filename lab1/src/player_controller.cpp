@@ -1,5 +1,5 @@
-#include "player_controller.hpp"
-#include "entity_status.hpp"
+#include "../include/player_controller.hpp"
+#include "../include/entity_status.hpp"
 
 PlayerController::PlayerController(Player* player, Cell* cell):player(player){
     this->player->cell = cell;

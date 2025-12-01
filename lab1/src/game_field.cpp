@@ -1,8 +1,8 @@
-#include "game_field.hpp"
-#include "cell.hpp"
-#include "impassable_cell.hpp"
-#include "slow_cell.hpp"
-#include "enemy_build.hpp"
+#include "../include/game_field.hpp"
+#include "../include/cell.hpp"
+#include "../include/impassable_cell.hpp"
+#include "../include/slow_cell.hpp"
+#include "../include/enemy_build.hpp"
 #include <ctime>
 
 GameField::GameField(int height, int width, int period):width(width), height(height){

@@ -1,4 +1,4 @@
-#include "player.hpp"
+#include "../include/player.hpp"
 
 Player::Player(int , int , int points):points(points){
     this->mode = PlayerMode::Move;

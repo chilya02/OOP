@@ -1,4 +1,4 @@
-#include "cell.hpp"
+#include "../include/cell.hpp"
 
 Cell::Cell(int y, int x):y(y), x(x){
   this->top = NULL;

@@ -1,8 +1,8 @@
-#include "command_controller.hpp"
+#include "../include/command_controller.hpp"
 
 #include <ncurses.h>
 
-#include "game_commands.hpp"
+#include "../include/game_commands.hpp"
 
 CommandController::CommandController(){
   initscr();
