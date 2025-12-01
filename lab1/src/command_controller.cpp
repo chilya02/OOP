@@ -11,23 +11,22 @@ CommandController::CommandController(){
 }
 
 Command CommandController::get_command(){
-    int command = '\0';
-    command = getch();
+  int command = '\0';
+  command = getch();
 
-    switch (command) {
-    
+  switch (command) {
     case 'q':
-        return Command::Quit;
+      return Command::Quit;
     case 'a':
-        return Command::Attack;
+      return Command::Attack;
     case KEY_UP:
-        return Command::Up;
+      return Command::Up;
     case KEY_DOWN:
-        return Command::Down;
+      return Command::Down;
     case KEY_RIGHT:
-        return Command::Right;
+      return Command::Right;
     case KEY_LEFT:
-        return Command::Left;
+      return Command::Left;
     }
     return Command::Undefined;
 }
