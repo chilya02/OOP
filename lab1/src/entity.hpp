@@ -29,9 +29,5 @@ class Entity{
     int damage;
     int HP; // Health points
     Cell* cell;
-
-
-
-  friend class PlayerController;
 };
 #endif

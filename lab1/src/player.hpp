@@ -11,5 +11,7 @@ class Player: public Entity{
   private:
     int points;
     PlayerMode mode;
+  
+  friend class PlayerController;
 };
 #endif //PLAYER_H
