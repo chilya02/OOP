@@ -16,6 +16,11 @@ class Entity{
     bool move_left();
     bool move_right();
 
+    Cell* get_cell();
+    EntityStatus get_status();
+    
+    void change_status();
+
   protected:
     bool move(Cell* target);
     EntityStatus status = EntityStatus::Await;
@@ -23,7 +28,8 @@ class Entity{
     int HP; // Health points
     Cell* cell;
 
-  friend class GameProcess;
-  friend class GameView;
+    bool can_act();
+
+  friend class PlayerController;
 };
 #endif

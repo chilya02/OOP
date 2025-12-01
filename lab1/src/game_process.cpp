@@ -2,23 +2,26 @@
 #include "entity_status.hpp"
 #include "game_field.hpp"
 #include "game_view.hpp"
+#include "command_controller.hpp"
+#include "game_commands.hpp"
 
 #include <iostream>
-#include <unistd.h>
-#include <ncurses.h>
 #include <ctime>
 
 GameProcess::GameProcess(){
-  this->player = NULL;
-  this->field = NULL;
+  this->player = nullptr;
+  this->field = nullptr;
+  this->contrroller = nullptr;
+  this->player_controller = nullptr;
 }
+
 GameProcess::~GameProcess(){
   endwin();
 }
 
 void GameProcess::create_random_game(){
   srand(time(NULL));
-  int size = 10 +  rand() % 16;
+  int size = 10 + rand() % 16;
   this->create_game(size, size);
 }
 
@@ -48,76 +51,50 @@ void GameProcess::start(){
     std::cerr << "Game has not configurated" << std::endl;
     exit(0);
   }
-  this->set_player_pos();    
-  initscr();
-  keypad(stdscr, 1);  
-  nodelay(stdscr, 1);
+  Cell* player_cell = &(*this->field->cells[this->field->height - 1][this->field->width - 1]);
+  this->player_controller = new PlayerController(this->player, player_cell);
+  this->contrroller = new CommandController();
   this->view = new GameView(this->field, this->player);
+  
   this->state = GameState::AwaitPlayer;
   this->loop();
 }
 
-void GameProcess::set_player_pos(){
-  this->player->cell = &(*this->field->cells[this->field->height - 1][this->field->width - 1]);
-}
-
-void GameProcess::move_player(int command){
-  switch (command){
-    case KEY_UP:
-      this->player->move_up();
-      break;
-    case KEY_DOWN:
-      this->player->move_down();
-      break;
-    case KEY_RIGHT:
-      this->player->move_right();
-      break;
-    case KEY_LEFT:
-      this->player->move_left();
-      break;
-  }
-}
-  
 void GameProcess::loop(){
-  int command = '\0';
+  Command command;
 
   this->view->invalidate();
-  time_t last_time;
+  unsigned last_time = clock();
+  while (this->state != GameState::Exit){
 
-  while (this->state != GameState::GameOver){
-
-    command = getch();
-    if (command == 'q')
-      this->state = GameState::GameOver;
+    command = this->contrroller->get_command();
+    if (command == Command::Quit)
+      this->state = GameState::Quit;
 
     this->view->check_size();
-    
+
     switch (this->state){
-
       case GameState::AwaitPlayer:
-        this->move_player(command);
-        break;
-
-      case GameState::AwaitEnemy:
-        if ((time(0) - last_time) > 1){
-          this->state = GameState::AwaitPlayer;
-          this->player->status = EntityStatus::Await;
+        if (this->player_controller->handle_command(command)){
+          last_time = clock();
+          this->state = GameState::AwaitEnemy;
           this->view->invalidate();
         }
         break;
-
+      case GameState::AwaitEnemy:
+        if ((clock() - last_time) >= 100000){
+          this->state = GameState::AwaitPlayer;
+          this->player->change_status();
+          this->view->invalidate();
+        }
+        break;
+      case GameState::Quit:
+        this->state = GameState::Exit;
+        break;  
       case GameState::GameOver:
         break;
+      case GameState::Exit:
+        break;
     }
-    if (this->player->status == EntityStatus::Await)
-      continue;
-    this->view->invalidate();
-    if (this->state == GameState::AwaitPlayer){
-      this->state = GameState::AwaitEnemy;
-      last_time = time(0);
-    }
-    //sleep(1);
-    //this->player->status = EntityStatus::Await;
-    //this->view->invalidate();
   }
 }

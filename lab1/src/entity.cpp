@@ -33,3 +33,29 @@ bool Entity::move_right(){
   Cell* right = this->cell->get_right();
   return this->move(right);
 }
+
+void Entity::change_status(){
+  switch (this->status)
+  {
+  case EntityStatus::Await:
+    break;
+  case EntityStatus::Slowed:
+    this->status = EntityStatus::Stay;
+    break;
+  case EntityStatus::Stay:
+    this->status = EntityStatus::Await;
+    break;
+  }
+}
+
+bool Entity::can_act(){
+  return this->status == EntityStatus::Await;
+}
+
+Cell* Entity::get_cell(){
+  return this->cell;
+}
+
+EntityStatus Entity::get_status(){
+  return this->status;
+}

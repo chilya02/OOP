@@ -1,4 +1,15 @@
 #include "iostream"
+class A{
+  protected:
+    virtual void m(){
+
+    }
+};
+
+class B : A {
+   public:
+     void m(){}
+};
 
 
 
@@ -23,6 +34,5 @@ int main(){
   std::cout << *data;
   int* array;
   array = new int[10];
-
   // Различие 
 }
