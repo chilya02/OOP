@@ -76,10 +76,13 @@ void GameProcess::loop(){
     switch (this->state){
       case GameState::AwaitPlayer:
         if (this->player_controller->handle_command(command)){
-          last_time = clock();
-          this->state = GameState::AwaitEnemy;
           this->view->invalidate();
         }
+        if (!this->player->can_act()){
+          last_time = clock();
+          this->state = GameState::AwaitEnemy;
+        }
+
         break;
       case GameState::AwaitEnemy:
         if ((clock() - last_time) >= 100000){

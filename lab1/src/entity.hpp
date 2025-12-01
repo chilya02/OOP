@@ -16,6 +16,8 @@ class Entity{
     bool move_left();
     bool move_right();
 
+    bool can_act();
+
     Cell* get_cell();
     EntityStatus get_status();
     
@@ -28,7 +30,7 @@ class Entity{
     int HP; // Health points
     Cell* cell;
 
-    bool can_act();
+
 
   friend class PlayerController;
 };
