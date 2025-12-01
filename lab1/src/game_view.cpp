@@ -165,9 +165,10 @@ void GameView::del_windows(){
 }
 
 void GameView::create_windows(){
-  if (!this->field_window)
+  if (!this->field_window){
     this->field_window = newwin(this->field_scr_height, this->field_scr_width, this->y_start, this->x_start);
     this->draw();
+  }
 }
 
 bool GameView::calc_coordinates(){
