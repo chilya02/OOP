@@ -37,8 +37,12 @@ void GameProcess::create_user_game(){
 
 void GameProcess::create_game(int width, int height, int period){
   try{  
-    this->field = new GameField(height, width, period);
-    this->player = new Player();
+    this->field = new GameField(height, width);
+    Cell* player_cell = &(*this->field->get_cell(height - 1, width - 1));
+    this->player = new Player(player_cell);
+    this->player_controller = new PlayerController(this->player);
+    Cell* build_cell = &(*this->field->get_cell(0, 0));
+    this->enemy_build = new EnemyBuild(build_cell, period);
   }
   catch (const char* error_msg){
     std::cerr << error_msg << std::endl;
@@ -51,8 +55,7 @@ void GameProcess::start(){
     std::cerr << "Game has not configurated" << std::endl;
     exit(0);
   }
-  Cell* player_cell = &(*this->field->cells[this->field->height - 1][this->field->width - 1]);
-  this->player_controller = new PlayerController(this->player, player_cell);
+
   this->contrroller = new CommandController();
   this->view = new GameView(this->field, this->player);
   
@@ -74,26 +77,34 @@ void GameProcess::loop(){
     this->view->check_size();
 
     switch (this->state){
+
       case GameState::AwaitPlayer:
-        if (this->player_controller->handle_command(command)){
+
+        if (this->player_controller->handle_command(command))
           this->view->invalidate();
-        }
+
         if (!this->player->can_act()){
           last_time = clock();
           this->state = GameState::AwaitEnemy;
         }
 
         break;
+
       case GameState::AwaitEnemy:
+
         if ((clock() - last_time) >= 100000){
           this->state = GameState::AwaitPlayer;
           this->player->change_status();
           this->view->invalidate();
         }
+
         break;
+
       case GameState::Quit:
+
         this->state = GameState::Exit;
         break;  
+      
       case GameState::GameOver:
         break;
       case GameState::Exit:

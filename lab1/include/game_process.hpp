@@ -7,6 +7,7 @@
 #include "command_controller.hpp"
 #include "game_commands.hpp"
 #include "player_controller.hpp"
+#include "enemy_build.hpp"
 
 class GameProcess{
   enum class GameState{
@@ -28,6 +29,7 @@ class GameProcess{
   private:
     GameField* field;
     Player* player;
+    EnemyBuild* enemy_build;
     GameView* view;
     CommandController* contrroller;
     PlayerController* player_controller;

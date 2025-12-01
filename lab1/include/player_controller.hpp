@@ -7,7 +7,7 @@
 
 class PlayerController{
   public:
-    PlayerController(Player* player, Cell* cell);
+    PlayerController(Player* player);
     bool handle_command(Command command);
     bool move_player(Command command);
   private:

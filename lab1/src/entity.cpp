@@ -2,6 +2,8 @@
 
 Entity::Entity(int damage, int HP):damage(damage), HP(HP){};
 
+Entity::Entity(Cell* cell, int, int):cell(cell){};
+
 bool Entity::is_alive(){
   return this->HP > 0;
 }

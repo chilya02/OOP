@@ -5,17 +5,17 @@
 
 class GameField{
   public:
-    GameField(int height, int width, int period);
+    GameField(int height, int width);
     int size();
+    Cell* get_cell(int y, int x);
+    int get_width();
+    int get_height();
   private:
     int width;
     int height;
     Cell ***cells;
     void create_impassable_cells();
     void create_slow_cells();
-    void create_enemy_build(int period);
     Cell** get_random_cell();
-  friend class GameView;
-  friend class GameProcess;
 };
 #endif // GAME_FIELD

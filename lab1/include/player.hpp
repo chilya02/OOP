@@ -7,6 +7,7 @@
 class Player: public Entity{
   public:
     Player(int damage = 30, int HP = 100, int points = 0);
+    Player(Cell* cell, int damage = 30, int HP = 100, int points = 0);
     PlayerMode get_mode();
   private:
     int points;

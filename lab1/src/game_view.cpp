@@ -5,8 +5,8 @@
 #include <vector>
 
 GameView::GameView(GameField* field, Player* player):field(field), player(player){
-  this->field_scr_width = field->width * CELL_WIDTH * 2;
-  this->field_scr_height = field->height * CELL_HEIGHT * 2;
+  this->field_scr_width = field->get_width() * CELL_WIDTH * 2;
+  this->field_scr_height = field->get_height() * CELL_HEIGHT * 2;
 
   this->field_window = nullptr;
   this->q_menu_window = nullptr;
@@ -79,9 +79,9 @@ void GameView::draw(){
   if (!this->is_visible)
     return;
 
-  for (int y = 0; y < this->field->height; y++){
-    for (int x = 0; x < this->field->width; x++){
-      Cell* cell = this->field->cells[y][x];
+  for (int y = 0; y < this->field->get_height(); y++){
+    for (int x = 0; x < this->field->get_width(); x++){
+      Cell* cell = this->field->get_cell(y, x);
       if (this->player->get_cell() == cell)
         this->draw_player(y, x);
       else

@@ -1,9 +1,7 @@
 #include "../include/player_controller.hpp"
 #include "../include/entity_status.hpp"
 
-PlayerController::PlayerController(Player* player, Cell* cell):player(player){
-    this->player->cell = cell;
-}
+PlayerController::PlayerController(Player* player):player(player){}
 
 bool PlayerController::handle_command(Command command){
 switch (this->player->status){
