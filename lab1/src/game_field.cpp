@@ -15,6 +15,7 @@ GameField::GameField(int height, int width):width(width), height(height){
   this->cells = Cell::create_matrix(height, width);
   this->create_impassable_cells();
   this->create_slow_cells();
+  this->cells[0][0] = new ImpassableCell(*this->cells[0][0]);
 }
 
 Cell** GameField::get_random_cell(){
