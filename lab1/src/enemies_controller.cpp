@@ -14,11 +14,11 @@ void EnemiesController::act(){
   for (Enemy* enemy: *this->enemies){
     enemy->change_status();
     if (enemy->can_act())
-      this->dijkstra(enemy);
+      this->move_enemy(enemy);
   }
 }
 
-void EnemiesController::dijkstra(Enemy* enemy){
+std::map<Cell*, int>  EnemiesController::BFS(){
   const int MAX = this->field->size();
 
   int width = this->field->get_width();
@@ -33,7 +33,7 @@ void EnemiesController::dijkstra(Enemy* enemy){
     }
   }
 
-  Cell* cell = player->get_cell();
+  Cell* cell = this->player->get_cell();
   dist[cell] = 0;
   q.push(cell);
 
@@ -48,14 +48,37 @@ void EnemiesController::dijkstra(Enemy* enemy){
       }
     }
   }
-  
+  return dist;
+}
+
+float EnemiesController::distance(Cell* cell){
+  int y1 = cell->get_y();
+  int x1 = cell->get_x();
+  int y2 = this->player->get_cell()->get_y();
+  int x2 = this->player->get_cell()->get_x();
+
+  return sqrt(pow(y1 - y2, 2) + pow(x1 - x2, 2));
+}
+
+Cell* EnemiesController::get_optimal_cell(Enemy* enemy){
+  std::map<Cell*, int> dist = this->BFS();
   Cell* target = nullptr;
-  int min_length = MAX;
+  int min_length = this->field->size();
   for (Cell* neighbor: enemy->get_cell()->get_free_neighbors()){
+    if (dist[neighbor] == min_length && target){
+      if (distance(neighbor) < distance(target)){
+        target = neighbor;
+      }
+    }
     if (dist[neighbor] < min_length){
       min_length = dist[neighbor];
       target = neighbor;
     }
   }
+  return target;
+}
+
+void EnemiesController::move_enemy(Enemy* enemy){
+  Cell* target = this->get_optimal_cell(enemy);
   enemy->move(target);
 }
