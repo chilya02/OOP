@@ -12,8 +12,6 @@ class Entity:public MovableCellObject{
     bool is_alive();
     bool hit(int damage);
 
-    
-
     bool can_act();
 
     EntityStatus get_status();
