@@ -8,7 +8,8 @@ bool Entity::is_alive(){
 
 bool Entity::move(Cell* target){
   bool res = MovableCellObject::move(target);
-  this->status = target->is_slow() ? EntityStatus::Slowed : EntityStatus::Stay;
+  if (res)
+    this->status = target->is_slow() ? EntityStatus::Slowed : EntityStatus::Stay;
   return res;
 }
 
