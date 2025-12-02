@@ -84,3 +84,16 @@ Cell*** Cell::create_matrix(int height, int width){
     }
     return cells;
   }
+
+std::vector<Cell*> Cell::get_neighbors(){
+  std::vector<Cell*> res;
+  if (this->bottom && !this->bottom->busy && !this->bottom->impassable)
+    res.push_back(this->bottom);
+  if (this->top && !this->top->busy && !this->top->impassable)
+    res.push_back(this->top);
+  if (this->left && !this->left->busy && !this->left->impassable)
+    res.push_back(this->left);
+  if (this->right && !this->right->busy && !this->right->impassable)
+    res.push_back(this->right);
+  return res;
+}

@@ -129,7 +129,7 @@ void GameDraw::draw_area(){
   std::vector<Cell*> res;
   switch (this->player->get_mode()){
   case PlayerMode::Move:
-    res = this->get_move_area();
+    res = this->player->get_cell()->get_neighbors();
     break;
   case PlayerMode::NearFight:
     break;

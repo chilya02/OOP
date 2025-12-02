@@ -1,6 +1,8 @@
-#include <stdlib.h>
 #ifndef CELL_H
 #define CELL_H
+
+#include <stdlib.h>
+#include <vector>
 
 class Cell{
   public:
@@ -17,6 +19,7 @@ class Cell{
     Cell* get_bottom();
     Cell* get_right();
     Cell* get_left();
+    std::vector<Cell*> get_neighbors();
   static Cell*** create_matrix(int height, int width);
 
   protected:
