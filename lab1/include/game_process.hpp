@@ -8,11 +8,15 @@
 #include "game_commands.hpp"
 #include "player_controller.hpp"
 #include "enemy_build.hpp"
+#include "enemy.hpp"
+#include "enemies_controller.hpp"
+#include <vector>
 
 class GameProcess{
   enum class GameState{
     AwaitPlayer,
     AwaitEnemy,
+    AwaitBuild,
     GameOver,
     Exit,
     Quit
@@ -33,6 +37,8 @@ class GameProcess{
     ViewController* view;
     CommandController* contrroller;
     PlayerController* player_controller;
+    EnemiesController* enemies_controller;
+    std::vector<Enemy*>* enemies;
     GameState state;
     void loop();
 };

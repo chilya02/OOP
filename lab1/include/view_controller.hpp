@@ -13,7 +13,7 @@
 
 class ViewController{
   public:
-    ViewController(GameField* field, Player* player, EnemyBuild* build);
+    ViewController(GameField* field, Player* player, EnemyBuild* build, std::vector<Enemy*>* enemies);
     ~ViewController();
     void invalidate();
     void check_size();

@@ -4,6 +4,7 @@
 #include "../include/view_controller.hpp"
 #include "../include/command_controller.hpp"
 #include "../include/game_commands.hpp"
+#include "../include/enemies_controller.hpp"
 
 #include <iostream>
 #include <ctime>
@@ -13,6 +14,9 @@ GameProcess::GameProcess(){
   this->field = nullptr;
   this->contrroller = nullptr;
   this->player_controller = nullptr;
+  this->enemies_controller = nullptr;
+  this->enemy_build = nullptr;
+  this->enemies = nullptr;
 }
 
 GameProcess::~GameProcess(){
@@ -43,6 +47,12 @@ void GameProcess::create_game(int width, int height, int period){
     this->player_controller = new PlayerController(this->player);
     Cell* build_cell = &(*this->field->get_cell(0, 0));
     this->enemy_build = new EnemyBuild(build_cell, period);
+
+    this->enemies = new std::vector<Enemy*>;
+    Cell* cell = this->field->get_cell(0, 1);
+    Enemy* enemy = new Enemy(cell);
+    this->enemies->push_back(enemy);
+    this->enemies_controller = new EnemiesController(this->enemies, this->player, this->field);
   }
   catch (const char* error_msg){
     std::cerr << error_msg << std::endl;
@@ -57,8 +67,8 @@ void GameProcess::start(){
   }
 
   this->contrroller = new CommandController();
-  this->view = new ViewController(this->field, this->player, this->enemy_build);
-  
+  this->view = new ViewController(this->field, this->player, this->enemy_build, this->enemies);
+
   this->state = GameState::AwaitPlayer;
   this->loop();
 }
@@ -92,12 +102,17 @@ void GameProcess::loop(){
 
       case GameState::AwaitEnemy:
 
-        if ((clock() - last_time) >= 100000){
+        if ((clock() - last_time) >= 1000000){
+          this->enemies_controller->act();
           this->state = GameState::AwaitPlayer;
           this->player->change_status();
           this->view->invalidate();
         }
 
+        break;
+
+      case GameState::AwaitBuild:
+        
         break;
 
       case GameState::Quit:

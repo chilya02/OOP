@@ -87,6 +87,19 @@ Cell*** Cell::create_matrix(int height, int width){
 
 std::vector<Cell*> Cell::get_neighbors(){
   std::vector<Cell*> res;
+  if (this->bottom && !this->bottom->impassable)
+    res.push_back(this->bottom);
+  if (this->top && !this->top->impassable)
+    res.push_back(this->top);
+  if (this->left && !this->left->impassable)
+    res.push_back(this->left);
+  if (this->right && !this->right->impassable)
+    res.push_back(this->right);
+  return res;
+}
+
+std::vector<Cell*> Cell::get_free_neighbors(){
+  std::vector<Cell*> res;
   if (this->bottom && !this->bottom->busy && !this->bottom->impassable)
     res.push_back(this->bottom);
   if (this->top && !this->top->busy && !this->top->impassable)

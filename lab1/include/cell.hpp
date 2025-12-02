@@ -20,6 +20,7 @@ class Cell{
     Cell* get_right();
     Cell* get_left();
     std::vector<Cell*> get_neighbors();
+    std::vector<Cell*> get_free_neighbors();
   static Cell*** create_matrix(int height, int width);
 
   protected:

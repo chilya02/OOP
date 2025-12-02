@@ -19,7 +19,7 @@ class Entity:public MovableCellObject{
     void change_status();
 
   protected:
-    bool move(Cell* target) override;
+    bool move(Cell* target) final;
     EntityStatus status;
     int damage;
     int HP; // Health points

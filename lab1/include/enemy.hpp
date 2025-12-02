@@ -4,8 +4,12 @@
 #include "entity.hpp"
 
 class Enemy: public Entity{
-  Enemy();
-  ~Enemy();
-  protected:
+  public:
+    Enemy(Cell* cell);
+    ~Enemy();
+  private:
+    //bool move(Cell* target) final;
+
+  friend class EnemiesController;
 };
 #endif // ENEMY_H

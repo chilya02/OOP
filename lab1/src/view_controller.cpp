@@ -6,13 +6,13 @@
 
 #include <vector>
 
-ViewController::ViewController(GameField* field, Player* player, EnemyBuild* build){
+ViewController::ViewController(GameField* field, Player* player, EnemyBuild* build, std::vector<Enemy*>* enemies){
   
   noecho();
   start_color();
   wclear(stdscr);
   
-  this->field_drawer = new GameDraw(player, field, build);
+  this->field_drawer = new GameDraw(player, field, build, enemies);
 
   this->calc_coordinates();
   

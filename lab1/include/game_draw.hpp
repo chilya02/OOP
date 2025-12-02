@@ -5,6 +5,7 @@
 #include "player.hpp"
 #include "game_field.hpp"
 #include "enemy_build.hpp"
+#include "enemy.hpp"
 
 #include <ncurses.h>
 #include <vector>
@@ -17,19 +18,21 @@
 #define AWAIT_COLOR         5
 #define SLOWED_COLOR        6
 #define BUILD_COLOR         7
+#define ENEMY_COLOR         8
 
 #define PLAYER_SYM          "/\\"
 #define SLOW_SYM            "~~"
 #define IMPASSABLE_SYM      "MM"
 #define CELL_SYM            "  "
 #define BUILD_SYM           "  "
+#define ENEMY_SYM           "XX"
 
 #define CELL_WIDTH          2
 #define CELL_HEIGHT         1
 
 class GameDraw{
   public:
-    GameDraw(Player* player, GameField* field, EnemyBuild* build);
+    GameDraw(Player* player, GameField* field, EnemyBuild* build, std::vector<Enemy*>* enemies);
     ~GameDraw();
     void draw();
     int get_width();
@@ -42,6 +45,7 @@ class GameDraw{
     Player* player;
     GameField* field;
     EnemyBuild* build;
+    std::vector<Enemy*>* enemies;
 
     WINDOW* win;
     
@@ -53,9 +57,8 @@ class GameDraw{
     void draw_build();
     void draw_area();
     void draw_area_cell(Cell*);
+    void draw_enemies();
     void print(int, int, const char*, int);
-
-    std::vector<Cell*> get_move_area();
 };
 
 #endif

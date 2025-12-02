@@ -2,8 +2,8 @@
 
 #include <vector>
 
-GameDraw::GameDraw(Player* player, GameField* field, EnemyBuild* build)
-    : player(player), field(field), build(build){
+GameDraw::GameDraw(Player* player, GameField* field, EnemyBuild* build, std::vector<Enemy*>* enemies)
+    : player(player), field(field), build(build), enemies(enemies){
   
   this->scr_height = field->get_height() * CELL_HEIGHT * 2;
   this->scr_width = field->get_width() * CELL_WIDTH * 2;
@@ -16,6 +16,7 @@ GameDraw::GameDraw(Player* player, GameField* field, EnemyBuild* build)
   init_pair(AWAIT_COLOR, COLOR_WHITE, COLOR_MAGENTA);
   init_pair(SLOWED_COLOR, COLOR_BLACK, COLOR_BLUE);
   init_pair(BUILD_COLOR, COLOR_BLACK, COLOR_WHITE);
+  init_pair(ENEMY_COLOR, COLOR_RED, COLOR_WHITE);
 
   this->win = nullptr;
 }
@@ -60,6 +61,7 @@ void GameDraw::draw(){
   if (this->player->can_act())
     this->draw_area();
   this->draw_build();
+  this->draw_enemies();
   wrefresh(this->win);
 }
 
@@ -129,7 +131,7 @@ void GameDraw::draw_area(){
   std::vector<Cell*> res;
   switch (this->player->get_mode()){
   case PlayerMode::Move:
-    res = this->player->get_cell()->get_neighbors();
+    res = this->player->get_cell()->get_free_neighbors();
     break;
   case PlayerMode::NearFight:
     break;
@@ -157,20 +159,9 @@ void GameDraw::draw_build(){
   this->print(cell->get_y(), cell->get_x(), BUILD_SYM, COLOR_PAIR(BUILD_COLOR));
 }
 
-std::vector<Cell*> GameDraw::get_move_area(){
-  Cell* anchor = this->player->get_cell();
-  std::vector<Cell*> res;
-  Cell* cell = anchor->get_bottom();
-  if (cell)
-    res.push_back(cell);
-  cell = anchor->get_top();
-  if (cell)
-    res.push_back(cell);
-  cell = anchor->get_left();
-  if (cell)
-    res.push_back(cell);
-  cell = anchor->get_right();
-  if (cell)
-    res.push_back(cell);
-  return res;
+void GameDraw::draw_enemies(){
+  for (Enemy* enemy: *this->enemies){
+    Cell* cell = enemy->get_cell();
+    this->print(cell->get_y(), cell->get_x(), ENEMY_SYM, COLOR_PAIR(ENEMY_COLOR));
+  }
 }
