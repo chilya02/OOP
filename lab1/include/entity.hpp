@@ -10,7 +10,7 @@ class Entity:public MovableCellObject{
     Entity(Cell* cell, int damage = 30, int HP = 100); 
 
     bool is_alive();
-    bool hit(int damage);
+    void hit(int damage);
 
     bool can_act();
 

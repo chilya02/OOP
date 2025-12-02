@@ -2,10 +2,7 @@
 #include "../include/cell.hpp"
 
 #include <queue>
-#include <set>
 #include <map>
-#include <iostream>
-#include <fstream>
 
 EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field)
   :enemies(enemies), player(player), field(field){}
@@ -13,9 +10,21 @@ EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* playe
 void EnemiesController::act(){
   for (Enemy* enemy: *this->enemies){
     enemy->change_status();
-    if (enemy->can_act())
-      this->move_enemy(enemy);
+    if (enemy->can_act()){
+      if (this->can_hit(enemy))
+        this->player->hit(enemy->damage);
+      else
+        this->move_enemy(enemy);
+    }
   }
+}
+
+bool EnemiesController::can_hit(Enemy* enemy){
+  for (Cell* cell: enemy->get_cell()->get_neighbors()){
+    if (cell == this->player->get_cell())
+      return true;
+  }
+  return false;
 }
 
 std::map<Cell*, int>  EnemiesController::BFS(){

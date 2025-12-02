@@ -20,6 +20,7 @@ class EnemiesController{
     void move_enemy(Enemy* enemy);
     Cell* get_optimal_cell(Enemy* enemy);
     float distance(Cell*);
+    bool can_hit(Enemy* enemy);
     std::map<Cell*, int>  BFS();
 };
 

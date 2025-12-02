@@ -34,3 +34,9 @@ bool Entity::can_act(){
 EntityStatus Entity::get_status(){
   return this->status;
 }
+
+void Entity::hit(int damage){
+  this->HP -= damage;
+  if (this->HP < 0)
+    this->HP = 0;
+}
