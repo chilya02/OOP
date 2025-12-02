@@ -3,19 +3,16 @@
 
 #include "cell.hpp"
 #include "entity_status.hpp"
-#include "cell_obj.hpp"
+#include "movable_cell_obj.hpp"
 
-class Entity:public CellObject{ 
+class Entity:public MovableCellObject{ 
   public:
     Entity(Cell* cell, int damage = 30, int HP = 100); 
 
     bool is_alive();
     bool hit(int damage);
 
-    bool move_up();
-    bool move_down();
-    bool move_left();
-    bool move_right();
+    
 
     bool can_act();
 
@@ -24,9 +21,8 @@ class Entity:public CellObject{
     void change_status();
 
   protected:
-    Entity(Cell* cell);
-    bool move(Cell* target);
-    EntityStatus status = EntityStatus::Await;
+    bool move(Cell* target) override;
+    EntityStatus status;
     int damage;
     int HP; // Health points
 };

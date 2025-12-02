@@ -49,6 +49,10 @@ bool Cell::is_slow(){
   return this->slow;
 }
 
+bool Cell::is_busy(){
+  return this->busy;
+}
+
 Cell* Cell::get_top(){
   return this->top;
 }

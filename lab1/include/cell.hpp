@@ -10,6 +10,7 @@ class Cell{
     Cell& operator=(const Cell& other);
     bool is_impassable();
     bool is_slow();
+    bool is_busy();
     int get_y();
     int get_x();
     Cell* get_top();
@@ -21,6 +22,7 @@ class Cell{
   protected:
     bool impassable;
     bool slow;
+    bool busy;
     const int y;
     const int x;
     
@@ -28,5 +30,8 @@ class Cell{
     Cell* bottom;
     Cell* right;
     Cell* left;
+  
+  friend class CellObject;
+  friend class MovableCellObject;
 };
 #endif //CELL_H
