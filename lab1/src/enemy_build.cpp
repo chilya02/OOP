@@ -1,6 +1,6 @@
 #include "../include/enemy_build.hpp"
 
-EnemyBuild::EnemyBuild(Cell* cell, int period):cell(cell), tick_period(period){
+EnemyBuild::EnemyBuild(Cell* cell, int period):CellObject(cell), tick_period(period){
 
 }
 
@@ -14,8 +14,4 @@ void EnemyBuild::tick(){
 
 void EnemyBuild::create_enemy(){
   
-}
-
-Cell* EnemyBuild::get_cell(){
-  return this->cell;
 }

@@ -1,8 +1,9 @@
 #include "../include/entity.hpp"
 
-Entity::Entity(int damage, int HP):damage(damage), HP(HP){};
+Entity::Entity(Cell* cell):CellObject(cell){}
 
-Entity::Entity(Cell* cell, int, int):cell(cell){};
+
+Entity::Entity(Cell* cell, int damage, int HP):CellObject(cell), damage(damage), HP(HP){};
 
 bool Entity::is_alive(){
   return this->HP > 0;
@@ -52,10 +53,6 @@ void Entity::change_status(){
 
 bool Entity::can_act(){
   return this->status == EntityStatus::Await;
-}
-
-Cell* Entity::get_cell(){
-  return this->cell;
 }
 
 EntityStatus Entity::get_status(){

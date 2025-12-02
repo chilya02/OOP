@@ -5,7 +5,11 @@ CFLAGS = -c
 OBJ_DIR = obj
 SRC_DIR = src
 INC_DIR = include
-OBJ = game_field.o main.o cell.o impassable_cell.o slow_cell.o game_process.o player.o entity.o enemy_build.o player_controller.o command_controller.o view_controller.o game_draw.o
+OBJ = game_field.o main.o cell.o impassable_cell.o 	\
+	slow_cell.o game_process.o player.o entity.o    \
+	enemy_build.o player_controller.o game_draw.o	\
+	command_controller.o view_controller.o 			\
+	cell_obj.o
 LIB = -lncurses
 
 all: $(OBJ_DIR) $(EXECUTABLE) 

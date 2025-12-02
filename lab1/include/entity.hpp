@@ -3,10 +3,10 @@
 
 #include "cell.hpp"
 #include "entity_status.hpp"
+#include "cell_obj.hpp"
 
-class Entity{ 
+class Entity:public CellObject{ 
   public:
-    Entity(int damage = 30, int HP = 100); 
     Entity(Cell* cell, int damage = 30, int HP = 100); 
 
     bool is_alive();
@@ -19,16 +19,15 @@ class Entity{
 
     bool can_act();
 
-    Cell* get_cell();
     EntityStatus get_status();
     
     void change_status();
 
   protected:
+    Entity(Cell* cell);
     bool move(Cell* target);
     EntityStatus status = EntityStatus::Await;
     int damage;
     int HP; // Health points
-    Cell* cell;
 };
 #endif
