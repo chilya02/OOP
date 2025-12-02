@@ -15,3 +15,7 @@ void EnemyBuild::tick(){
 void EnemyBuild::create_enemy(){
   
 }
+
+Cell* EnemyBuild::get_cell(){
+  return this->cell;
+}

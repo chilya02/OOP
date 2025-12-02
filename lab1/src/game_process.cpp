@@ -1,7 +1,7 @@
 #include "../include/game_process.hpp"
 #include "../include/entity_status.hpp"
 #include "../include/game_field.hpp"
-#include "../include/game_view.hpp"
+#include "../include/view_controller.hpp"
 #include "../include/command_controller.hpp"
 #include "../include/game_commands.hpp"
 
@@ -57,7 +57,7 @@ void GameProcess::start(){
   }
 
   this->contrroller = new CommandController();
-  this->view = new GameView(this->field, this->player);
+  this->view = new ViewController(this->field, this->player, this->enemy_build);
   
   this->state = GameState::AwaitPlayer;
   this->loop();

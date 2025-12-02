@@ -1,7 +1,7 @@
 #ifndef GAME_PROCESS_H
 #define GAME_PROCESS_H
 
-#include "game_view.hpp"
+#include "view_controller.hpp"
 #include "player.hpp"
 #include "game_field.hpp"
 #include "command_controller.hpp"
@@ -30,7 +30,7 @@ class GameProcess{
     GameField* field;
     Player* player;
     EnemyBuild* enemy_build;
-    GameView* view;
+    ViewController* view;
     CommandController* contrroller;
     PlayerController* player_controller;
     GameState state;

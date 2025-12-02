@@ -7,6 +7,7 @@ class EnemyBuild{
     EnemyBuild(Cell* cell, int period);
     ~EnemyBuild();
     void tick();
+    Cell* get_cell();
   private:
     Cell* cell;
     int tick_period; 
