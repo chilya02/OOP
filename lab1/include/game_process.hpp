@@ -6,8 +6,12 @@
 #include "interfaces/iowrapper.hpp"
 
 #include "game.hpp"
+#include "player_controller.hpp"
+#include "enemies_controller.hpp"
+#include "enemy_building_controller.hpp"
 
 #include <vector>
+#include <ctime>
 
 class GameProcess{
   enum class GameState{
@@ -30,6 +34,12 @@ class GameProcess{
     GameState state;
     ViewInterface* view;
     CommandInterface* controller;
+    PlayerController* player_controller;
+    EnemiesController* enemies_controller;
+    EnemyBuildingController* building_controller;
+    clock_t last_move;
+    bool timer();
+    void change_state();
     void loop();
 };
 #endif // GAME_PROCESS_H

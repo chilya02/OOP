@@ -3,9 +3,7 @@
 
 #include "player.hpp"
 #include "game_field.hpp"
-#include "player_controller.hpp"
 #include "enemy_building.hpp"
-#include "enemies_controller.hpp"
 #include "enemy.hpp"
 
 #include <vector>
@@ -19,8 +17,6 @@ class Game{
     GameField* field;
     Player* player;
     EnemyBuilding* enemy_building;
-    PlayerController* player_controller;
-    EnemiesController* enemies_controller;
     std::vector<Enemy*>* enemies;
 };
 

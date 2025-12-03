@@ -7,7 +7,7 @@ Game::Game(int height, int width, int period){
     this->field = new GameField(height, width);
     Cell* player_cell = &(*this->field->get_cell(height - 1, width - 1));
     this->player = new Player(player_cell);
-    this->player_controller = new PlayerController(this->player);
+    
     Cell* build_cell = &(*this->field->get_cell(0, 0));
     this->enemy_building = new EnemyBuilding(build_cell, period);
 
@@ -15,7 +15,7 @@ Game::Game(int height, int width, int period){
     Cell* cell = this->field->get_cell(0, 1);
     Enemy* enemy = new Enemy(cell);
     this->enemies->push_back(enemy);
-    this->enemies_controller = new EnemiesController(this->enemies, this->player, this->field);
+    
   }
   catch (const char* error_msg){
     std::cerr << error_msg << std::endl;
