@@ -8,7 +8,6 @@ bool MovableCellObject::move(Cell* target){
   this->cell->busy = false;
   this->cell = target;
   target->busy = true;
-  //this->status = target->is_slow() ? EntityStatus::Slowed : EntityStatus::Stay;
   return true;
 }
 
