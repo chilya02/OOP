@@ -6,11 +6,8 @@
 class EnemyBuilding: public CellObject{
   public:
     EnemyBuilding(Cell* cell, int period);
-    ~EnemyBuilding();
-    void tick();
   private:
     int tick_period; 
-    int tick_count = 0;
-    void create_enemy();
+  friend class EnemyBuildingController;
 };
 #endif // ENEMY_BUILD_H
