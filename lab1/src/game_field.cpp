@@ -2,7 +2,7 @@
 #include "../include/cell.hpp"
 #include "../include/impassable_cell.hpp"
 #include "../include/slow_cell.hpp"
-#include "../include/enemy_build.hpp"
+
 #include <ctime>
 
 GameField::GameField(int height, int width):width(width), height(height){

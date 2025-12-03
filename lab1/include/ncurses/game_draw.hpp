@@ -45,12 +45,12 @@ class GameDraw{
     int scr_height;
     int scr_width;
     
-    void draw_cell(Cell*);
-    void draw_player();
-    void draw_build();
     void draw_area();
-    void draw_area_cell(Cell*);
+    void draw_player();
     void draw_enemies();
+    void draw_building();
+    void draw_cell(Cell*);
+    void draw_area_cell(Cell*);
     void print(int, int, const char*, int);
 };
 

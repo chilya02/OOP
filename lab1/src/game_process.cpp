@@ -63,7 +63,7 @@ void GameProcess::loop(){
 
         break;
 
-      case GameState::AwaitBuild:
+      case GameState::AwaitBuilding:
         
         break;
 

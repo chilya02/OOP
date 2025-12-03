@@ -3,10 +3,10 @@
 #include "cell.hpp"
 #include "cell_obj.hpp"
 
-class EnemyBuild: public CellObject{
+class EnemyBuilding: public CellObject{
   public:
-    EnemyBuild(Cell* cell, int period);
-    ~EnemyBuild();
+    EnemyBuilding(Cell* cell, int period);
+    ~EnemyBuilding();
     void tick();
   private:
     int tick_period; 

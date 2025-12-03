@@ -9,7 +9,7 @@ Game::Game(int height, int width, int period){
     this->player = new Player(player_cell);
     this->player_controller = new PlayerController(this->player);
     Cell* build_cell = &(*this->field->get_cell(0, 0));
-    this->enemy_build = new EnemyBuild(build_cell, period);
+    this->enemy_building = new EnemyBuilding(build_cell, period);
 
     this->enemies = new std::vector<Enemy*>;
     Cell* cell = this->field->get_cell(0, 1);

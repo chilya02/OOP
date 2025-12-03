@@ -60,7 +60,7 @@ void GameDraw::draw(){
   draw_player();
   if (this->game->player->can_act())
     draw_area();
-  draw_build();
+  draw_building();
   draw_enemies();
   wrefresh(this->win);
 }
@@ -154,8 +154,8 @@ void GameDraw::draw_area_cell(Cell* cell){
   this->print(cell->get_y(), cell->get_x(), text, COLOR_PAIR(PLAYER_COLOR));
 }
 
-void GameDraw::draw_build(){
-  Cell* cell = this->game->enemy_build->get_cell();
+void GameDraw::draw_building(){
+  Cell* cell = this->game->enemy_building->get_cell();
   this->print(cell->get_y(), cell->get_x(), BUILD_SYM, COLOR_PAIR(BUILD_COLOR));
 }
 

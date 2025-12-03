@@ -13,7 +13,7 @@ class GameProcess{
   enum class GameState{
     AwaitPlayer,
     AwaitEnemy,
-    AwaitBuild,
+    AwaitBuilding,
     GameOver,
     Exit,
     Quit
