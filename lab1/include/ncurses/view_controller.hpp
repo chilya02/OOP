@@ -1,22 +1,21 @@
-#ifndef GAME_VIEW_H
-#define GAME_VIEW_H
+#ifndef NCURSES_GAME_VIEW_H
+#define NCURSES_GAME_VIEW_H
 
-#include "game_field.hpp"
+#include "../interfaces/view.hpp"
+#include "../game.hpp"
 
-#include "enemy_build.hpp"
-#include "player.hpp"
 #include "game_draw.hpp"
 
 #include <ncurses.h>
 #include <vector>
 
 
-class ViewController{
+class NcursesViewController:public ViewInterface{
   public:
-    ViewController(GameField* field, Player* player, EnemyBuild* build, std::vector<Enemy*>* enemies);
-    ~ViewController();
-    void invalidate();
-    void check_size();
+    NcursesViewController(Game* game);
+    ~NcursesViewController() final;
+    void invalidate() override;
+    void check_size() override;
 
   private:
     GameDraw* field_drawer;

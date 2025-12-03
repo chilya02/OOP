@@ -1,16 +1,17 @@
-#include "../include/command_controller.hpp"
+#include "../../include/ncurses/command_controller.hpp"
 
 #include <ncurses.h>
 
-#include "../include/game_commands.hpp"
+#include "../../include/game_commands.hpp"
 
-CommandController::CommandController(){
-  initscr();
+NcursesCommandController::NcursesCommandController(){
   keypad(stdscr, 1);  
   nodelay(stdscr, 1);
 }
 
-Command CommandController::get_command(){
+NcursesCommandController::~NcursesCommandController(){}
+
+Command NcursesCommandController::get_command(){
   int command = '\0';
   command = getch();
 

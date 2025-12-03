@@ -1,12 +1,12 @@
-#include "../include/game_draw.hpp"
+#include "../../include/ncurses/game_draw.hpp"
 
 #include <vector>
 
-GameDraw::GameDraw(Player* player, GameField* field, EnemyBuild* build, std::vector<Enemy*>* enemies)
-    : player(player), field(field), build(build), enemies(enemies){
+GameDraw::GameDraw(Game* game)
+    : game(game){
   
-  this->scr_height = field->get_height() * CELL_HEIGHT * 2;
-  this->scr_width = field->get_width() * CELL_WIDTH * 2;
+  this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
+  this->scr_width = game->field->get_width() * CELL_WIDTH * 2;
   
   init_pair(DEFAULT_COLOR, COLOR_WHITE, COLOR_BLACK);
   init_pair(CELL_COLOR, COLOR_BLACK, COLOR_GREEN);
@@ -37,7 +37,7 @@ int GameDraw::get_height(){
 void GameDraw::create_window(int y, int x){
   if (!this->win){
     this->win = newwin(this->scr_height, this->scr_width, y, x);
-    this->draw();
+    draw();
   }
 }
 
@@ -51,17 +51,17 @@ void GameDraw::del_window(){
 void GameDraw::draw(){
   if (!this->win)
     return;
-  for (int y = 0; y < this->field->get_height(); y++){
-    for (int x = 0; x < this->field->get_width(); x++){
-      Cell* cell = this->field->get_cell(y, x);
-      this->draw_cell(cell);
+  for (int y = 0; y < this->game->field->get_height(); y++){
+    for (int x = 0; x < this->game->field->get_width(); x++){
+      Cell* cell = this->game->field->get_cell(y, x);
+      draw_cell(cell);
     }
   }
-  this->draw_player();
-  if (this->player->can_act())
-    this->draw_area();
-  this->draw_build();
-  this->draw_enemies();
+  draw_player();
+  if (this->game->player->can_act())
+    draw_area();
+  draw_build();
+  draw_enemies();
   wrefresh(this->win);
 }
 
@@ -98,11 +98,11 @@ void GameDraw::draw_player(){
   const char* text = PLAYER_SYM;
   int attr = 0;
 
-  Cell* cell = this->player->get_cell();
+  Cell* cell = game->player->get_cell();
   int y = cell->get_y();
   int x = cell->get_x();
 
-  switch (this->player->get_status()) {
+  switch (game->player->get_status()) {
     case EntityStatus::Await:
       attr = COLOR_PAIR(AWAIT_COLOR) | A_BLINK;
       break;
@@ -122,16 +122,16 @@ void GameDraw::print(int y, int x, const char* text, int attr){
   int x_scr = x * CELL_WIDTH * 2;
   if (y >= this->scr_height | x >= this->scr_width)
     return;
-  wattron(this->win, attr);
-  mvwprintw(this->win, y_scr, x_scr, text);
-  wattroff(this->win, attr);
+  wattron(win, attr);
+  mvwprintw(win, y_scr, x_scr, text);
+  wattroff(win, attr);
 }
 
 void GameDraw::draw_area(){
   std::vector<Cell*> res;
-  switch (this->player->get_mode()){
+  switch (game->player->get_mode()){
   case PlayerMode::Move:
-    res = this->player->get_cell()->get_free_neighbors();
+    res = game->player->get_cell()->get_free_neighbors();
     break;
   case PlayerMode::NearFight:
     break;
@@ -141,7 +141,7 @@ void GameDraw::draw_area(){
     break;
   }
   for (auto cell: res){
-    draw_area_cell(cell);
+    this->draw_area_cell(cell);
   }
 }
 
@@ -155,12 +155,12 @@ void GameDraw::draw_area_cell(Cell* cell){
 }
 
 void GameDraw::draw_build(){
-  Cell* cell = this->build->get_cell();
+  Cell* cell = this->game->enemy_build->get_cell();
   this->print(cell->get_y(), cell->get_x(), BUILD_SYM, COLOR_PAIR(BUILD_COLOR));
 }
 
 void GameDraw::draw_enemies(){
-  for (Enemy* enemy: *this->enemies){
+  for (Enemy* enemy: *game->enemies){
     Cell* cell = enemy->get_cell();
     this->print(cell->get_y(), cell->get_x(), ENEMY_SYM, COLOR_PAIR(ENEMY_COLOR));
   }

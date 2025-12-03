@@ -1,11 +1,7 @@
 #ifndef GAME_DRAW_H
 #define GAME_DRAW_H
 
-#include "cell.hpp"
-#include "player.hpp"
-#include "game_field.hpp"
-#include "enemy_build.hpp"
-#include "enemy.hpp"
+#include "../game.hpp"
 
 #include <ncurses.h>
 #include <vector>
@@ -32,7 +28,7 @@
 
 class GameDraw{
   public:
-    GameDraw(Player* player, GameField* field, EnemyBuild* build, std::vector<Enemy*>* enemies);
+    GameDraw(Game* game);
     ~GameDraw();
     void draw();
     int get_width();
@@ -42,10 +38,7 @@ class GameDraw{
     void move(int x, int y);
 
   private:
-    Player* player;
-    GameField* field;
-    EnemyBuild* build;
-    std::vector<Enemy*>* enemies;
+    Game* game;
 
     WINDOW* win;
     

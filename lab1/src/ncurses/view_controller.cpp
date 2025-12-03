@@ -1,31 +1,27 @@
-#include "../include/view_controller.hpp"
-#include "../include/player.hpp"
-#include "../include/player_mode.hpp"
-#include "../include/enemy_build.hpp"
-#include "../include/game_draw.hpp"
+#include "../../include/ncurses/view_controller.hpp"
+#include "../../include/ncurses/game_draw.hpp"
 
 #include <vector>
 
-ViewController::ViewController(GameField* field, Player* player, EnemyBuild* build, std::vector<Enemy*>* enemies){
+NcursesViewController::NcursesViewController(Game* game){
   
-  noecho();
   start_color();
   wclear(stdscr);
   
-  this->field_drawer = new GameDraw(player, field, build, enemies);
+  this->field_drawer = new GameDraw(game);
 
   this->calc_coordinates();
   
   this->draw();
 }
 
-ViewController::~ViewController(){
+NcursesViewController::~NcursesViewController(){
   if (this->field_drawer)
     delete this->field_drawer;
 }
 
 
-void ViewController::draw(){
+void NcursesViewController::draw(){
   if (!this->is_visible)
     return;
   this->field_drawer->draw();
@@ -33,18 +29,18 @@ void ViewController::draw(){
   wrefresh(stdscr);
 }
 
-void ViewController::del_windows(){
+void NcursesViewController::del_windows(){
   if (this->is_visible){
     this->field_drawer->del_window();
     wclear(stdscr);
   }
 }
 
-void ViewController::create_windows(){
+void NcursesViewController::create_windows(){
   this->field_drawer->create_window(this->field_y, this->field_x);
 }
 
-bool ViewController::calc_coordinates(){
+bool NcursesViewController::calc_coordinates(){
   int row, col;
 
   getmaxyx(stdscr, row, col);
@@ -76,21 +72,21 @@ bool ViewController::calc_coordinates(){
   return true;
 }
 
-void ViewController::move_field(){
+void NcursesViewController::move_field(){
   wclear(stdscr);
   wrefresh(stdscr);
   this->field_drawer->move(this->field_y, this->field_x);
   move(0,0);
 }
 
-void ViewController::check_size(){
+void NcursesViewController::check_size(){
   if (this->calc_coordinates()){
     if (this->is_visible)
       this->move_field();
   }
 }
 
-void ViewController::invalidate(){
+void NcursesViewController::invalidate(){
   this->check_size();
   this->draw();
 }
