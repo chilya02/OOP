@@ -11,9 +11,9 @@ CUR_DIR = ncurses
 
 OBJ = game_field.o main.o cell.o impassable_cell.o 	\
 	slow_cell.o game_process.o player.o entity.o    	\
-	enemy_build.o player_controller.o enemy.o					\
+	enemy_building.o player_controller.o enemy.o			\
+	enemies_controller.o abstract_iowrapper.o					\
 	cell_obj.o movable_cell_obj.o game.o							\
-	enemies_controller.o abstract_iowrapper.o
 
 CUR = game_draw.o iowrapper.o command_controller.o view_controller.o
 
