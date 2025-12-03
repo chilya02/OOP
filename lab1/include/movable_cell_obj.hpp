@@ -7,12 +7,13 @@ class MovableCellObject: public CellObject{
   public:
     MovableCellObject(Cell*);
 
-  bool move_up();
-  bool move_down();
-  bool move_left();
-  bool move_right();
+
 
   protected:
+    bool move_up();
+    bool move_down();
+    bool move_left();
+    bool move_right();
     virtual bool move(Cell* target);
 };
 #endif //MOVABLE_CELL_OBJ_H
