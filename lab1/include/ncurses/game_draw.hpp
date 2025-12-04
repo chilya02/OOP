@@ -29,19 +29,10 @@ class GameDraw final:public AbstractDrawer{
   public:
     GameDraw(Game* game);
     ~GameDraw();
-    void draw();
-    int get_width();
-    int get_height();
-    void create_window(int y, int x);
-    void move(int x, int y);
+    void draw() final;
 
   private:
     Game* game;
-
-    WINDOW* win;
-    
-    int scr_height;
-    int scr_width;
     
     void draw_area();
     void draw_player();

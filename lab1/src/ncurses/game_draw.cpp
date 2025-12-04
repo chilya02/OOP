@@ -24,21 +24,6 @@ GameDraw::~GameDraw(){
     delwin(this->win);
 }
 
-int GameDraw::get_width(){
-    return this->scr_width;
-}
-
-int GameDraw::get_height(){
-    return this->scr_height;
-}
-
-void GameDraw::create_window(int y, int x){
-  if (!this->win){
-    this->win = newwin(this->scr_height, this->scr_width, y, x);
-    draw();
-  }
-}
-
 void GameDraw::draw(){
   if (!this->win)
     return;
@@ -53,13 +38,6 @@ void GameDraw::draw(){
     draw_area();
   draw_building();
   draw_enemies();
-  wrefresh(this->win);
-}
-
-void GameDraw::move(int y, int x){
-  if (!this->win)
-    return;
-  mvwin(this->win, y, x);
   wrefresh(this->win);
 }
 
