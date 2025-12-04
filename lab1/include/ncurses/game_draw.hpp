@@ -3,7 +3,7 @@
 
 #include "../game.hpp"
 
-#include <ncurses.h>
+#include "abs_drawer.hpp"
 
 #define DEFAULT_COLOR       0
 #define CELL_COLOR          1
@@ -25,14 +25,13 @@
 #define CELL_WIDTH          2
 #define CELL_HEIGHT         1
 
-class GameDraw{
+class GameDraw final:public AbstractDrawer{
   public:
     GameDraw(Game* game);
     ~GameDraw();
     void draw();
     int get_width();
     int get_height();
-    void del_window();
     void create_window(int y, int x);
     void move(int x, int y);
 

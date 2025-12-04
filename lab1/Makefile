@@ -16,7 +16,7 @@ OBJ = game_field.o main.o cell.o impassable_cell.o 	\
 	cell_obj.o movable_cell_obj.o game.o							\
 	enemy_building_controller.o
 
-CUR = game_draw.o iowrapper.o command_controller.o view_controller.o
+CUR = game_draw.o iowrapper.o command_controller.o view_controller.o abs_drawer.o
 
 LIB = -lncurses
 

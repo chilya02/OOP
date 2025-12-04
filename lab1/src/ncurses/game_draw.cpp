@@ -39,13 +39,6 @@ void GameDraw::create_window(int y, int x){
   }
 }
 
-void GameDraw::del_window(){
-    if (this->win){
-        delwin(this->win);
-        this->win = nullptr;
-    }
-}
-
 void GameDraw::draw(){
   if (!this->win)
     return;
