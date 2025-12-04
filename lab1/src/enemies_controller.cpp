@@ -3,6 +3,7 @@
 
 #include <queue>
 #include <map>
+#include <math.h>
 
 EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field)
   :enemies(enemies), player(player), field(field){}

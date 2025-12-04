@@ -14,6 +14,8 @@ switch (this->player->status){
     break;
   case EntityStatus::Stay:
     return true;
+  default:
+    return false;
   }
 }
 

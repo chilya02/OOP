@@ -120,10 +120,10 @@ void GameDraw::print(int y, int x, const char* text, int attr){
     return;
   int y_scr = y * CELL_HEIGHT * 2;
   int x_scr = x * CELL_WIDTH * 2;
-  if (y >= this->scr_height | x >= this->scr_width)
+  if (y >= this->scr_height || x >= this->scr_width)
     return;
   wattron(win, attr);
-  mvwprintw(win, y_scr, x_scr, text);
+  mvwprintw(win, y_scr, x_scr, "%s", text);
   wattroff(win, attr);
 }
 
