@@ -3,7 +3,6 @@
 
 #include "player.hpp"
 #include "game_commands.hpp"
-#include "cell.hpp"
 
 class PlayerController{
   public:

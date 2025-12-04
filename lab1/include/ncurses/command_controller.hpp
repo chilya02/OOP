@@ -2,9 +2,8 @@
 #define NCURSES_COMMAND_CONTROLLER_H
 
 #include "../interfaces/command.hpp"
-#include <ncurses.h>
 
-class NcursesCommandController:public CommandInterface{
+class NcursesCommandController final:public CommandInterface{
   public:
     NcursesCommandController();
     virtual ~NcursesCommandController() final;

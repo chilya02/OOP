@@ -1,8 +1,6 @@
 #include "../include/enemies_controller.hpp"
-#include "../include/cell.hpp"
 
 #include <queue>
-#include <map>
 #include <math.h>
 
 EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field)

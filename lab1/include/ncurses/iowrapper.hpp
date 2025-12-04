@@ -3,7 +3,7 @@
 #include "../abstract_iowrapper.hpp"
 #include "../game.hpp"
 
-class NcursesIOWrapper :public IOWrapper{
+class NcursesIOWrapper final:public IOWrapper{
   public:
     NcursesIOWrapper(Game* game);
     virtual ~NcursesIOWrapper() final;

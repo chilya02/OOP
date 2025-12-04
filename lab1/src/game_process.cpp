@@ -1,8 +1,6 @@
 #include "../include/game_process.hpp"
 
-
 #include <iostream>
-#include <ctime>
 
 GameProcess::GameProcess(Game* game, ViewInterface* view, CommandInterface* controller)
 :game(game), view(view), controller(controller){

@@ -6,11 +6,7 @@
 
 #include "game_draw.hpp"
 
-#include <ncurses.h>
-#include <vector>
-
-
-class NcursesViewController:public ViewInterface{
+class NcursesViewController final:public ViewInterface{
   public:
     NcursesViewController(Game* game);
     ~NcursesViewController() final;

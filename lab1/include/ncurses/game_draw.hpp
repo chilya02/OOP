@@ -4,7 +4,6 @@
 #include "../game.hpp"
 
 #include <ncurses.h>
-#include <vector>
 
 #define DEFAULT_COLOR       0
 #define CELL_COLOR          1

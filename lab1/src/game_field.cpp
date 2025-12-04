@@ -1,4 +1,5 @@
 #include "../include/game_field.hpp"
+
 #include "../include/cell.hpp"
 #include "../include/impassable_cell.hpp"
 #include "../include/slow_cell.hpp"

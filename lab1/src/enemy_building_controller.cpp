@@ -1,7 +1,4 @@
 #include "../include/enemy_building_controller.hpp"
-#include "../include/cell.hpp"
-
-#include <random>
 
 EnemyBuildingController::EnemyBuildingController(
   std::vector<Enemy*>* enemies, 

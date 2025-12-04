@@ -2,8 +2,6 @@
 
 #include <ncurses.h>
 
-#include "../../include/game_commands.hpp"
-
 NcursesCommandController::NcursesCommandController(){
   keypad(stdscr, 1);  
   nodelay(stdscr, 1);

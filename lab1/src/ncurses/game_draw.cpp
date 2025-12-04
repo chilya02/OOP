@@ -1,7 +1,5 @@
 #include "../../include/ncurses/game_draw.hpp"
 
-#include <vector>
-
 GameDraw::GameDraw(Game* game)
     : game(game){
   

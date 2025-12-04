@@ -10,7 +10,6 @@
 #include "enemies_controller.hpp"
 #include "enemy_building_controller.hpp"
 
-#include <vector>
 #include <ctime>
 
 class GameProcess{

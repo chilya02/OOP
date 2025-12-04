@@ -1,7 +1,4 @@
 #include "../../include/ncurses/view_controller.hpp"
-#include "../../include/ncurses/game_draw.hpp"
-
-#include <vector>
 
 NcursesViewController::NcursesViewController(Game* game){
   
