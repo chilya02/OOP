@@ -1,7 +1,7 @@
 #include "../../include/ncurses/game_draw.hpp"
 
 GameDraw::GameDraw(Game* game)
-    : game(game){
+    :AbstractDrawer(game){
   
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
   this->scr_width = game->field->get_width() * CELL_WIDTH * 2;
@@ -15,8 +15,6 @@ GameDraw::GameDraw(Game* game)
   init_pair(SLOWED_COLOR, COLOR_BLACK, COLOR_BLUE);
   init_pair(BUILD_COLOR, COLOR_BLACK, COLOR_WHITE);
   init_pair(ENEMY_COLOR, COLOR_RED, COLOR_WHITE);
-
-  this->win = nullptr;
 }
 
 GameDraw::~GameDraw(){

@@ -1,11 +1,13 @@
 #ifndef ABS_DRAWER_H
 #define ABS_DRAWER_H
 
+#include "../game.hpp"
+
 #include <ncurses.h>
 
 class AbstractDrawer{
   public:
-    AbstractDrawer();
+    AbstractDrawer(Game* game);
     void create_window(int y, int x);
     void del_window();
     void move(int y, int x);
@@ -16,6 +18,7 @@ class AbstractDrawer{
     int get_width();
     
   protected:
+    Game* game;
     WINDOW* win;
     int scr_height;
     int scr_width;
