@@ -32,7 +32,6 @@ class GameDraw final:public AbstractDrawer{
     void draw() final;
 
   private:
-    Game* game;
     
     void draw_area();
     void draw_player();

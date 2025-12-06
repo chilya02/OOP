@@ -4,8 +4,10 @@ AbstractDrawer::AbstractDrawer(Game* game)
 :game(game), win(nullptr){}
 
 void AbstractDrawer::del_window(){
-  if (this->win)
+  if (this->win){
     delwin(this->win);
+    this->win = nullptr;
+  }
 }
 
 void AbstractDrawer::move(int y, int x){
@@ -18,7 +20,7 @@ void AbstractDrawer::move(int y, int x){
 void AbstractDrawer::create_window(int y, int x){
   if (!this->win){
     this->win = newwin(this->scr_height, this->scr_width, y, x);
-    draw();
+    this->draw();
   }
 }
 

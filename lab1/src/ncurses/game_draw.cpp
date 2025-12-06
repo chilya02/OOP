@@ -1,7 +1,7 @@
 #include "../../include/ncurses/game_draw.hpp"
 
 GameDraw::GameDraw(Game* game)
-    :AbstractDrawer(game){
+  :AbstractDrawer(game){
   
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
   this->scr_width = game->field->get_width() * CELL_WIDTH * 2;

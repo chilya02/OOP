@@ -2,3 +2,5 @@
 
 ProgressDraw::ProgressDraw(Game* game)
 :AbstractDrawer(game){}
+
+void ProgressDraw::draw(){}

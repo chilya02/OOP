@@ -8,7 +8,6 @@
 class ProgressDraw final : public AbstractDrawer{
   ProgressDraw(Game* game);
   ~ProgressDraw();
-  void create_window();
   void draw();
 };
 
