@@ -8,6 +8,7 @@
 class AbstractDrawer{
   public:
     AbstractDrawer(Game* game);
+    ~AbstractDrawer();
     void create_window(int y, int x);
     void del_window();
     void move(int y, int x);

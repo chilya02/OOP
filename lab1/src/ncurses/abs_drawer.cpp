@@ -3,6 +3,12 @@
 AbstractDrawer::AbstractDrawer(Game* game)
 :game(game), win(nullptr){}
 
+AbstractDrawer::~AbstractDrawer(){
+  if (this->win){
+    delwin(this->win);
+  }
+}
+
 void AbstractDrawer::del_window(){
   if (this->win){
     delwin(this->win);

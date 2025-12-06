@@ -17,10 +17,7 @@ GameDraw::GameDraw(Game* game)
   init_pair(ENEMY_COLOR, COLOR_RED, COLOR_WHITE);
 }
 
-GameDraw::~GameDraw(){
-  if (this->win)
-    delwin(this->win);
-}
+GameDraw::~GameDraw(){}
 
 void GameDraw::draw(){
   if (!this->win)
