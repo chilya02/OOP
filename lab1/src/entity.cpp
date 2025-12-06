@@ -40,3 +40,7 @@ void Entity::hit(int damage){
   if (this->HP < 0)
     this->HP = 0;
 }
+
+int Entity::get_HP(){
+  return this->HP;
+}

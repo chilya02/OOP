@@ -13,6 +13,7 @@ class Entity:public MovableCellObject{
     void hit(int damage);
 
     bool can_act();
+    int get_HP();
 
     EntityStatus get_status();
     
