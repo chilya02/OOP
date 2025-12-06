@@ -1,8 +1,7 @@
-#include "../include/game_field.hpp"
+#include "../../include/cells/game_field.hpp"
 
-#include "../include/cell.hpp"
-#include "../include/impassable_cell.hpp"
-#include "../include/slow_cell.hpp"
+#include "../../include/cells/impassable_cell.hpp"
+#include "../../include/cells/slow_cell.hpp"
 
 #include <ctime>
 

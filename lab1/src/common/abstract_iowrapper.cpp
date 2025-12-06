@@ -1,4 +1,4 @@
-#include "../include/abstract_iowrapper.hpp"
+#include "../../include/common/abstract_iowrapper.hpp"
 
 CommandInterface* IOWrapper::get_command(){
   return this->command;

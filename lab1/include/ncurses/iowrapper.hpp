@@ -1,7 +1,7 @@
 #ifndef NCURSES_IOWRAPPER_H
 #define NCURSES_IOWRAPPER_H
-#include "../abstract_iowrapper.hpp"
-#include "../game.hpp"
+#include "../common/abstract_iowrapper.hpp"
+#include "../common/game.hpp"
 
 class NcursesIOWrapper final:public IOWrapper{
   public:

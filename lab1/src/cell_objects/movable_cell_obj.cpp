@@ -1,4 +1,4 @@
-#include "../include/movable_cell_obj.hpp"
+#include "../../include/cell_objects/movable_cell_obj.hpp"
 
 MovableCellObject::MovableCellObject(Cell* cell):CellObject(cell){}
 

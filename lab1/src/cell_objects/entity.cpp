@@ -1,4 +1,4 @@
-#include "../include/entity.hpp"
+#include "../../include/cell_objects/entity.hpp"
 
 Entity::Entity(Cell* cell, int damage, int HP):MovableCellObject(cell), damage(damage), HP(HP){};
 

@@ -1,7 +1,7 @@
 #ifndef COMMAND_INTERFACE_H
 #define COMMAND_INTERFACE_H
 
-#include "../game_commands.hpp"
+#include "../common/game_commands.hpp"
 
 class CommandInterface{
   public:

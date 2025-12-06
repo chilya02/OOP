@@ -2,7 +2,7 @@
 #define NCURSES_GAME_VIEW_H
 
 #include "../interfaces/view.hpp"
-#include "../game.hpp"
+#include "../common/game.hpp"
 
 #include "game_draw.hpp"
 #include "progress_draw.hpp"

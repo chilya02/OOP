@@ -1,7 +1,7 @@
 #ifndef ABS_DRAWER_H
 #define ABS_DRAWER_H
 
-#include "../game.hpp"
+#include "../common/game.hpp"
 
 #include <ncurses.h>
 

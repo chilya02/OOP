@@ -1,7 +1,7 @@
 #ifndef CELL_OBJ_H
 #define CELL_OBJ_H
 
-#include "cell.hpp"
+#include "../cells/cell.hpp"
 
 class CellObject{
   public:

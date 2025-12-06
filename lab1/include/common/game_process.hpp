@@ -1,14 +1,15 @@
 #ifndef GAME_PROCESS_H
 #define GAME_PROCESS_H
 
-#include "interfaces/view.hpp"
-#include "interfaces/command.hpp"
-#include "interfaces/iowrapper.hpp"
+#include "../interfaces/view.hpp"
+#include "../interfaces/command.hpp"
+#include "../interfaces/iowrapper.hpp"
 
 #include "game.hpp"
-#include "player_controller.hpp"
-#include "enemies_controller.hpp"
-#include "enemy_building_controller.hpp"
+
+#include "../controllers/player_controller.hpp"
+#include "../controllers/enemies_controller.hpp"
+#include "../controllers/enemy_building_controller.hpp"
 
 #include <ctime>
 

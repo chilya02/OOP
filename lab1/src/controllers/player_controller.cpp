@@ -1,5 +1,5 @@
-#include "../include/player_controller.hpp"
-#include "../include/entity_status.hpp"
+#include "../../include/controllers/player_controller.hpp"
+#include "../../include/cell_objects/entity_status.hpp"
 
 PlayerController::PlayerController(Player* player):player(player){}
 

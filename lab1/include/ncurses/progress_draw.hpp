@@ -3,7 +3,7 @@
 
 #include "abs_drawer.hpp"
 #include "config.hpp"
-#include "../game.hpp"
+#include "../common/game.hpp"
 
 class ProgressDraw final : public AbstractDrawer{
   public:

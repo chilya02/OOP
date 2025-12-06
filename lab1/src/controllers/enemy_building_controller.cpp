@@ -1,4 +1,4 @@
-#include "../include/enemy_building_controller.hpp"
+#include "../../include/controllers/enemy_building_controller.hpp"
 
 EnemyBuildingController::EnemyBuildingController(
   std::vector<Enemy*>* enemies, 

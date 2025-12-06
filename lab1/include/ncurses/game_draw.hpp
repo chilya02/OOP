@@ -1,7 +1,7 @@
 #ifndef GAME_DRAW_H
 #define GAME_DRAW_H
 
-#include "../game.hpp"
+#include "../common/game.hpp"
 #include "config.hpp"
 #include "abs_drawer.hpp"
 

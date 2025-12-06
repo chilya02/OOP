@@ -1,6 +1,6 @@
-#include "interfaces/iowrapper.hpp"
-#include "interfaces/command.hpp"
-#include "interfaces/view.hpp"
+#include "../interfaces/iowrapper.hpp"
+#include "../interfaces/command.hpp"
+#include "../interfaces/view.hpp"
 
 class IOWrapper:public IOWrapperInterface{
 

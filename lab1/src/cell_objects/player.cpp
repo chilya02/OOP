@@ -1,4 +1,4 @@
-#include "../include/player.hpp"
+#include "../../include/cell_objects/player.hpp"
 
 Player::Player(Cell* cell, int damage, int HP, int points):Entity(cell, damage, HP), points(points){
   this->mode = PlayerMode::Move;

@@ -1,8 +1,8 @@
 #ifndef ENEMY_BUILDING_CONTROLLER_H
 #define ENEMY_BUILDING_CONTROLLER_H
 
-#include "enemy.hpp"
-#include "enemy_building.hpp"
+#include "../cell_objects/enemy.hpp"
+#include "../cell_objects/enemy_building.hpp"
 
 #include <vector>
 

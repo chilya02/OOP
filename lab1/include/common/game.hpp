@@ -1,10 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "player.hpp"
-#include "game_field.hpp"
-#include "enemy_building.hpp"
-#include "enemy.hpp"
+#include "../cell_objects/player.hpp"
+#include "../cells/game_field.hpp"
+#include "../cell_objects/enemy_building.hpp"
+#include "../cell_objects/enemy.hpp"
 
 #include <vector>
 

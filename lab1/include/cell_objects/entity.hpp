@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "cell.hpp"
 #include "entity_status.hpp"
 #include "movable_cell_obj.hpp"
 

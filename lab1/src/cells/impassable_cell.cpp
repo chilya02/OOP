@@ -1,4 +1,4 @@
-#include "../include/impassable_cell.hpp"
+#include "../../include/cells/impassable_cell.hpp"
 
 ImpassableCell::ImpassableCell(int y, int x):Cell(y, x){
   this->impassable = true;

@@ -1,4 +1,4 @@
-#include "../include/game_process.hpp"
+#include "../../include/common/game_process.hpp"
 
 #include <iostream>
 
@@ -35,6 +35,9 @@ void GameProcess::change_state(){
   case GameState::AwaitBuilding:
     this->state = GameState::AwaitPlayer;
     this->game->player->change_status();
+    if (!this->game->player->is_alive()){
+      this->state = GameState::GameOver;
+    }
     break;
   case GameState::Quit:
   case GameState::Exit:

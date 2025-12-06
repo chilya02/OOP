@@ -1,5 +1,5 @@
-#include "../include/game_process.hpp"
-#include "../include/game.hpp"
+#include "../include/common/game_process.hpp"
+#include "../include/common/game.hpp"
 #include "../include/ncurses/iowrapper.hpp"
 
 

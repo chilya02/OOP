@@ -1,8 +1,8 @@
 #ifndef PLAYER_CONTROLLER_H
 #define PLAYER_CONTROLLER_H
 
-#include "player.hpp"
-#include "game_commands.hpp"
+#include "../cell_objects/player.hpp"
+#include "../common/game_commands.hpp"
 
 class PlayerController{
   public:
