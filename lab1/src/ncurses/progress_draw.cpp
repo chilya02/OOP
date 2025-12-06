@@ -20,15 +20,28 @@ void ProgressDraw::draw(){
 void ProgressDraw::draw_player_info(){
   mvwprintw(this->win, 0, 0, "Player:");
   mvwprintw(this->win, 1, 0, "HP: %d", this->game->player->get_HP());
-  //this->draw_progress_bar(2,0, this->game->player);
+  char* text;
+  switch (this->game->player->get_mode()){
+  case PlayerMode::Move:
+    text = "Move";
+    break;
+  case PlayerMode::NearFight:
+  case PlayerMode::FarFight:
+    text = "Attack";
+    break;
+  default:
+    break;
+  }
+  mvwprintw(this->win, 2, 0, "Mode:");
+  mvwprintw(this->win, 3, 0, text);
 }
 
 void ProgressDraw::draw_enemies_HP(){
   int count = 1;
-  mvwprintw(this->win, 3, 0, "Enemies:");
+  mvwprintw(this->win, 5, 0, "Enemies:");
   for (Enemy* enemy: *this->game->enemies){
     if (enemy->is_alive()){
-      mvwprintw(this->win, 3+count, 0, "%d: %d", count, enemy->get_HP());
+      mvwprintw(this->win, 5+count, 0, "%d: %d", count, enemy->get_HP());
       count++;
     }
   }
