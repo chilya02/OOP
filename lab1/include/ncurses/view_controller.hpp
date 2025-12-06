@@ -22,7 +22,10 @@ class NcursesViewController final:public ViewInterface{
     int row;
     int field_x;
     int field_y;
+    int min_width;
+    int min_height;
     void draw();
+    void print_size_message();
     void del_windows();
     void create_windows();
     bool calc_coordinates();

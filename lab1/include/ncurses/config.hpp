@@ -22,5 +22,6 @@
 #define CELL_HEIGHT         1
 
 #define PROGRESS_MARGIN_LR  2
+#define VIEW_MARGIN_TD      1
 
 #endif // NCURSES_CONFIG_H

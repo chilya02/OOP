@@ -3,7 +3,7 @@
 ProgressDraw::ProgressDraw(Game* game)
 :AbstractDrawer(game){
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
-  this->scr_width = 12;
+  this->scr_width = 10;
 }
 
 ProgressDraw::~ProgressDraw(){}
