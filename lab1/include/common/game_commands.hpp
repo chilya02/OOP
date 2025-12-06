@@ -7,6 +7,7 @@ enum class Command{
     Right, 
     Up,
     Down,
+    Ok,
     Attack,
     Move,
     Undefined

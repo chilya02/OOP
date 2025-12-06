@@ -18,6 +18,8 @@ Command NcursesCommandController::get_command(){
       return Command::Quit;
     case 'a':
       return Command::Attack;
+    case 'm':
+      return Command::Move;
     case KEY_UP:
       return Command::Up;
     case KEY_DOWN:
@@ -26,6 +28,8 @@ Command NcursesCommandController::get_command(){
       return Command::Right;
     case KEY_LEFT:
       return Command::Left;
+    case KEY_ENTER:
+      return Command::Ok;
     }
     return Command::Undefined;
 }

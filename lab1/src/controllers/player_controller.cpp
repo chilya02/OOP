@@ -10,12 +10,39 @@ switch (this->player->status){
     return true;
     break;
   case EntityStatus::Await:
-    return this->move_player(command);
+    return this->handle_mode(command);
     break;
   case EntityStatus::Stay:
     return true;
   default:
     return false;
+  }
+}
+
+bool PlayerController::handle_mode(Command command){
+  switch (command){
+  case Command::Attack:
+    if (this->player->mode == PlayerMode::NearFight)
+      this->player->mode = PlayerMode::FarFight;
+    else 
+      this->player->mode = PlayerMode::NearFight;
+    return true;
+  case Command::Move:
+    this->player->mode = PlayerMode::Move;
+    return true;
+  default:
+    return handle_act(command);
+  }
+}
+
+bool PlayerController::handle_act(Command command){
+  switch (this->player->get_mode()){
+  case PlayerMode::Move:
+    return this->move_player(command);
+    break;
+
+  default:
+    break;
   }
 }
 

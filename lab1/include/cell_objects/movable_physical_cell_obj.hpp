@@ -8,5 +8,6 @@ class MovablePhysicalCellObject : public MovableCellObject{
 public:
   MovablePhysicalCellObject(Cell* cell);
   bool move(Cell* cell) override;
+  bool can_move(Cell* cell) override;
 };
 #endif

@@ -8,6 +8,8 @@ class PlayerController{
   public:
     PlayerController(Player* player);
     bool handle_command(Command command);
+    bool handle_mode(Command command);
+    bool handle_act(Command command);
     bool move_player(Command command);
   private:
     Player* player;

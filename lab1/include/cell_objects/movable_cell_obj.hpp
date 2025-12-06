@@ -13,6 +13,6 @@ class MovableCellObject: public CellObject{
     bool move_left();
     bool move_right();
     virtual bool move(Cell* target);
-    bool can_move(Cell* target);
+    virtual bool can_move(Cell* target);
 };
 #endif //MOVABLE_CELL_OBJ_H

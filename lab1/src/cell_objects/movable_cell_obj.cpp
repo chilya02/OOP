@@ -30,7 +30,7 @@ bool MovableCellObject::move_right(){
 }
 
 bool MovableCellObject::can_move(Cell* target){
-  if (!target || target->is_impassable() || target->is_busy())
+  if (!target || target->is_impassable())
     return false;
   return true;
 }
