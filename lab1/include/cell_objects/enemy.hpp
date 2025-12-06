@@ -7,8 +7,6 @@ class Enemy: public Entity{
   public:
     Enemy(Cell* cell);
     ~Enemy();
-  private:
-    //bool move(Cell* target) final;
 
   friend class EnemiesController;
 };

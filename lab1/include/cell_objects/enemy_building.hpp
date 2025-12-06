@@ -1,9 +1,9 @@
 #ifndef ENEMY_BUILD_H
 #define ENEMY_BUILD_H
 
-#include "cell_obj.hpp"
+#include "physical_cell_obj.hpp"
 
-class EnemyBuilding: public CellObject{
+class EnemyBuilding: public PhysicalCellObject{
   public:
     EnemyBuilding(Cell* cell, int period);
   private:

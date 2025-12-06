@@ -1,13 +1,13 @@
 #include "../../include/cell_objects/entity.hpp"
 
-Entity::Entity(Cell* cell, int damage, int HP):MovableCellObject(cell), damage(damage), HP(HP){};
+Entity::Entity(Cell* cell, int damage, int HP):MovablePhysicalCellObject(cell), damage(damage), HP(HP){};
 
 bool Entity::is_alive(){
   return this->HP > 0;
 }
 
 bool Entity::move(Cell* target){
-  bool res = MovableCellObject::move(target);
+  bool res = MovablePhysicalCellObject::move(target);
   if (res)
     this->status = target->is_slow() ? EntityStatus::Slowed : EntityStatus::Stay;
   return res;

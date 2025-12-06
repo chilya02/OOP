@@ -3,11 +3,9 @@
 MovableCellObject::MovableCellObject(Cell* cell):CellObject(cell){}
 
 bool MovableCellObject::move(Cell* target){
-  if (!target || target->is_impassable() || target->is_busy())
+  if (!can_move(target))
     return false;
-  this->cell->busy = false;
   this->cell = target;
-  target->busy = true;
   return true;
 }
 
@@ -29,4 +27,10 @@ bool MovableCellObject::move_left(){
 bool MovableCellObject::move_right(){
   Cell* right = this->cell->get_right();
   return this->move(right);
+}
+
+bool MovableCellObject::can_move(Cell* target){
+  if (!target || target->is_impassable() || target->is_busy())
+    return false;
+  return true;
 }

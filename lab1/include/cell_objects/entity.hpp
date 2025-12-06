@@ -2,11 +2,11 @@
 #define ENTITY_H
 
 #include "entity_status.hpp"
-#include "movable_cell_obj.hpp"
+#include "movable_physical_cell_obj.hpp"
 
-class Entity:public MovableCellObject{ 
+class Entity:public MovablePhysicalCellObject{ 
   public:
-    Entity(Cell* cell, int damage = 30, int HP = 100); 
+    Entity(Cell* cell, int damage = 10, int HP = 100); 
 
     bool is_alive();
     void hit(int damage);

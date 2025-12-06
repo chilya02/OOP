@@ -35,7 +35,7 @@ class Cell{
     Cell* right;
     Cell* left;
   
-  friend class CellObject;
-  friend class MovableCellObject;
+  friend class PhysicalCellObject;
+  friend class MovablePhysicalCellObject;
 };
 #endif //CELL_H

@@ -5,9 +5,9 @@
 
 class CellObject{
   public:
-    CellObject(Cell* cell);
     Cell* get_cell();
   protected:
+    CellObject(Cell* cell);
     Cell* cell;
 
 };
