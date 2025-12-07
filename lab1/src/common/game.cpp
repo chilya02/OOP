@@ -15,7 +15,8 @@ Game::Game(int height, int width, int period){
     Cell* cell = this->field->get_cell(0, 1);
     Enemy* enemy = new Enemy(cell);
     this->enemies->push_back(enemy);
-    
+
+    this->weapon = new Weapon(this->player, this->field);
   }
   catch (const char* error_msg){
     std::cerr << error_msg << std::endl;
@@ -24,18 +25,18 @@ Game::Game(int height, int width, int period){
 }
 
 Game::~Game(){
-  // if (this->field)
-  //   delete this->field;
-  // if (this->player)
-  //   delete this->player;
-  // if (this->enemy_build)
-  //   delete this->enemy_build;
-  // if (this->player_controller)
-  //   delete player_controller;
-  // if (this->enemies_controller)
-  //   delete enemies_controller;
-  // if (this->enemies)
-  //   delete this->enemies;
+  if (this->field)
+    delete this->field;
+  if (this->player)
+    delete this->player;
+  if (this->enemy_building)
+    delete this->enemy_building;
+  if (this->enemies)
+    for (Enemy* enemy: *this->enemies)
+      delete enemy;
+    delete this->enemies;
+  if (this->weapon)
+    delete this->weapon;
 }
 
 Game* Game::create_random_game(){

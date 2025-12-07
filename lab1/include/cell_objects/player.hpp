@@ -4,9 +4,10 @@
 #include "entity.hpp"
 #include "player_mode.hpp"
 
-class Player: public Entity{
+class Player final: public Entity{
   public:
     Player(Cell* cell, int damage = 30, int HP = 100, int points = 0);
+    ~Player();
     PlayerMode get_mode();
   private:
     int points;

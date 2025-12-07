@@ -45,6 +45,8 @@ int GameField::size(){
 }
 
 Cell* GameField::get_cell(int y, int x){
+  if (y < 0 || x < 0 || y >= this->height || x >= this->width)
+    return nullptr;
   return this->cells[y][x];
 }
 

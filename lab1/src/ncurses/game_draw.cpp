@@ -1,5 +1,8 @@
 #include "../../include/ncurses/game_draw.hpp"
 
+#include <iostream>
+#include <fstream>
+
 GameDraw::GameDraw(Game* game)
   :AbstractDrawer(game){
   
@@ -11,7 +14,7 @@ GameDraw::GameDraw(Game* game)
   init_pair(IMPASSABLE_COLOR, COLOR_WHITE, COLOR_RED);
   init_pair(SLOW_COLOR, COLOR_WHITE, COLOR_BLUE);
   init_pair(PLAYER_COLOR, COLOR_BLACK, COLOR_YELLOW);
-  init_pair(AWAIT_COLOR, COLOR_WHITE, COLOR_MAGENTA);
+  init_pair(FOCUS_COLOR, COLOR_WHITE, COLOR_MAGENTA);
   init_pair(SLOWED_COLOR, COLOR_BLACK, COLOR_BLUE);
   init_pair(BUILD_COLOR, COLOR_BLACK, COLOR_WHITE);
   init_pair(ENEMY_COLOR, COLOR_RED, COLOR_WHITE);
@@ -33,7 +36,20 @@ void GameDraw::draw(){
     draw_area();
   draw_building();
   draw_enemies();
+  draw_weapon();
   wrefresh(this->win);
+}
+
+void GameDraw::draw_weapon(){
+  if (game->player->get_status() == EntityStatus::Await
+    && game->player->get_mode() != PlayerMode::Move){
+      int attr = COLOR_PAIR(FOCUS_COLOR) | A_BLINK;
+      Cell* cell = game->weapon->get_cell();
+      std::ofstream outfile;
+      outfile.open("test3.txt", std::ios_base::app); // append instead of overwrite
+      outfile << cell->get_y() << " " << cell->get_x() << std::endl;
+      this->print(cell->get_y(), cell->get_x(), "AA", attr);
+    }
 }
 
 void GameDraw::draw_cell(Cell* cell){
@@ -68,7 +84,7 @@ void GameDraw::draw_player(){
 
   switch (game->player->get_status()) {
     case EntityStatus::Await:
-      attr = COLOR_PAIR(AWAIT_COLOR) | A_BLINK;
+      attr = game->player->get_mode() == PlayerMode::Move ? COLOR_PAIR(FOCUS_COLOR) | A_BLINK : COLOR_PAIR(PLAYER_COLOR);
       break;
     case EntityStatus::Slowed:
       attr = COLOR_PAIR(SLOWED_COLOR);
@@ -98,8 +114,8 @@ void GameDraw::draw_area(){
     res = game->player->get_cell()->get_free_neighbors();
     break;
   case PlayerMode::NearFight:
-    break;
   case PlayerMode::FarFight:
+    res = game->weapon->get_area();
     break;
   default:
     break;

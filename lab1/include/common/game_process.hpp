@@ -10,6 +10,7 @@
 #include "../controllers/player_controller.hpp"
 #include "../controllers/enemies_controller.hpp"
 #include "../controllers/enemy_building_controller.hpp"
+#include "../controllers/command_handler.hpp"
 
 #include <ctime>
 
@@ -34,7 +35,8 @@ class GameProcess{
     GameState state;
     ViewInterface* view;
     CommandInterface* controller;
-    PlayerController* player_controller;
+    CommandHandler* command_handler;
+    //PlayerController* player_controller;
     EnemiesController* enemies_controller;
     EnemyBuildingController* building_controller;
     clock_t last_move;

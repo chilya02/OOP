@@ -6,7 +6,7 @@
 #define IMPASSABLE_COLOR    2
 #define SLOW_COLOR          3
 #define PLAYER_COLOR        4
-#define AWAIT_COLOR         5
+#define FOCUS_COLOR         5
 #define SLOWED_COLOR        6
 #define BUILD_COLOR         7
 #define ENEMY_COLOR         8

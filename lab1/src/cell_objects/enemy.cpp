@@ -3,3 +3,5 @@
 Enemy::Enemy(Cell* cell):Entity(cell){
   this->status = EntityStatus::Stay;
 };
+
+Enemy::~Enemy(){}

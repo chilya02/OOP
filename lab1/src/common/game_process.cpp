@@ -4,15 +4,22 @@
 
 GameProcess::GameProcess(Game* game, ViewInterface* view, CommandInterface* controller)
 :game(game), view(view), controller(controller){
-  this->player_controller = new PlayerController(game->player);
-  this->enemies_controller = new EnemiesController(game->enemies, game->player, game->field);
+  this->enemies_controller = new EnemiesController(game->enemies, game->player, game->field, game->weapon);
+  this->command_handler = new CommandHandler(game->player, game->weapon, enemies_controller);
   this->building_controller = new EnemyBuildingController(game->enemies, game->enemy_building);
 }
 
 GameProcess::GameProcess(Game* game, IOWrapperInterface* wrapper)
 :GameProcess(game, wrapper->get_view(), wrapper->get_command()){}
 
-GameProcess::~GameProcess(){}
+GameProcess::~GameProcess(){
+  if (this->building_controller)
+    delete this->building_controller;
+  if (this->enemies_controller)
+    delete this->enemies_controller;
+  if (this->command_handler)
+    delete this->command_handler;
+}
 
 void GameProcess::start(){
   if (!(game->player) || !(game->field)){
@@ -67,7 +74,7 @@ void GameProcess::loop(){
 
       case GameState::AwaitPlayer:
 
-        if (this->player_controller->handle_command(command))
+        if (this->command_handler->handle_command(command))
           view->invalidate();
 
         if (!game->player->can_act()){

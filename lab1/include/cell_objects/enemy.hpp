@@ -3,7 +3,7 @@
 
 #include "entity.hpp"
 
-class Enemy: public Entity{
+class Enemy final: public Entity{
   public:
     Enemy(Cell* cell);
     ~Enemy();

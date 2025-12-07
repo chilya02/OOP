@@ -14,5 +14,6 @@ class MovableCellObject: public CellObject{
     bool move_right();
     virtual bool move(Cell* target);
     virtual bool can_move(Cell* target);
+  friend class MovableController;
 };
 #endif //MOVABLE_CELL_OBJ_H

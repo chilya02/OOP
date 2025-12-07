@@ -22,11 +22,13 @@ NCURSES = game_draw.o iowrapper.o command_controller.o 	\
 CELLS = cell.o impassable_cell.o slow_cell.o game_field.o
 
 CONTROLLERS = enemy_building_controller.o \
-	player_controller.o enemies_controller.o
+	player_controller.o enemies_controller.o\
+	movable_controller.o weapon_controller.o\
+	command_handler.o
 
 CELL_OBJECTS = cell_obj.o movable_cell_obj.o 	\
 	player.o entity.o enemy_building.o enemy.o	\
-	physical_cell_obj.o \
+	physical_cell_obj.o weapon.o 					 			\
 	movable_physical_cell_obj.o
 
 ENTRY = main.o

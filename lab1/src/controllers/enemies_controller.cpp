@@ -3,8 +3,8 @@
 #include <queue>
 #include <math.h>
 
-EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field)
-  :enemies(enemies), player(player), field(field){}
+EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field, Weapon* weapon)
+  :enemies(enemies), player(player), field(field), weapon(weapon){}
 
 void EnemiesController::act(){
   for (Enemy* enemy: *this->enemies){
@@ -89,4 +89,18 @@ Cell* EnemiesController::get_optimal_cell(Enemy* enemy){
 void EnemiesController::move_enemy(Enemy* enemy){
   Cell* target = this->get_optimal_cell(enemy);
   enemy->move(target);
+}
+
+void EnemiesController::hit_enemy(){
+  for (Enemy* enemy: *this->enemies){
+    if (enemy->get_cell() == weapon->get_cell()){
+      enemy->hit(weapon->get_damage());
+      if (!enemy->is_alive()){
+         auto it = std::find(enemies->begin(), enemies->end(), enemy);
+         if (it != enemies->end()) {
+          enemies->erase(it);
+        }
+      }
+    }
+  }
 }

@@ -28,6 +28,8 @@ Command NcursesCommandController::get_command(){
       return Command::Right;
     case KEY_LEFT:
       return Command::Left;
+    case '\n':
+    case '\r':
     case KEY_ENTER:
       return Command::Ok;
     }

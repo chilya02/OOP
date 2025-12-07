@@ -20,7 +20,7 @@ void ProgressDraw::draw(){
 void ProgressDraw::draw_player_info(){
   mvwprintw(this->win, 0, 0, "Player:");
   mvwprintw(this->win, 1, 0, "HP: %d", this->game->player->get_HP());
-  char* text;
+  const char* text;
   switch (this->game->player->get_mode()){
   case PlayerMode::Move:
     text = "Move";
