@@ -6,12 +6,13 @@
 #include "../cell_objects/enemy_building.hpp"
 #include "../cell_objects/enemy.hpp"
 #include "../cell_objects/weapon.hpp"
+#include "../config.hpp"
 
 #include <vector>
 
 class Game{
   public:
-    Game(int height = 10, int width = 10, int period = 3);
+    Game(int height = 10, int width = 10, int period = ENEMY_BUILDING_PERIOD);
     ~Game();
     static Game* create_random_game();
     static Game* create_user_game();

@@ -45,11 +45,11 @@ void Weapon::center(){
 int Weapon::get_damage(){
   switch (this->player->get_mode()){
     case PlayerMode::NearFight:
-      return 40;
+      return NEAR_FIGHT_DAMAGE;
     break;
     case PlayerMode::FarFight:
-      return 20;
+      return FAR_FIGHT_DAMAGE;
     default:
-      return 20;
+      return FAR_FIGHT_DAMAGE;
   }
 }

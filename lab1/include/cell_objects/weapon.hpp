@@ -1,12 +1,10 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include "../config.hpp"
 #include "player.hpp"
 #include "movable_cell_obj.hpp"
 #include "../cells/game_field.hpp"
-
-#define NEAR_FIGHT_RANGE    2
-#define FAR_FIGHT_RANGE     4
 
 class Weapon: public MovableCellObject{
   public:
