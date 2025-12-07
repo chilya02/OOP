@@ -2,6 +2,8 @@
 
 Entity::Entity(Cell* cell, int damage, int HP):MovablePhysicalCellObject(cell), damage(damage), HP(HP){};
 
+Entity::~Entity(){}
+
 bool Entity::is_alive(){
   return this->HP > 0;
 }

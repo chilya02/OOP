@@ -4,6 +4,11 @@ MovablePhysicalCellObject::MovablePhysicalCellObject(Cell* cell)
 :MovableCellObject(cell){
   cell->busy = true;
 }
+
+MovablePhysicalCellObject::~MovablePhysicalCellObject(){
+  this->cell->busy = false;
+}
+
 bool MovablePhysicalCellObject::move(Cell* target){
   if (this->can_move(target)){
     this->cell->busy = false;

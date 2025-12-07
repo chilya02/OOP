@@ -100,6 +100,7 @@ void EnemiesController::hit_enemy(){
          if (it != enemies->end()) {
           enemies->erase(it);
         }
+        delete enemy;
       }
     }
   }

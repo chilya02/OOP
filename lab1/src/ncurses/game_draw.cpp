@@ -1,8 +1,5 @@
 #include "../../include/ncurses/game_draw.hpp"
 
-#include <iostream>
-#include <fstream>
-
 GameDraw::GameDraw(Game* game)
   :AbstractDrawer(game){
   
@@ -45,9 +42,6 @@ void GameDraw::draw_weapon(){
     && game->player->get_mode() != PlayerMode::Move){
       int attr = COLOR_PAIR(FOCUS_COLOR) | A_BLINK;
       Cell* cell = game->weapon->get_cell();
-      std::ofstream outfile;
-      outfile.open("test3.txt", std::ios_base::app); // append instead of overwrite
-      outfile << cell->get_y() << " " << cell->get_x() << std::endl;
       this->print(cell->get_y(), cell->get_x(), "AA", attr);
     }
 }

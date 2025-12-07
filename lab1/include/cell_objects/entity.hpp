@@ -7,7 +7,7 @@
 class Entity:public MovablePhysicalCellObject{ 
   public:
     Entity(Cell* cell, int damage, int HP = 100); 
-
+    ~Entity();
     bool is_alive();
     void hit(int damage);
 
