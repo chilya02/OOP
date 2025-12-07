@@ -49,7 +49,7 @@ test: all
 	./$(EXECUTABLE) < test_data
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CXX_FLAGS) $(LIB) $^ -o $(EXECUTABLE)
+	$(CC) $(CXX_FLAGS) $^ -o $(EXECUTABLE) $(LIB) 
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp	
 	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
