@@ -2,6 +2,7 @@
 
 #include <queue>
 #include <math.h>
+#include <algorithm>
 
 EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field, Weapon* weapon)
   :enemies(enemies), player(player), field(field), weapon(weapon){}
