@@ -9,6 +9,7 @@ class Player final: public Entity{
     Player(Cell* cell, int damage = 30, int HP = 100, int points = 0);
     ~Player();
     PlayerMode get_mode();
+    int get_score();
   private:
     int points;
     PlayerMode mode;

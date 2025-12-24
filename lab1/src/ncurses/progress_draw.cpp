@@ -26,14 +26,16 @@ void ProgressDraw::draw_player_info(){
     text = "Move";
     break;
   case PlayerMode::NearFight:
+    text = "Near";
+    break;
   case PlayerMode::FarFight:
-    text = "Attack";
+    text = "Far";
     break;
   default:
     break;
   }
-  mvwprintw(this->win, 2, 0, "Mode:");
-  mvwprintw(this->win, 3, 0, text);
+  mvwprintw(this->win, 2, 0, "Mode: %s", text);
+  mvwprintw(this->win, 3, 0, "Score: %d", this->game->player->get_score());
 }
 
 void ProgressDraw::draw_enemies_HP(){

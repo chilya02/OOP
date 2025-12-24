@@ -8,3 +8,7 @@ Player::~Player(){}
 PlayerMode Player::get_mode(){
   return this->mode;
 }
+
+int Player::get_score(){
+  return this->points;
+}
