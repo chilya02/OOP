@@ -27,3 +27,7 @@ bool PlayerController::move_player(Command command){
 void PlayerController::set_stay(){
   this->player->status = EntityStatus::Stay;
 }
+
+void PlayerController::add_points(int count){
+  this->player->points += count;
+}

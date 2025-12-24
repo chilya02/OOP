@@ -41,7 +41,9 @@ bool CommandHandler::handle_act(Command command){
       return false;
   }
   if (command == Command::Ok && res){
-    enemies_controller->hit_enemy();
+    if (enemies_controller->hit_enemy()){
+      this->player_controller->add_points();
+    }
     this->player_controller->set_stay();
   }
   return res;

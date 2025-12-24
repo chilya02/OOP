@@ -13,6 +13,7 @@ class PlayerController : public MovableController{
     bool handle_mode(Command command);
     bool move_player(Command command);
     void set_stay();
+    void add_points(int count = 50);
     Player* player;
   
   friend class CommandHandler;

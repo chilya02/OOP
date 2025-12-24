@@ -92,7 +92,7 @@ void EnemiesController::move_enemy(Enemy* enemy){
   enemy->move(target);
 }
 
-void EnemiesController::hit_enemy(){
+bool EnemiesController::hit_enemy(){
   for (Enemy* enemy: *this->enemies){
     if (enemy->get_cell() == weapon->get_cell()){
       enemy->hit(weapon->get_damage());
@@ -102,7 +102,9 @@ void EnemiesController::hit_enemy(){
           enemies->erase(it);
         }
         delete enemy;
+        return true;
       }
     }
   }
+  return false;
 }
