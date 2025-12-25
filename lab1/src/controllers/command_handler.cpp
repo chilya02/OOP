@@ -3,11 +3,13 @@
 CommandHandler::CommandHandler(
   Player* player, 
   Weapon* weapon,
+  SpellsHand* hand,
   EnemiesController* enemies)
   :enemies_controller(enemies) 
   {
     this->player_controller = new PlayerController(player);
     this->weapon_controller = new WeaponController(weapon);
+    this->spells_hand_controller = new SpellsHandController(hand);
   }
 
 CommandHandler::~CommandHandler(){
@@ -22,6 +24,7 @@ bool CommandHandler::handle_command(Command command){
     case Command::Attack:
       this->weapon_controller->set_center();
     case Command::Move:
+    case Command::Cast:
       return this->player_controller->handle_mode(command);
     default:
       return this->handle_act(command);
@@ -36,6 +39,8 @@ bool CommandHandler::handle_act(Command command){
     case PlayerMode::FarFight:
     case PlayerMode::NearFight:
       res = weapon_controller->handle_command(command);
+      break;
+    case PlayerMode::Cast:
       break;
     default:
       return false;

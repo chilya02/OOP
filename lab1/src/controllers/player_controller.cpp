@@ -15,6 +15,9 @@ bool PlayerController::handle_mode(Command command){
   case Command::Move:
     this->player->mode = PlayerMode::Move;
     return true;
+  case Command::Cast:
+    this->player->mode = PlayerMode::Cast;
+    return true;
   default:
     return false;
   }
