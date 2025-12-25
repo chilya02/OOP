@@ -3,6 +3,8 @@
 Weapon::Weapon(Player* player, GameField* field)
 :MovableCellObject(player->get_cell()), player(player), field(field){}
 
+Weapon::~Weapon(){}
+
 std::vector<Cell*> Weapon::get_area(){
   std::vector<Cell*> res;
   int mid_y = this->player->get_cell()->get_y();

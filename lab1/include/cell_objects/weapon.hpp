@@ -6,9 +6,10 @@
 #include "movable_cell_obj.hpp"
 #include "../cells/game_field.hpp"
 
-class Weapon: public MovableCellObject{
+class Weapon final: public MovableCellObject{
   public:
     Weapon(Player* player, GameField* field);
+    ~Weapon();
     std::vector<Cell*> get_area();
     int get_damage();
   private:
