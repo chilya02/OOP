@@ -20,6 +20,8 @@ Command NcursesCommandController::get_command(){
       return Command::Attack;
     case 'm':
       return Command::Move;
+    case 'c':
+      return Command::Cast;
     case KEY_UP:
       return Command::Up;
     case KEY_DOWN:

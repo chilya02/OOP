@@ -31,6 +31,9 @@ void ProgressDraw::draw_player_info(){
   case PlayerMode::FarFight:
     text = "Far";
     break;
+  case PlayerMode::Cast:
+    text = "Cast";
+    break;
   default:
     break;
   }
