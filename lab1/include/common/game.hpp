@@ -6,6 +6,7 @@
 #include "../cell_objects/enemy_building.hpp"
 #include "../cell_objects/enemy.hpp"
 #include "../cell_objects/weapon.hpp"
+#include "../spells/spells_hand.hpp"
 #include "../config.hpp"
 
 #include <vector>
@@ -18,6 +19,7 @@ class Game{
     static Game* create_user_game();
     GameField* field;
     Player* player;
+    SpellsHand* spells_hand;
     Weapon* weapon;
     EnemyBuilding* enemy_building;
     std::vector<Enemy*>* enemies;

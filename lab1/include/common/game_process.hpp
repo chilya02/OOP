@@ -36,7 +36,6 @@ class GameProcess{
     ViewInterface* view;
     CommandInterface* controller;
     CommandHandler* command_handler;
-    //PlayerController* player_controller;
     EnemiesController* enemies_controller;
     EnemyBuildingController* building_controller;
     clock_t last_move;

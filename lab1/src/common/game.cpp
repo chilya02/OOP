@@ -17,6 +17,7 @@ Game::Game(int height, int width, int period){
     this->enemies->push_back(enemy);
 
     this->weapon = new Weapon(this->player, this->field);
+    this->spells_hand = new SpellsHand();
   }
   catch (const char* error_msg){
     std::cerr << error_msg << std::endl;
@@ -37,6 +38,8 @@ Game::~Game(){
     delete this->enemies;
   if (this->weapon)
     delete this->weapon;
+  if (this->spells_hand)
+      delete this->spells_hand;
 }
 
 Game* Game::create_random_game(){
