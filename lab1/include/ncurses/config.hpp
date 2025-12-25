@@ -10,6 +10,8 @@
 #define SLOWED_COLOR        6
 #define BUILD_COLOR         7
 #define ENEMY_COLOR         8
+#define SELECTED_CARD_COLOR 9
+#define CARD_COLOR          10
 
 #define PLAYER_SYM          "/\\"
 #define SLOW_SYM            "~~"

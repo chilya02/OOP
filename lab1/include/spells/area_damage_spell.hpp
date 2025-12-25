@@ -7,6 +7,7 @@ class AreaDamageSpell : public SpellCardInterface{
   public:
     AreaDamageSpell();
     ~AreaDamageSpell();
+    const char* text() final;
 };
 
 #endif //AREA_DAMAGE_SPELL_H

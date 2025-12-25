@@ -3,3 +3,7 @@
 DirectDamageSpell::DirectDamageSpell(){}
 
 DirectDamageSpell::~DirectDamageSpell(){}
+
+const char* DirectDamageSpell::text(){
+  return "direct";
+}

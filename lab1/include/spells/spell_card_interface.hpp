@@ -3,7 +3,7 @@
 
 class SpellCardInterface{
   public:
-    virtual ~SpellCardInterface(){};
+    virtual const char* text() = 0;
 };
 
 #endif //SPELL_CARD_INTERFACE_H

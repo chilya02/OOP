@@ -5,6 +5,7 @@
 #include "../common/game.hpp"
 
 #include "game_draw.hpp"
+#include "hand_draw.hpp"
 #include "progress_draw.hpp"
 
 class NcursesViewController final:public ViewInterface{
@@ -16,6 +17,7 @@ class NcursesViewController final:public ViewInterface{
 
   private:
     GameDraw* field_drawer;
+    HandDraw* hand_drawer;
     ProgressDraw* progress_drawer;
     bool is_visible;
     int col;

@@ -8,6 +8,8 @@ class HandDraw: public AbstractDrawer{
     HandDraw(Game* game);
     ~HandDraw();
     void draw() final;
+  private:
+    void draw_card(int, SpellCardInterface* card);
 };
 
 #endif // HAND_DRAW_H

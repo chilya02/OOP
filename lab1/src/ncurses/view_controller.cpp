@@ -6,6 +6,7 @@ NcursesViewController::NcursesViewController(Game* game){
   wclear(stdscr);
   
   this->field_drawer = new GameDraw(game);
+  this->hand_drawer = new HandDraw(game);
   this->progress_drawer = new ProgressDraw(game);
 
   this->min_height = this->field_drawer->get_height() + VIEW_MARGIN_TD;
@@ -29,6 +30,7 @@ void NcursesViewController::draw(){
   if (!this->is_visible)
     return;
   this->field_drawer->draw();
+  this->hand_drawer->draw();
   this->progress_drawer->draw();
   move(0, 0);
   wrefresh(stdscr);
@@ -38,6 +40,7 @@ void NcursesViewController::del_windows(){
   if (this->is_visible){
     this->field_drawer->del_window();
     this->progress_drawer->del_window();
+    this->hand_drawer->del_window();
     wclear(stdscr);
   }
 }
@@ -51,6 +54,7 @@ void NcursesViewController::print_size_message(){
 
 void NcursesViewController::create_windows(){
   this->field_drawer->create_window(this->field_y, this->field_x);
+  this->hand_drawer->create_window(this->field_y+ this->field_drawer->get_height(), this->field_x);
   this->progress_drawer->create_window(this->field_y, PROGRESS_MARGIN_LR);
 }
 
@@ -97,6 +101,7 @@ void NcursesViewController::move_field(){
   wclear(stdscr);
   wrefresh(stdscr);
   this->field_drawer->move(this->field_y, this->field_x);
+  this->hand_drawer->move(this->field_y+ this->field_drawer->get_height(), this->field_x);
   this->progress_drawer->move(this->field_y, PROGRESS_MARGIN_LR);
   wrefresh(stdscr);
   move(0,0);

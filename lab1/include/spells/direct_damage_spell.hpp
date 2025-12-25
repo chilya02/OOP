@@ -7,6 +7,7 @@ class DirectDamageSpell : public SpellCardInterface{
   public:
     DirectDamageSpell();
     ~DirectDamageSpell();
+    const char* text() final;
 };
 
 #endif //DIRECT_DAMAGE_SPELL_H

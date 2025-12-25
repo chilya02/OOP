@@ -3,3 +3,7 @@
 AreaDamageSpell::AreaDamageSpell(){}
 
 AreaDamageSpell::~AreaDamageSpell(){}
+
+const char* AreaDamageSpell::text(){
+  return "area";
+}
