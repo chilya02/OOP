@@ -13,30 +13,38 @@ CELLS_DIR = cells
 CELL_OBJ_DIR = cell_objects
 CONTROLLERS_DIR = controllers
 COMMON_DIR = common
+SPELLS_DIR = spells
 
 COMMON = game_process.o abstract_iowrapper.o game.o		
 	
 NCURSES = game_draw.o iowrapper.o command_controller.o 	\
-	view_controller.o abs_drawer.o progress_draw.o
+	view_controller.o abs_drawer.o progress_draw.o 				\
+	hand_draw.o
 
 CELLS = cell.o impassable_cell.o slow_cell.o game_field.o
 
-CONTROLLERS = enemy_building_controller.o \
-	player_controller.o enemies_controller.o\
-	movable_controller.o weapon_controller.o\
-	command_handler.o
+CONTROLLERS = enemy_building_controller.o 		\
+	player_controller.o enemies_controller.o		\
+	movable_controller.o weapon_controller.o		\
+	command_handler.o spells_hand_controller.o	\
+	direct_damage_controller.o 									\
+	area_damage_controller.o
 
 CELL_OBJECTS = cell_obj.o movable_cell_obj.o 	\
 	player.o entity.o enemy_building.o enemy.o	\
 	physical_cell_obj.o weapon.o 					 			\
 	movable_physical_cell_obj.o
 
+SPELLS = spells_hand.o direct_damage_spell.o	\
+	area_damage_spell.o area_damage.o 					\
+	direct_damage.o
+
 ENTRY = main.o
 
 OBJECTS = $(addprefix $(OBJ_DIR)/,\
 	$(COMMON) $(NCURSES) $(CELLS)		\
 	$(CONTROLLERS) $(CELL_OBJECTS)	\
-	$(ENTRY)) 
+	$(ENTRY) $(SPELLS)) 
 
 LIB = -lncurses
 
@@ -70,6 +78,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/$(COMMON_DIR)/%.cpp $(INC_DIR)/$(COMMON_DIR)/%.hpp
 	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
+	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/$(SPELLS_DIR)/%.cpp $(INC_DIR)/$(SPELLS_DIR)/%.hpp
 	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
 
 #$(OBJ_DIR)/game_field.o: $(addprefix $(INC_DIR)/, cell.hpp impassable_cell.hpp slow_cell.hpp)
