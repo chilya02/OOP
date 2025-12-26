@@ -39,11 +39,13 @@ void GameDraw::draw(){
 
 void GameDraw::draw_weapon(){
   if (game->player->get_status() == EntityStatus::Await
-    && game->player->get_mode() != PlayerMode::Move){
-      int attr = COLOR_PAIR(FOCUS_COLOR) | A_BLINK;
-      Cell* cell = game->weapon->get_cell();
-      this->print(cell->get_y(), cell->get_x(), "AA", attr);
-    }
+    && (game->player->get_mode() == PlayerMode::NearFight||
+        game->player->get_mode() == PlayerMode::FarFight))
+  {
+    int attr = COLOR_PAIR(FOCUS_COLOR) | A_BLINK;
+    Cell* cell = game->weapon->get_cell();
+    this->print(cell->get_y(), cell->get_x(), "AA", attr);
+  }
 }
 
 void GameDraw::draw_cell(Cell* cell){
