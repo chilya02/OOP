@@ -1,11 +1,11 @@
 #include "../../include/spells/spells_hand.hpp"
-#include "../../include/spells/direct_damage_spell.hpp"
+#include "../../include/spells/area_damage_card.hpp"
 
 SpellsHand::SpellsHand(int size)
 :size(size){
   this->cards = new std::vector <SpellCardInterface*>;
-  this->cards->push_back(new DirectDamageSpell());
-  this->cards->push_back(new DirectDamageSpell());
+  this->cards->push_back(new AreaDamageCard());
+  this->cards->push_back(new AreaDamageCard());
 }
 
 SpellsHand::~SpellsHand(){}
@@ -20,4 +20,14 @@ std::vector <SpellCardInterface*>* SpellsHand::get_cards(){
 
 SpellCardInterface* SpellsHand::get_selected_card(){
   return (*this->cards)[active_index];
+}
+
+void SpellsHand::inc_index(){
+  this->active_index += 1;
+  this->active_index %= this->cards->size();
+}
+
+void SpellsHand::dec_index(){
+  this->active_index -= 1;
+  this->active_index %= this->cards->size();
 }

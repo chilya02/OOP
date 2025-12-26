@@ -15,6 +15,10 @@ class SpellsHand{
     std::vector <SpellCardInterface*>* cards;
     int size;
     int active_index = 0;
+    void inc_index();
+    void dec_index();
+
+    friend class SpellsHandController;
 };
 
 #endif // SPELLS_HAND_H
