@@ -10,8 +10,11 @@ class SpellsHandController{
     ~SpellsHandController();
     bool can_cast();
     bool handle_command(Command command);
+    bool is_active();
+    void deactivate();
   private:
     SpellsHand* spells_hand;
+    bool active;
 };
 
 #endif //SPELLS_HAND_CONTROLLER_H

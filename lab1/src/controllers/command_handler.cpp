@@ -20,7 +20,8 @@ CommandHandler::~CommandHandler(){
 }
 bool CommandHandler::handle_command(Command command){
   switch (command)
-  {
+  { case Command::Undefined:
+      return false;
     case Command::Attack:
       this->weapon_controller->set_center();
     case Command::Move:
@@ -41,7 +42,9 @@ bool CommandHandler::handle_act(Command command){
       res = weapon_controller->handle_command(command);
       break;
     case PlayerMode::Cast:
-      break;
+    if (spells_hand_controller->can_cast())
+      return spells_hand_controller->handle_command(command);
+    return false;
     default:
       return false;
   }
