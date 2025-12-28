@@ -6,7 +6,14 @@ SpellsHand::SpellsHand(int size)
   this->cards = new std::vector <SpellCardInterface*>;
 }
 
-SpellsHand::~SpellsHand(){}
+SpellsHand::~SpellsHand(){
+  if (this->cards){
+    for (SpellCardInterface* card: *this->cards){
+      delete card;
+    }
+    delete this->cards;
+  }
+}
 
 int SpellsHand::get_size(){
   return this->size;
