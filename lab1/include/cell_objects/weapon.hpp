@@ -3,18 +3,16 @@
 
 #include "../config.hpp"
 #include "player.hpp"
-#include "movable_cell_obj.hpp"
+#include "movable_damage.hpp"
 #include "../cells/game_field.hpp"
 
-class Weapon final: public MovableCellObject{
+class Weapon final: public MovableDamage{
   public:
     Weapon(Player* player, GameField* field);
     ~Weapon();
     std::vector<Cell*> get_area();
-    int get_damage();
+    int get_damage() override;
   private:
-    Player* player;
-    GameField* field;
     void center();
     int get_offset();
     bool can_move(Cell*) final;

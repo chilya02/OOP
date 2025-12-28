@@ -4,8 +4,6 @@
 SpellsHand::SpellsHand(int size)
 :size(size){
   this->cards = new std::vector <SpellCardInterface*>;
-  this->cards->push_back(new AreaDamageCard());
-  this->cards->push_back(new AreaDamageCard());
 }
 
 SpellsHand::~SpellsHand(){}

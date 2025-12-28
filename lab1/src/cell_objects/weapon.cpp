@@ -1,7 +1,7 @@
 #include "../../include/cell_objects/weapon.hpp"
 
 Weapon::Weapon(Player* player, GameField* field)
-:MovableCellObject(player->get_cell()), player(player), field(field){}
+:MovableDamage(player->get_cell(), field, player){}
 
 Weapon::~Weapon(){}
 
