@@ -28,16 +28,17 @@ CONTROLLERS = enemy_building_controller.o 		\
 	movable_controller.o weapon_controller.o		\
 	command_handler.o spells_hand_controller.o	\
 	direct_damage_controller.o 									\
-	area_damage_controller.o
+	area_damage_controller.o										\
+	movable_spell_controller.o
 
 CELL_OBJECTS = cell_obj.o movable_cell_obj.o 	\
 	player.o entity.o enemy_building.o enemy.o	\
 	physical_cell_obj.o weapon.o 					 			\
 	movable_physical_cell_obj.o
 
-SPELLS = spells_hand.o direct_damage_spell.o	\
-	area_damage_spell.o area_damage.o 					\
-	direct_damage.o
+SPELLS = spells_hand.o direct_damage_card.o	\
+	area_damage_card.o area_damage.o 					\
+	direct_damage.o movable_spell.o
 
 ENTRY = main.o
 
@@ -47,6 +48,8 @@ OBJECTS = $(addprefix $(OBJ_DIR)/,\
 	$(ENTRY) $(SPELLS)) 
 
 LIB = -lncurses
+
+COMPILE = $(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
 
 all: $(OBJ_DIR) $(EXECUTABLE) 
 
@@ -60,28 +63,28 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CXX_FLAGS) $^ -o $(EXECUTABLE) $(LIB) 
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp	
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(NCURSES_DIR)/%.cpp $(INC_DIR)/$(NCURSES_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CELL_OBJ_DIR)/%.cpp $(INC_DIR)/$(CELL_OBJ_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CELLS_DIR)/%.cpp $(INC_DIR)/$(CELLS_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(COMMON_DIR)/%.cpp $(INC_DIR)/$(COMMON_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/$(SPELLS_DIR)/%.cpp $(INC_DIR)/$(SPELLS_DIR)/%.hpp
-	$(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
+	$(COMPILE)
 
 #$(OBJ_DIR)/game_field.o: $(addprefix $(INC_DIR)/, cell.hpp impassable_cell.hpp slow_cell.hpp)
 
