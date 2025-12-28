@@ -27,18 +27,17 @@ CONTROLLERS = enemy_building_controller.o 		\
 	player_controller.o enemies_controller.o		\
 	movable_controller.o weapon_controller.o		\
 	command_handler.o spells_hand_controller.o	\
-	direct_damage_controller.o 									\
-	area_damage_controller.o										\
-	movable_spell_controller.o
+	movable_damage_controller.o
 
 CELL_OBJECTS = cell_obj.o movable_cell_obj.o 	\
 	player.o entity.o enemy_building.o enemy.o	\
 	physical_cell_obj.o weapon.o 					 			\
-	movable_physical_cell_obj.o
+	movable_physical_cell_obj.o movable_damage.o\
 
 SPELLS = spells_hand.o direct_damage_card.o	\
 	area_damage_card.o area_damage.o 					\
-	direct_damage.o movable_spell.o
+	direct_damage.o movable_damage_card.o			\
+	movable_damage_spell.o
 
 ENTRY = main.o
 
