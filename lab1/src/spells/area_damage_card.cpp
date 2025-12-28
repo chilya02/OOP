@@ -9,7 +9,3 @@ AreaDamageCard::~AreaDamageCard(){}
 const char* AreaDamageCard::text(){
   return "area";
 }
-
-// AreaDamageController* AreaDamageCard::get_controller(){
-//   return this->controller;
-// }
