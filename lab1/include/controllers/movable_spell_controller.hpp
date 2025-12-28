@@ -2,17 +2,17 @@
 #define MOVABLE_SPELL_CONTROLLER_H
 
 #include "movable_controller.hpp"
-#include "../spells/movable_spell.hpp"
+#include "../spells/movable_damage.hpp"
 #include "spell_controller_interface.hpp"
 
 
 class MovableSpellController: public SpellControllerInterface, public MovableController{
   public:
-    MovableSpellController(MovableSpell*);
+    MovableSpellController(MovableDamage*);
     ~MovableSpellController();
     bool handle_command(Command command) override;
   protected:
-    MovableSpell* spell;
+    MovableDamage* spell;
 };
 
 #endif //# MOVABLE_SPELL_CONTROLLER_H

@@ -1,6 +1,6 @@
 #include "../../include/controllers/movable_spell_controller.hpp"
 
-MovableSpellController::MovableSpellController(MovableSpell* spell)
+MovableSpellController::MovableSpellController(MovableDamage* spell)
 : MovableController(spell){}
 
 MovableSpellController::~MovableSpellController(){}
