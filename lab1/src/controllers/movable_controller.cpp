@@ -17,3 +17,7 @@ bool MovableController::move_obj(Command command){
       return false;
   }
 }
+
+Cell* MovableController::get_cell(){
+  return this->obj->get_cell();
+}

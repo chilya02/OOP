@@ -13,7 +13,8 @@ class EnemiesController{
   public:
     EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field, Weapon* weapon);
     void act();
-    bool hit_enemy();
+    int hit(std::vector<Cell*>, int);
+    int hit(Cell*, int);
   private:
     std::vector<Enemy*>* enemies;
     Player* player;

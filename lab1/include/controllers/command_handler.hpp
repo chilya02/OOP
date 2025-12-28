@@ -13,6 +13,7 @@ class CommandHandler{
     bool handle_command(Command command);
   private:
     bool handle_act(Command command);
+    void hit_enemies();
     PlayerController* player_controller;
     WeaponController* weapon_controller;
     EnemiesController* enemies_controller;

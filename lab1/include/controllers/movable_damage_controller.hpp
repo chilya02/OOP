@@ -11,6 +11,7 @@ class MovableDamageController: public ControllerInterface, public MovableControl
     MovableDamageController(MovableDamage*);
     ~MovableDamageController();
     bool handle_command(Command command) override;
+    int get_damage();
   protected:
     MovableDamage* damage;
 };

@@ -43,16 +43,32 @@ bool CommandHandler::handle_act(Command command){
       break;
     case PlayerMode::Cast:
     if (spells_hand_controller->can_cast())
-      return spells_hand_controller->handle_command(command);
-    return false;
+      res = spells_hand_controller->handle_command(command);
+        break;
     default:
       return false;
   }
   if (command == Command::Ok && res){
-    if (enemies_controller->hit_enemy()){
-      this->player_controller->add_points();
-    }
+    this->hit_enemies();
     this->player_controller->set_stay();
   }
   return res;
+}
+
+void CommandHandler::hit_enemies(){
+  int res = 0;
+  switch (this->player_controller->player->get_mode()){
+  case PlayerMode::FarFight:
+  case PlayerMode::NearFight:
+    res = this->enemies_controller->hit(
+      this->weapon_controller->get_cell(), 
+      this->weapon_controller->get_damage());
+    break;
+  case PlayerMode::Cast:
+    //res = this->enemies_controller->hit();
+    break;
+  default:
+    break;
+  }
+  this->player_controller->add_points(res);
 }

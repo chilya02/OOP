@@ -1,7 +1,7 @@
 #include "../../include/controllers/movable_damage_controller.hpp"
 
-MovableDamageController::MovableDamageController(MovableDamage* spell)
-: MovableController(spell){}
+MovableDamageController::MovableDamageController(MovableDamage* damage)
+: MovableController(damage), damage(damage){}
 
 MovableDamageController::~MovableDamageController(){}
 
@@ -15,4 +15,8 @@ bool MovableDamageController::handle_command(Command command){
     return true;
   }
   return false;
+}
+
+int MovableDamageController::get_damage(){
+  return this->damage->get_damage();
 }

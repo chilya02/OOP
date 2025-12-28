@@ -92,19 +92,28 @@ void EnemiesController::move_enemy(Enemy* enemy){
   enemy->move(target);
 }
 
-bool EnemiesController::hit_enemy(){
+
+int EnemiesController::hit(Cell* cell, int damage){
   for (Enemy* enemy: *this->enemies){
-    if (enemy->get_cell() == weapon->get_cell()){
-      enemy->hit(weapon->get_damage());
+    if (enemy->get_cell() == cell){
+      enemy->hit(damage);
       if (!enemy->is_alive()){
          auto it = std::find(enemies->begin(), enemies->end(), enemy);
          if (it != enemies->end()) {
           enemies->erase(it);
         }
         delete enemy;
-        return true;
+        return 1;
       }
     }
+  return 0;
   }
-  return false;
+}
+
+int EnemiesController::hit(std::vector<Cell*> cells, int damage){
+  int res = 0;
+  for (Cell* cell: cells){
+    res += this->hit(cell, damage);
+  }
+  return res;
 }

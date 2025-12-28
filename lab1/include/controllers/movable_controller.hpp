@@ -5,6 +5,8 @@
 #include "../common/game_commands.hpp"
 
 class MovableController{
+  public:
+    Cell* get_cell();
   protected:
     MovableController(MovableCellObject* obj);
     bool move_obj(Command command);
