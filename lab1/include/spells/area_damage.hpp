@@ -6,6 +6,7 @@
 class AreaDamage: public MovableDamageSpell{
   public:
     AreaDamage(GameField* ,Player*, int damage = 30);
+    ~AreaDamage();
 };
 
 #endif //AREA_DAMAGE_H

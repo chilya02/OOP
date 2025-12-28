@@ -7,3 +7,7 @@ MovableDamageSpell::MovableDamageSpell(GameField* field, Player* player, int dam
 int MovableDamageSpell::get_damage(){
   return this->damage;
 }
+
+MovableDamageSpell::~MovableDamageSpell(){
+  
+}

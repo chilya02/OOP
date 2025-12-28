@@ -6,6 +6,7 @@
 class DirectDamage: public MovableDamageSpell{
   public:
     DirectDamage(GameField*, Player*, int damage = 40);
+    ~DirectDamage();
 };
 
 #endif // DIRECT_DAMAGE_H

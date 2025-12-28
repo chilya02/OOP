@@ -10,6 +10,7 @@ class AreaDamageCard : public MovableDamageCard{
     ~AreaDamageCard();
     const char* text() final;
   private:
+    AreaDamage* spell;
 };
 
 #endif //AREA_DAMAGE_CARD_H

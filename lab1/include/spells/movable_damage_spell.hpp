@@ -6,7 +6,7 @@
 class MovableDamageSpell:public MovableDamage{
   public:
     MovableDamageSpell(GameField*, Player*, int);
-    ~MovableDamageSpell();
+    virtual ~MovableDamageSpell();
     int get_damage() override;
   protected:
     int damage;

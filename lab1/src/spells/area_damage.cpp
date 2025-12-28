@@ -4,3 +4,4 @@ AreaDamage::AreaDamage(GameField* field, Player* player, int damage)
   :MovableDamageSpell(field, player, damage){
 
 }
+AreaDamage::~AreaDamage(){}
