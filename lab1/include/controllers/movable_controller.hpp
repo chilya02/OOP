@@ -10,6 +10,5 @@ class MovableController{
     bool move_obj(Command command);
   private:
     MovableCellObject* obj;
-
 };
 #endif // MOVABLE_CONTROLLER_H

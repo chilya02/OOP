@@ -2,12 +2,11 @@
 #define WEAPON_CONTROLLER_H
 
 #include "../cell_objects/weapon.hpp"
-#include "movable_controller.hpp"
+#include "movable_damage_controller.hpp"
 
-class WeaponController: public MovableController{
+class WeaponController: public MovableDamageController{
   public:
     WeaponController(Weapon* );
-    bool handle_command(Command command);
     void set_center();
   private:
     Weapon* weapon;
