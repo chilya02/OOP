@@ -10,10 +10,8 @@ class MovableDamage:public MovableCellObject{
     MovableDamage(Cell*, GameField*, Player*);
     virtual int get_damage() = 0;
   protected:
-    int damage;
     GameField* field;
     Player* player;
-
   friend class MovableDamageController;
 };
 
