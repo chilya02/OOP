@@ -9,7 +9,7 @@ NcursesViewController::NcursesViewController(Game* game){
   this->hand_drawer = new HandDraw(game);
   this->progress_drawer = new ProgressDraw(game);
 
-  this->min_height = this->field_drawer->get_height() + VIEW_MARGIN_TD;
+  this->min_height = this->field_drawer->get_height() + VIEW_MARGIN_TD + this->hand_drawer->get_height();
 
   this->min_width = this->field_drawer->get_width() + this->progress_drawer->get_width() + 2 * PROGRESS_MARGIN_LR;
 
