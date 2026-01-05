@@ -15,6 +15,8 @@ class SpellsHandController{
   private:
     SpellsHand* spells_hand;
     bool active;
+
+    ControllerInterface* get_active_controller();
 };
 
 #endif //SPELLS_HAND_CONTROLLER_H

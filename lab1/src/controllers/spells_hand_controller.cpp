@@ -9,7 +9,7 @@ SpellsHandController::~SpellsHandController(){}
 
 bool SpellsHandController::handle_command(Command command){
   if (this->is_active()){
-    return this->spells_hand->get_selected_card()->get_controller();
+    return this->get_active_controller()->handle_command(command);
   }
   switch (command)
   {
@@ -39,4 +39,8 @@ bool SpellsHandController::is_active(){
 
 void SpellsHandController::deactivate(){
   this->active = false;
+}
+
+ControllerInterface* SpellsHandController::get_active_controller(){
+  return this->spells_hand->get_selected_card()->get_controller();
 }
