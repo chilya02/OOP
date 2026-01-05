@@ -13,7 +13,7 @@ std::vector<Cell*> Weapon::get_area(){
   for (int y = mid_y - offset; y < mid_y + offset + 1; y++){
       for (int x = mid_x - offset; x < mid_x + offset + 1; x++){
         Cell* target = this->field->get_cell(y, x);
-        if (this->can_move(target)){
+        if (this->can_move(target) && target != this->player->get_cell()){
           res.push_back(target);
         }
       }
@@ -34,7 +34,7 @@ int Weapon::get_offset(){
 
 bool Weapon::can_move(Cell* target){
   bool flag = MovableCellObject::can_move(target);
-  flag = flag && target != this->player->get_cell();
+  //flag = flag && target != this->player->get_cell();
   flag = flag && abs(target->get_y() - player->get_cell()->get_y()) <= get_offset();
   flag = flag && abs(target->get_x() - player->get_cell()->get_x()) <= get_offset();
   return flag;
