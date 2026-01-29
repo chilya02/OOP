@@ -4,12 +4,13 @@ CommandHandler::CommandHandler(
   Player* player, 
   Weapon* weapon,
   SpellsHand* hand,
+  GameField* field,
   EnemiesController* enemies)
   :enemies_controller(enemies) 
   {
     this->player_controller = new PlayerController(player);
     this->weapon_controller = new WeaponController(weapon);
-    this->spells_hand_controller = new SpellsHandController(hand);
+    this->spells_hand_controller = new SpellsHandController(hand, field, player);
   }
 
 CommandHandler::~CommandHandler(){

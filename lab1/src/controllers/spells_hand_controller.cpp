@@ -1,8 +1,11 @@
 #include "../../include/controllers/spells_hand_controller.hpp"
+#include "../../include/spells/area_damage_card.hpp"
+#include "../../include/spells/direct_damage_card.hpp"
 
-SpellsHandController::SpellsHandController(SpellsHand* spells_hand):
-  spells_hand(spells_hand), active(false){
-
+SpellsHandController::SpellsHandController(SpellsHand* spells_hand, GameField* field, Player* player):
+  spells_hand(spells_hand), field(field), player(player), active(false){
+    spells_hand->cards->push_back(new AreaDamageCard(field, player));
+    spells_hand->cards->push_back(new DirectDamageCard());
   }
 
 SpellsHandController::~SpellsHandController(){}

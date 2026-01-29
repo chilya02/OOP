@@ -8,7 +8,7 @@
 
 class CommandHandler{
   public:
-    CommandHandler(Player*, Weapon*, SpellsHand*, EnemiesController*);
+    CommandHandler(Player*, Weapon*, SpellsHand*, GameField*, EnemiesController*);
     ~CommandHandler();
     bool handle_command(Command command);
   private:

@@ -108,6 +108,7 @@ int EnemiesController::hit(Cell* cell, int damage){
     }
   return 0;
   }
+  return 0;
 }
 
 int EnemiesController::hit(std::vector<Cell*> cells, int damage){

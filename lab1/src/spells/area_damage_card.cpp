@@ -10,5 +10,5 @@ AreaDamageCard::~AreaDamageCard(){
 }
 
 const char* AreaDamageCard::text(){
-  return "area";
+  return " area ";
 }

@@ -5,6 +5,7 @@ WeaponController::WeaponController(Weapon* weapon)
   
 }
 
+WeaponController::~WeaponController(){}
 
 void WeaponController::set_center(){
   this->weapon->center();
