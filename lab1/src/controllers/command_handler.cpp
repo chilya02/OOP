@@ -35,21 +35,27 @@ bool CommandHandler::handle_command(Command command){
 
 bool CommandHandler::handle_act(Command command){
   bool res = false;
+  bool hit = false;
   switch (player_controller->player->get_mode()){
     case PlayerMode::Move:
       return player_controller->move_player(command);
     case PlayerMode::FarFight:
     case PlayerMode::NearFight:
       res = weapon_controller->handle_command(command);
+      hit = res;
       break;
     case PlayerMode::Cast:
-    if (spells_hand_controller->can_cast())
+    if (spells_hand_controller->can_cast()){
+      if (spells_hand_controller->is_active()){
+        hit = true;
+      }
       res = spells_hand_controller->handle_command(command);
-        break;
+    }
+      break;
     default:
       return false;
   }
-  if (command == Command::Ok && res){
+  if (command == Command::Ok && hit){
     this->hit_enemies();
     this->player_controller->set_stay();
   }
