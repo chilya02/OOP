@@ -18,7 +18,7 @@ void HandDraw::draw(){
   int x = 0;
   wattron(this->win, CARD_COLOR);
   for (SpellCardInterface* card: *game->spells_hand->get_cards()){
-    if (card == game->spells_hand->get_selected_card()){
+    if (game->player->get_mode() == PlayerMode::Cast && card == game->spells_hand->get_selected_card()){
       wattron(this->win, COLOR_PAIR(SELECTED_CARD_COLOR));
       this->draw_card(x, card);
       wattroff(this->win, COLOR_PAIR(SELECTED_CARD_COLOR));
