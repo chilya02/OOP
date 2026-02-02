@@ -24,7 +24,6 @@ bool CommandHandler::handle_command(Command command){
   { case Command::Undefined:
       return false;
     case Command::Attack:
-      this->weapon_controller->set_center();
     case Command::Move:
     case Command::Cast:
       return this->player_controller->handle_mode(command);
@@ -68,7 +67,7 @@ void CommandHandler::hit_enemies(){
   case PlayerMode::FarFight:
   case PlayerMode::NearFight:
     res = this->enemies_controller->hit(
-      this->weapon_controller->get_cell(), 
+      this->weapon_controller->get_area(), 
       this->weapon_controller->get_damage());
     break;
   case PlayerMode::Cast:

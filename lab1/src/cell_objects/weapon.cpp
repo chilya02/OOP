@@ -1,23 +1,37 @@
 #include "../../include/cell_objects/weapon.hpp"
 
 Weapon::Weapon(Player* player, GameField* field)
-:MovableDamage(player->get_cell(), field, player){}
+: player(player), field(field), direction(WeaponDirection::Top){}
 
 Weapon::~Weapon(){}
 
 std::vector<Cell*> Weapon::get_area(){
   std::vector<Cell*> res;
-  int mid_y = this->player->get_cell()->get_y();
-  int mid_x = this->player->get_cell()->get_x();
-  int offset = this->get_offset();
-  for (int y = mid_y - offset; y < mid_y + offset + 1; y++){
-      for (int x = mid_x - offset; x < mid_x + offset + 1; x++){
-        Cell* target = this->field->get_cell(y, x);
-        if (this->can_move(target) && target != this->player->get_cell()){
-          res.push_back(target);
-        }
-      }
+  int y = player->get_cell()->get_y();
+  int x = player->get_cell()->get_x();
+  for (int count = 0; count < get_offset(); count++){
+    switch (direction){
+      case WeaponDirection::Top:
+        y -= 1;
+        break;
+      case WeaponDirection::Bottom:
+        y += 1;
+        break;
+      case WeaponDirection::Left:
+        x -= 1;
+        break;
+      case WeaponDirection::Right:
+        x += 1;
+        break;
     }
+    if (y >= 0 and y < field->get_height() and x >= 0 and x < field->get_width()){
+      Cell* cell = field->get_cell(y, x);
+      if (cell->is_impassable()){
+        break;
+      }
+      res.push_back(cell);
+    }
+  }
   return res;
 }
 
@@ -30,18 +44,6 @@ int Weapon::get_offset(){
   default:
     return 0;
   }
-}
-
-bool Weapon::can_move(Cell* target){
-  bool flag = MovableCellObject::can_move(target);
-  //flag = flag && target != this->player->get_cell();
-  flag = flag && abs(target->get_y() - player->get_cell()->get_y()) <= get_offset();
-  flag = flag && abs(target->get_x() - player->get_cell()->get_x()) <= get_offset();
-  return flag;
-}
-
-void Weapon::center(){
-  this->cell = this->player->get_cell();
 }
 
 int Weapon::get_damage(){

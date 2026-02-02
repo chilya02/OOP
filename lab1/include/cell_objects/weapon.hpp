@@ -3,19 +3,20 @@
 
 #include "../config.hpp"
 #include "player.hpp"
-#include "movable_damage.hpp"
 #include "../cells/game_field.hpp"
+#include "weapon_direction.hpp"
 
-class Weapon final: public MovableDamage{
+class Weapon{
   public:
     Weapon(Player* player, GameField* field);
     ~Weapon();
     std::vector<Cell*> get_area();
-    int get_damage() override;
+    int get_damage();
   private:
-    void center();
     int get_offset();
-    bool can_move(Cell*) final;
+    WeaponDirection direction;
+    Player* player;
+    GameField* field;
   friend class WeaponController;
 };
 
