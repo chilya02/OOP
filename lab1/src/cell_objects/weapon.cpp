@@ -1,7 +1,7 @@
 #include "../../include/cell_objects/weapon.hpp"
 
 Weapon::Weapon(Player* player, GameField* field)
-: player(player), field(field), direction(WeaponDirection::Top){}
+:direction(WeaponDirection::Top), player(player), field(field){}
 
 Weapon::~Weapon(){}
 
