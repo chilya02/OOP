@@ -6,10 +6,11 @@
 class CellObject{
   public:
     Cell* get_cell();
+    bool is_movable();
   protected:
     CellObject(Cell* cell);
     Cell* cell;
-
+    bool movable;
 };
 
 #endif //CELL_OBJ_H

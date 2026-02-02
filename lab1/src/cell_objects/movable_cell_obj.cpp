@@ -1,6 +1,8 @@
 #include "../../include/cell_objects/movable_cell_obj.hpp"
 
-MovableCellObject::MovableCellObject(Cell* cell):CellObject(cell){}
+MovableCellObject::MovableCellObject(Cell* cell):CellObject(cell){
+  this->movable = true;
+}
 
 bool MovableCellObject::move(Cell* target){
   if (!can_move(target))
