@@ -4,8 +4,8 @@
 #include <math.h>
 #include <algorithm>
 
-EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field, Weapon* weapon)
-  :enemies(enemies), player(player), field(field), weapon(weapon){}
+EnemiesController::EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field)
+  :enemies(enemies), player(player), field(field){}
 
 void EnemiesController::act(){
   for (Enemy* enemy: *this->enemies){

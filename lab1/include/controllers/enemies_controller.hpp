@@ -11,7 +11,7 @@
 
 class EnemiesController{
   public:
-    EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field, Weapon* weapon);
+    EnemiesController(std::vector<Enemy*>* enemies, Player* player, GameField* field);
     void act();
     int hit(std::vector<Cell*>, int);
     int hit(Cell*, int);
@@ -19,7 +19,6 @@ class EnemiesController{
     std::vector<Enemy*>* enemies;
     Player* player;
     GameField* field;
-    Weapon* weapon;
     void move_enemy(Enemy* enemy);
     Cell* get_optimal_cell(Enemy* enemy);
     float distance(Cell*);
