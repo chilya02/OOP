@@ -94,6 +94,8 @@ void EnemiesController::move_enemy(Enemy* enemy){
 
 
 int EnemiesController::hit(Cell* cell, int damage){
+  if (!cell->is_busy())
+    return 0;
   for (Enemy* enemy: *this->enemies){
     if (enemy->get_cell() == cell){
       enemy->hit(damage);
