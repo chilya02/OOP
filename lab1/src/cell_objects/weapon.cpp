@@ -36,10 +36,10 @@ std::vector<Cell*> Weapon::get_area(){
 }
 
 int Weapon::get_offset(){
-  switch (this->player->get_mode()){
-  case PlayerMode::NearFight:
+  switch (this->mode){
+  case WeaponMode::Near:
     return NEAR_FIGHT_RANGE;
-  case PlayerMode::FarFight:
+  case WeaponMode::Far:
     return FAR_FIGHT_RANGE;
   default:
     return 0;
@@ -47,13 +47,17 @@ int Weapon::get_offset(){
 }
 
 int Weapon::get_damage(){
-  switch (this->player->get_mode()){
-    case PlayerMode::NearFight:
+  switch (this->mode){
+    case WeaponMode::Near:
       return NEAR_FIGHT_DAMAGE;
     break;
-    case PlayerMode::FarFight:
+    case WeaponMode::Far:
       return FAR_FIGHT_DAMAGE;
     default:
       return FAR_FIGHT_DAMAGE;
   }
+}
+
+WeaponMode Weapon::get_mode(){
+  return this->mode;
 }

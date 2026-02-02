@@ -15,6 +15,20 @@ std::vector<Cell*> WeaponController::get_area(){
   return this->weapon->get_area();
 }
 
+bool WeaponController::change_mode(){
+  switch (weapon->mode){ 
+    case WeaponMode::Near:
+      weapon->mode = WeaponMode::Far;
+      break;
+    case WeaponMode::Far:
+      weapon->mode = WeaponMode::Near;
+      break;
+    default:
+      return false;
+  }
+  return true;
+}
+
 bool WeaponController::handle_command(Command command){
   switch (command){
     case Command::Up:

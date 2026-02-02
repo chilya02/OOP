@@ -11,6 +11,7 @@ class WeaponController{
     std::vector<Cell*> get_area();
     int get_damage();
     bool handle_command(Command);
+    bool change_mode();
   private:
     Weapon* weapon;
 };

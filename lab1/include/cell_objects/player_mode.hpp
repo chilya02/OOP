@@ -3,8 +3,7 @@
 
 enum class PlayerMode{
     Move, 
-    NearFight,
-    FarFight,
+    Attack,
     Cast
 };
 #endif // PLAYER_MODE_H

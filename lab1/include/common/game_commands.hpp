@@ -9,6 +9,7 @@ enum class Command{
     Down,
     Ok,
     Attack,
+    ChangeRange,
     Move,
     Cast,
     Undefined

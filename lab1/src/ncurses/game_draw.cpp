@@ -97,8 +97,7 @@ void GameDraw::draw_area(){
   case PlayerMode::Move:
     res = game->player->get_cell()->get_free_neighbors();
     break;
-  case PlayerMode::NearFight:
-  case PlayerMode::FarFight:
+  case PlayerMode::Attack:
     res = game->weapon->get_area();
     break;
   default:
@@ -128,8 +127,7 @@ void GameDraw::draw_enemies(){
   for (Enemy* enemy: *game->enemies){
     attr = COLOR_PAIR(ENEMY_COLOR);
     Cell* cell = enemy->get_cell();
-    if (game->player->get_mode() == PlayerMode::NearFight 
-      || game->player->get_mode() == PlayerMode::FarFight){
+    if (game->player->get_mode() == PlayerMode::Attack) {
         for (Cell* damage_cell: game->weapon->get_area()){
           if (damage_cell == cell){
             attr = COLOR_PAIR(FOCUS_COLOR);

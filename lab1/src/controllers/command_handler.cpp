@@ -38,8 +38,11 @@ bool CommandHandler::handle_act(Command command){
   switch (player_controller->player->get_mode()){
     case PlayerMode::Move:
       return player_controller->move_player(command);
-    case PlayerMode::FarFight:
-    case PlayerMode::NearFight:
+    case PlayerMode::Attack:
+      if (command == Command::ChangeRange){
+        this->player_controller->set_stay();
+        return weapon_controller->change_mode();
+      }
       res = weapon_controller->handle_command(command);
       hit = res;
       break;
@@ -64,8 +67,7 @@ bool CommandHandler::handle_act(Command command){
 void CommandHandler::hit_enemies(){
   int res = 0;
   switch (this->player_controller->player->get_mode()){
-  case PlayerMode::FarFight:
-  case PlayerMode::NearFight:
+  case PlayerMode::Attack:
     res = this->enemies_controller->hit(
       this->weapon_controller->get_area(), 
       this->weapon_controller->get_damage());

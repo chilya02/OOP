@@ -25,11 +25,8 @@ void ProgressDraw::draw_player_info(){
   case PlayerMode::Move:
     text = "Move";
     break;
-  case PlayerMode::NearFight:
-    text = "Near";
-    break;
-  case PlayerMode::FarFight:
-    text = "Far";
+  case PlayerMode::Attack:
+    text = game->weapon->get_mode() == WeaponMode::Near ? "Near" : "Far";
     break;
   case PlayerMode::Cast:
     text = "Cast";

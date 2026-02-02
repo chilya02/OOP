@@ -7,10 +7,7 @@ PlayerController::PlayerController(Player* player)
 bool PlayerController::handle_mode(Command command){
   switch (command){
   case Command::Attack:
-    if (this->player->mode == PlayerMode::NearFight)
-      this->player->mode = PlayerMode::FarFight;
-    else 
-      this->player->mode = PlayerMode::NearFight;
+    this->player->mode = PlayerMode::Attack;
     return true;
   case Command::Move:
     this->player->mode = PlayerMode::Move;
