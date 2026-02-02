@@ -33,19 +33,7 @@ void GameDraw::draw(){
     draw_area();
   draw_building();
   draw_enemies();
-  draw_weapon();
   wrefresh(this->win);
-}
-
-void GameDraw::draw_weapon(){
-  if (game->player->get_status() == EntityStatus::Await
-    && (game->player->get_mode() == PlayerMode::NearFight||
-        game->player->get_mode() == PlayerMode::FarFight))
-  {
-    int attr = COLOR_PAIR(FOCUS_COLOR) | A_BLINK;
-    Cell* cell = game->weapon->get_cell();
-    this->print(cell->get_y(), cell->get_x(), "AA", attr);
-  }
 }
 
 void GameDraw::draw_cell(Cell* cell){
@@ -136,8 +124,19 @@ void GameDraw::draw_building(){
 }
 
 void GameDraw::draw_enemies(){
+  int attr = 0;
   for (Enemy* enemy: *game->enemies){
+    attr = COLOR_PAIR(ENEMY_COLOR);
     Cell* cell = enemy->get_cell();
-    this->print(cell->get_y(), cell->get_x(), ENEMY_SYM, COLOR_PAIR(ENEMY_COLOR));
+    if (game->player->get_mode() == PlayerMode::NearFight 
+      || game->player->get_mode() == PlayerMode::FarFight){
+        for (Cell* damage_cell: game->weapon->get_area()){
+          if (damage_cell == cell){
+            attr = COLOR_PAIR(FOCUS_COLOR);
+            break;
+          }
+        }
+      } 
+    this->print(cell->get_y(), cell->get_x(), ENEMY_SYM, attr);
   }
 }

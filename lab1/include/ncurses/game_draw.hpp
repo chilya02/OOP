@@ -15,7 +15,6 @@ class GameDraw final:public AbstractDrawer{
     
     void draw_area();
     void draw_player();
-    void draw_weapon();
     void draw_enemies();
     void draw_building();
     void draw_cell(Cell*);
