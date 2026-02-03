@@ -79,7 +79,7 @@ Cell* EnemiesController::get_optimal_cell(Enemy* enemy){
         target = neighbor;
       }
     }
-    if (dist[neighbor] < min_length){
+    else if (dist[neighbor] <= min_length){
       min_length = dist[neighbor];
       target = neighbor;
     }
