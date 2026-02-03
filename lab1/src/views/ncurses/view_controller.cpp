@@ -1,0 +1,120 @@
+#include "../../../include/views/ncurses/view_controller.hpp"
+
+NcursesViewController::NcursesViewController(Game* game){
+  
+  start_color();
+  wclear(stdscr);
+  
+  this->field_drawer = new GameDraw(game);
+  this->hand_drawer = new HandDraw(game);
+  this->progress_drawer = new ProgressDraw(game);
+
+  this->min_height = this->field_drawer->get_height() + VIEW_MARGIN_TD + this->hand_drawer->get_height();
+
+  this->min_width = this->field_drawer->get_width() + this->progress_drawer->get_width() + 2 * PROGRESS_MARGIN_LR;
+
+  this->calc_coordinates();
+  
+  this->draw();
+}
+
+NcursesViewController::~NcursesViewController(){
+  if (this->field_drawer)
+    delete this->field_drawer;
+  if (this->progress_drawer)
+    delete this->progress_drawer;
+}
+
+
+void NcursesViewController::draw(){
+  if (!this->is_visible)
+    return;
+  this->field_drawer->draw();
+  this->hand_drawer->draw();
+  this->progress_drawer->draw();
+  move(0, 0);
+  wrefresh(stdscr);
+}
+
+void NcursesViewController::del_windows(){
+  if (this->is_visible){
+    this->field_drawer->del_window();
+    this->progress_drawer->del_window();
+    this->hand_drawer->del_window();
+    wclear(stdscr);
+  }
+}
+
+void NcursesViewController::print_size_message(){
+  wclear(stdscr);
+  mvwprintw(stdscr, this->row/2, this->col/2 - 7, "Too small size");
+  mvwprintw(stdscr, this->row/2+1, this->col/2 - 5, "min: %dx%d", min_height, min_width);
+  wrefresh(stdscr);
+}
+
+void NcursesViewController::create_windows(){
+  this->field_drawer->create_window(this->field_y, this->field_x);
+  this->hand_drawer->create_window(this->field_y+ this->field_drawer->get_height(), this->field_x);
+  this->progress_drawer->create_window(this->field_y, PROGRESS_MARGIN_LR);
+}
+
+bool NcursesViewController::calc_coordinates(){
+  int row, col;
+
+  getmaxyx(stdscr, row, col);
+  
+  if (this->row == row && this->col == col)
+    return false;
+  
+  this->col = col;
+  this->row = row;
+  
+  int field_width = this->field_drawer->get_width();
+  int field_height = this->field_drawer->get_height();
+
+  this->field_x = (col - field_width) / 2;
+  this->field_y = (row - field_height) / 2;
+
+  int min_field_x = this->progress_drawer->get_width() + 2 * PROGRESS_MARGIN_LR;
+  int min_field_y = VIEW_MARGIN_TD;
+
+  field_x = field_x > min_field_x ? field_x : min_field_x;
+  field_y = field_y > min_field_y ? field_y : min_field_y;
+  
+  if (col < this->min_width || row < this->min_height){
+    if (this->is_visible){
+      del_windows();
+      this->is_visible = false;
+    }
+    this->print_size_message();
+  } else {
+      if (!this->is_visible){
+      this->is_visible = true;
+      this->create_windows();
+    }
+  }
+
+  return true;
+}
+
+void NcursesViewController::move_field(){
+  wclear(stdscr);
+  wrefresh(stdscr);
+  this->field_drawer->move(this->field_y, this->field_x);
+  this->hand_drawer->move(this->field_y+ this->field_drawer->get_height(), this->field_x);
+  this->progress_drawer->move(this->field_y, PROGRESS_MARGIN_LR);
+  wrefresh(stdscr);
+  move(0,0);
+}
+
+void NcursesViewController::check_size(){
+  if (this->calc_coordinates()){
+    if (this->is_visible)
+      this->move_field();
+  }
+}
+
+void NcursesViewController::invalidate(){
+  this->check_size();
+  this->draw();
+}

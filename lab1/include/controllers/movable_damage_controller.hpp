@@ -1,9 +1,9 @@
 #ifndef MOVABLE_DAMAGE_CONTROLLER_H
 #define MOVABLE_DAMAGE_CONTROLLER_H
 
-#include "movable_controller.hpp"
-#include "../cell_objects/movable_damage.hpp"
-#include "controller_interface.hpp"
+#include "abstract/movable_controller.hpp"
+#include "../models/cell_objects/abstract/movable_damage.hpp"
+#include "interfaces/controller_interface.hpp"
 
 
 class MovableDamageController: public ControllerInterface, public MovableController{

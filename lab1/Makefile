@@ -8,49 +8,75 @@ OBJ_DIR = obj
 SRC_DIR = src
 INC_DIR = include
 
-NCURSES_DIR = ncurses
-CELLS_DIR = cells
-CELL_OBJ_DIR = cell_objects
-CONTROLLERS_DIR = controllers
-COMMON_DIR = common
-SPELLS_DIR = spells
+COMMON = 				abstract_iowrapper.o
 
-COMMON = game_process.o abstract_iowrapper.o game.o		
-	
-NCURSES = game_draw.o iowrapper.o command_controller.o 	\
-	view_controller.o abs_drawer.o progress_draw.o 				\
-	hand_draw.o
+CONTROLLERS = 	movable_damage_controller.o \
+								enemy_building_controller.o \
+								spells_hand_controller.o \
+								movable_controller.o \
+								enemies_controller.o \
+								player_controller.o \
+								weapon_controller.o	\
+								command_handler.o \
+								game_process.o
 
-CELLS = cell.o impassable_cell.o slow_cell.o game_field.o
+NCURSES =		 		command_controller.o \
+								view_controller.o \
+								progress_draw.o \
+								abs_drawer.o \
+								game_draw.o \
+								iowrapper.o \
+								hand_draw.o
 
-CONTROLLERS = enemy_building_controller.o 		\
-	player_controller.o enemies_controller.o		\
-	movable_controller.o weapon_controller.o		\
-	command_handler.o spells_hand_controller.o	\
-	movable_damage_controller.o
+SPELLS =	 			movable_damage_spell.o \
+								direct_damage.o	\
+								spells_hand.o \
+								area_damage.o 
 
-CELL_OBJECTS = cell_obj.o movable_cell_obj.o 	\
-	player.o entity.o enemy_building.o enemy.o	\
-	physical_cell_obj.o weapon.o 					 			\
-	movable_physical_cell_obj.o movable_damage.o\
+CELLS = 				impassable_cell.o \
+								game_field.o \
+								slow_cell.o \
+								cell.o 
 
-SPELLS = spells_hand.o direct_damage_card.o	\
-	area_damage_card.o area_damage.o 					\
-	direct_damage.o movable_damage_card.o			\
-	movable_damage_spell.o
+CARDS =		 			movable_damage_card.o \
+								direct_damage_card.o \
+								area_damage_card.o 
 
-ENTRY = main.o
+CELL_OBJECTS = 	movable_physical_cell_obj.o \
+								physical_cell_obj.o \
+								movable_cell_obj.o \
+								enemy_building.o \
+								movable_damage.o \
+								cell_obj.o \
+								player.o \
+								entity.o \
+								enemy.o	
 
-OBJECTS = $(addprefix $(OBJ_DIR)/,\
-	$(COMMON) $(NCURSES) $(CELLS)		\
-	$(CONTROLLERS) $(CELL_OBJECTS)	\
-	$(ENTRY) $(SPELLS)) 
+MODELS = 				$(CELL_OBJECTS) \
+								$(SPELLS) \
+								$(CELLS) \
+								$(CARDS) \
+								weapon.o \
+								game.o
+
+ENTRY =					main.o
+
+OBJECTS = 			$(addprefix $(OBJ_DIR)/,\
+								$(CONTROLLERS) \
+								$(NCURSES) \
+								$(COMMON) \
+								$(MODELS) \
+								$(ENTRY) )
 
 LIB = -lncurses
 
 COMPILE = $(CC) $(CFLAGS) $(CXX_FLAGS) $< -o $@
 
 all: $(OBJ_DIR) $(EXECUTABLE) 
+
+da:
+	VIEW_DIR = ncurses
+	echo $(VIEW_DIR)
 
 run: all
 	./$(EXECUTABLE)
@@ -59,31 +85,49 @@ test: all
 	./$(EXECUTABLE) < test_data
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CXX_FLAGS) $^ -o $(EXECUTABLE) $(LIB) 
+	$(CC) $(CXX_FLAGS) $^ -o $(EXECUTABLE) $(LIB)
 
-$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp	
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
 	$(COMPILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(NCURSES_DIR)/%.cpp $(INC_DIR)/$(NCURSES_DIR)/%.hpp
+$(OBJ_DIR)/%.o: %.cpp %.hpp
 	$(COMPILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(CELL_OBJ_DIR)/%.cpp $(INC_DIR)/$(CELL_OBJ_DIR)/%.hpp
-	$(COMPILE)
+vpath %.cpp $(SRC_DIR)/common $(SRC_DIR)/common/abstract $(SRC_DIR)/common/ncurses
+vpath %.cpp $(SRC_DIR)/controllers/abstract $(SRC_DIR)/controllers
+vpath %.cpp $(SRC_DIR)/inputs $(SRC_DIR)/inputs/ncurses
+vpath %.cpp $(SRC_DIR)/models $(SRC_DIR)/models/cards $(SRC_DIR)/models/cards/abstract
+vpath %.cpp $(SRC_DIR)/models/cell_objects $(SRC_DIR)/models/cell_objects/abstract
+vpath %.cpp $(SRC_DIR)/models/cells $(SRC_DIR)/models/spells $(SRC_DIR)/models/spells/abstract
+vpath %.cpp $(SRC_DIR)/models/weapon $(SRC_DIR)/views $(SRC_DIR)/views/ncurses $(SRC_DIR)/views/ncurses/abstract
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(CELLS_DIR)/%.cpp $(INC_DIR)/$(CELLS_DIR)/%.hpp
-	$(COMPILE)
+vpath %.hpp $(INC_DIR)/common $(INC_DIR)/common/abstract $(INC_DIR)/common/ncurses
+vpath %.hpp $(INC_DIR)/controllers/abstract $(INC_DIR)/controllers
+vpath %.hpp $(INC_DIR)/inputs $(INC_DIR)/inputs/ncurses
+vpath %.hpp $(INC_DIR)/models $(INC_DIR)/models/cards $(INC_DIR)/models/cards/abstract
+vpath %.hpp $(INC_DIR)/models/cell_objects $(INC_DIR)/models/cell_objects/abstract
+vpath %.hpp $(INC_DIR)/models/cells $(INC_DIR)/models/spells $(INC_DIR)/models/spells/abstract
+vpath %.hpp $(INC_DIR)/models/weapon $(INC_DIR)/views $(INC_DIR)/views/ncurses $(INC_DIR)/views/ncurses/abstract
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/%.hpp
-	$(COMPILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(COMMON_DIR)/%.cpp $(INC_DIR)/$(COMMON_DIR)/%.hpp
-	$(COMPILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
-	$(COMPILE)
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/%.hpp
+# 	$(COMPILE)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/$(SPELLS_DIR)/%.cpp $(INC_DIR)/$(SPELLS_DIR)/%.hpp
-	$(COMPILE)
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/$(ABS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/$(ABS_DIR)/%.hpp
+# 	$(COMPILE)
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(COMMON_DIR)/$(ABS_DIR)/%.cpp $(INC_DIR)/$(COMMON_DIR)/$(ABS_DIR)/%.hpp
+# 	$(COMPILE)
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
+# 	$(COMPILE)
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(MODELS_DIR)/$(SPELLS_DIR)/%.cpp $(INC_DIR)/$(MODELS_DIR)/$(SPELLS_DIR)/%.hpp
+# 	$(COMPILE)
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(MODELS_DIR)/$(CARDS_DIR)/%.cpp $(INC_DIR)/$(MODELS_DIR)/$(CARDS_DIR)/%.hpp
+# 	$(COMPILE)
 
 #$(OBJ_DIR)/game_field.o: $(addprefix $(INC_DIR)/, cell.hpp impassable_cell.hpp slow_cell.hpp)
 

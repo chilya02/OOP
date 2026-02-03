@@ -1,6 +1,6 @@
-#include "../include/common/game_process.hpp"
-#include "../include/common/game.hpp"
-#include "../include/ncurses/iowrapper.hpp"
+#include "../include/controllers/game_process.hpp"
+#include "../include/models/game.hpp"
+#include "../include/common/ncurses/iowrapper.hpp"
 
 
 int main(){

@@ -1,5 +1,4 @@
 #include "../../include/controllers/player_controller.hpp"
-#include "../../include/cell_objects/entity_status.hpp"
 
 PlayerController::PlayerController(Player* player)
 :MovableController(player), player(player){}

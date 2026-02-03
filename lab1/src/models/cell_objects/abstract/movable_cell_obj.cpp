@@ -1,0 +1,38 @@
+#include "../../../../include/models/cell_objects/abstract/movable_cell_obj.hpp"
+
+MovableCellObject::MovableCellObject(Cell* cell):CellObject(cell){
+  this->movable = true;
+}
+
+bool MovableCellObject::move(Cell* target){
+  if (!can_move(target))
+    return false;
+  this->cell = target;
+  return true;
+}
+
+bool MovableCellObject::move_down(){
+  Cell* bottom = this->cell->get_bottom();
+  return  this->move(bottom);
+}
+
+bool MovableCellObject::move_up(){
+  Cell* top = this->cell->get_top();
+  return this->move(top);
+}
+
+bool MovableCellObject::move_left(){
+  Cell* left = this->cell->get_left();
+  return this->move(left);
+}
+
+bool MovableCellObject::move_right(){
+  Cell* right = this->cell->get_right();
+  return this->move(right);
+}
+
+bool MovableCellObject::can_move(Cell* target){
+  if (!target || target->is_impassable())
+    return false;
+  return true;
+}

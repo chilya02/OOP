@@ -1,6 +1,6 @@
 #include "../../include/controllers/spells_hand_controller.hpp"
-#include "../../include/spells/area_damage_card.hpp"
-#include "../../include/spells/direct_damage_card.hpp"
+#include "../../include/models/cards/area_damage_card.hpp"
+#include "../../include/models/cards/direct_damage_card.hpp"
 
 SpellsHandController::SpellsHandController(SpellsHand* spells_hand, GameField* field, Player* player):
   spells_hand(spells_hand), field(field), player(player), active(false){

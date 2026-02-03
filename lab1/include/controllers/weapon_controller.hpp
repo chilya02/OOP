@@ -1,7 +1,7 @@
 #ifndef WEAPON_CONTROLLER_H
 #define WEAPON_CONTROLLER_H
 
-#include "../cell_objects/weapon.hpp"
+#include "../models/weapon/weapon.hpp"
 #include "../common/game_commands.hpp"
 
 class WeaponController{

@@ -1,10 +1,9 @@
 #ifndef PLAYER_CONTROLLER_H
 #define PLAYER_CONTROLLER_H
 
-#include "../cell_objects/player.hpp"
-#include "../cell_objects/weapon.hpp"
-#include "../cell_objects/enemy.hpp"
-#include "movable_controller.hpp"
+#include "../models/cell_objects/player.hpp"
+#include "../models/cell_objects/enemy.hpp"
+#include "abstract/movable_controller.hpp"
 
 class PlayerController : public MovableController{
   public:

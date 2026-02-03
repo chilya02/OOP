@@ -2,9 +2,9 @@
 #define SPELLS_HAND_CONTROLLER_H
 
 #include "../common/game_commands.hpp"
-#include "../spells/spells_hand.hpp"
-#include "../cells/game_field.hpp"
-#include "../cell_objects/player.hpp"
+#include "../models/spells/spells_hand.hpp"
+#include "../models/cells/game_field.hpp"
+#include "../models/cell_objects/player.hpp"
 
 class SpellsHandController{
   public:

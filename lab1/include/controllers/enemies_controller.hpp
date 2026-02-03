@@ -1,10 +1,10 @@
 #ifndef ENEMIES_CONTROLLER_H
 #define ENEMIES_CONTROLLER_H
 
-#include "../cell_objects/enemy.hpp"
-#include "../cell_objects/player.hpp"
-#include "../cell_objects/weapon.hpp"
-#include "../cells/game_field.hpp"
+#include "../models/cell_objects/enemy.hpp"
+#include "../models/cell_objects/player.hpp"
+#include "../models/weapon/weapon.hpp"
+#include "../models/cells/game_field.hpp"
 
 #include <map>
 #include <vector>
