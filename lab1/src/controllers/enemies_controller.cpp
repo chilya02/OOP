@@ -108,7 +108,6 @@ int EnemiesController::hit(Cell* cell, int damage){
         return 1;
       }
     }
-  return 0;
   }
   return 0;
 }
