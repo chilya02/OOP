@@ -5,6 +5,7 @@
 NcursesCommandController::NcursesCommandController(){
   keypad(stdscr, 1);  
   nodelay(stdscr, 1);
+  set_escdelay(0);
 }
 
 NcursesCommandController::~NcursesCommandController(){}
@@ -40,6 +41,8 @@ Command NcursesCommandController::get_command(){
     case '\r':
     case KEY_ENTER:
       return Command::Ok;
+    case 27:
+        return Command::Escape;
     }
     return Command::Undefined;
 }

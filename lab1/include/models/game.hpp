@@ -23,6 +23,8 @@ class Game{
     Weapon* weapon;
     EnemyBuilding* enemy_building;
     std::vector<Enemy*>* enemies;
+    std::vector<Cell*> get_attack_area();
+    int get_attack_damage();
 };
 
 #endif //GAME_H

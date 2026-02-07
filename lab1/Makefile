@@ -28,8 +28,7 @@ NCURSES =		 		command_controller.o \
 								iowrapper.o \
 								hand_draw.o
 
-SPELLS =	 			movable_damage_spell.o \
-								direct_damage.o	\
+SPELLS =	 			direct_damage.o	\
 								spells_hand.o \
 								area_damage.o 
 
@@ -40,7 +39,8 @@ CELLS = 				impassable_cell.o \
 
 CARDS =		 			movable_damage_card.o \
 								direct_damage_card.o \
-								area_damage_card.o 
+								area_damage_card.o \
+								abstract_card.o
 
 CELL_OBJECTS = 	movable_physical_cell_obj.o \
 								physical_cell_obj.o \
@@ -109,8 +109,6 @@ vpath %.hpp $(INC_DIR)/models/cell_objects $(INC_DIR)/models/cell_objects/abstra
 vpath %.hpp $(INC_DIR)/models/cells $(INC_DIR)/models/spells $(INC_DIR)/models/spells/abstract
 vpath %.hpp $(INC_DIR)/models/weapon $(INC_DIR)/views $(INC_DIR)/views/ncurses $(INC_DIR)/views/ncurses/abstract
 
-
-
 # $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/%.hpp
 # 	$(COMPILE)
 
@@ -138,3 +136,5 @@ $(OBJ_DIR):
 clean:
 	@rm -rf $(OBJ_DIR)
 	@rm -f game
+
+.PHONY : all clean run

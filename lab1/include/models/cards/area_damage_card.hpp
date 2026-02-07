@@ -9,8 +9,6 @@ class AreaDamageCard : public MovableDamageCard{
     AreaDamageCard(GameField*, Player*);
     ~AreaDamageCard();
     const char* text() final;
-  private:
-    AreaDamage* spell;
 };
 
 #endif //AREA_DAMAGE_CARD_H

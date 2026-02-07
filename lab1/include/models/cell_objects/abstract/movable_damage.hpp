@@ -7,11 +7,12 @@
 
 class MovableDamage:public MovableCellObject{
   public:
-    MovableDamage(Cell*, GameField*, Player*);
-    virtual int get_damage() = 0;
+    MovableDamage(Cell*, int);
+    int get_damage();
+    virtual bool can_hit();
+    virtual std::vector <Cell*> get_area() = 0;
   protected:
-    GameField* field;
-    Player* player;
+    int damage;
   friend class MovableDamageController;
 };
 

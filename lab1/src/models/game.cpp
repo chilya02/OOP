@@ -1,5 +1,5 @@
 #include "../../include/models/game.hpp"
-
+#include "../../include/models/cards/abstract/movable_damage_card.hpp"
 #include <iostream>
 
 Game::Game(int height, int width, int period){
@@ -56,4 +56,37 @@ Game* Game::create_user_game(){
     int width;
     std::cin >> width;
     return new Game(width, height);
+}
+
+std::vector <Cell*> Game::get_attack_area(){
+  switch (this->player->get_mode()){
+    case PlayerMode::Move:
+      break;
+    case PlayerMode::Attack:
+      return this->weapon->get_area();
+    case PlayerMode::Cast:
+      SpellCardInterface* card = this->spells_hand->get_selected_card();
+      if (this->spells_hand->is_active() && card->is_movable()){
+        MovableDamageCard* casted_card = dynamic_cast <MovableDamageCard*> (card);
+        return casted_card->get_spell()->get_area();
+      }
+  }
+  std::vector <Cell*> res;
+  return res;
+}
+
+int Game::get_attack_damage(){
+  switch (this->player->get_mode()){
+  case PlayerMode::Move:
+    break;
+  case PlayerMode::Attack:
+    return this->weapon->get_damage();
+  case PlayerMode::Cast:
+    SpellCardInterface* card = this->spells_hand->get_selected_card();
+      if (this->spells_hand->is_active() && card->is_movable()){
+        MovableDamageCard* casted_card = dynamic_cast <MovableDamageCard*> (card);
+        return casted_card->get_spell()->get_damage();
+      }
+  }
+  return 0;
 }

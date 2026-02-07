@@ -6,11 +6,9 @@
 
 class DirectDamageCard : public MovableDamageCard{
   public:
-    DirectDamageCard();
+    DirectDamageCard(GameField*, Player*);
     ~DirectDamageCard();
     const char* text() final;
-  private:
-    DirectDamage* spell;
 };
 
 #endif //DIRECT_DAMAGE_SPELL_H

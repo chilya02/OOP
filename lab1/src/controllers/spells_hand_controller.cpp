@@ -3,15 +3,19 @@
 #include "../../include/models/cards/direct_damage_card.hpp"
 
 SpellsHandController::SpellsHandController(SpellsHand* spells_hand, GameField* field, Player* player):
-  spells_hand(spells_hand), field(field), player(player), active(false){
+  spells_hand(spells_hand), field(field), player(player){
     spells_hand->cards->push_back(new AreaDamageCard(field, player));
-    spells_hand->cards->push_back(new DirectDamageCard());
+    spells_hand->cards->push_back(new DirectDamageCard(field, player));
   }
 
 SpellsHandController::~SpellsHandController(){}
 
 bool SpellsHandController::handle_command(Command command){
   if (this->is_active()){
+    if (command == Command::Escape){
+      this->deactivate();
+      return true;
+    }
     return this->get_active_controller()->handle_command(command);
   }
   switch (command)
@@ -25,7 +29,7 @@ bool SpellsHandController::handle_command(Command command){
     return true;
     break;
   case Command::Ok:
-    this->active = true;
+    this->spells_hand->active = true;
     return true;
   default:
     return false;
@@ -37,13 +41,21 @@ bool SpellsHandController::can_cast(){
 }
 
 bool SpellsHandController::is_active(){
-  return this->active;
+  return this->spells_hand->is_active();
 }
 
 void SpellsHandController::deactivate(){
-  this->active = false;
+  this->spells_hand->active = false;
+}
+
+void SpellsHandController::remove_selected_card(){
+  this->spells_hand->remove_selected_card();
 }
 
 ControllerInterface* SpellsHandController::get_active_controller(){
   return this->spells_hand->get_selected_card()->get_controller();
+}
+
+SpellCardInterface* SpellsHandController::get_active_card(){
+  return this->spells_hand->get_selected_card();
 }

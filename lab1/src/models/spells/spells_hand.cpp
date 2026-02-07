@@ -1,7 +1,7 @@
 #include "../../../include/models/spells/spells_hand.hpp"
 
 SpellsHand::SpellsHand(int size)
-:size(size){
+  :active(false), size(size){
   this->cards = new std::vector <SpellCardInterface*>;
 }
 
@@ -33,5 +33,14 @@ void SpellsHand::inc_index(){
 
 void SpellsHand::dec_index(){
   this->active_index -= 1;
+  this->active_index %= this->cards->size();
+}
+
+bool SpellsHand::is_active(){
+  return this->active;
+}
+
+void SpellsHand::remove_selected_card(){
+  this->cards->erase(cards->begin() + this->active_index);
   this->active_index %= this->cards->size();
 }

@@ -5,7 +5,7 @@
 GameProcess::GameProcess(Game* game, ViewInterface* view, CommandInterface* controller)
 :game(game), view(view), controller(controller){
   this->enemies_controller = new EnemiesController(game->enemies, game->player, game->field);
-  this->command_handler = new CommandHandler(game->player, game->weapon, game->spells_hand, game->field, enemies_controller);
+  this->command_handler = new CommandHandler(game, enemies_controller);
   this->building_controller = new EnemyBuildingController(game->enemies, game->enemy_building);
 }
 

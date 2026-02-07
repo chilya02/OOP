@@ -14,11 +14,12 @@ class SpellsHandController{
     bool handle_command(Command command);
     bool is_active();
     void deactivate();
+    void remove_selected_card();
+    SpellCardInterface*get_active_card();
   private:
     SpellsHand* spells_hand;
     GameField* field;
     Player* player;
-    bool active;
 
     ControllerInterface* get_active_controller();
 };

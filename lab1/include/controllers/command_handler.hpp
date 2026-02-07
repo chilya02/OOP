@@ -5,10 +5,11 @@
 #include "weapon_controller.hpp"
 #include "enemies_controller.hpp"
 #include "spells_hand_controller.hpp"
+#include "../models/game.hpp"
 
 class CommandHandler{
   public:
-    CommandHandler(Player*, Weapon*, SpellsHand*, GameField*, EnemiesController*);
+    CommandHandler(Game*, EnemiesController*);
     ~CommandHandler();
     bool handle_command(Command command);
   private:
@@ -18,6 +19,7 @@ class CommandHandler{
     WeaponController* weapon_controller;
     EnemiesController* enemies_controller;
     SpellsHandController* spells_hand_controller;
+    Game* game;
 };
 
 #endif // COMMAND_HANDLER_H

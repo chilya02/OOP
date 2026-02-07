@@ -10,9 +10,7 @@ bool MovableDamageController::handle_command(Command command){
     return true;
   }
   if (command == Command::Ok){
-    if (damage->get_cell() == damage->player->get_cell())
-      return false;
-    return true;
+    return damage->can_hit();
   }
   return false;
 }

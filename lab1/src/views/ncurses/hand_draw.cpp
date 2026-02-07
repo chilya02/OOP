@@ -2,7 +2,7 @@
 #include "../../../include/views/ncurses/config.hpp"
 
 HandDraw::HandDraw(Game* game):
-AbstractDrawer(game){
+AbstractDrawer(game), prev_size(0){
   this->scr_height = 6;
   this->scr_width = game->spells_hand->get_size() * 10;
 
@@ -15,6 +15,11 @@ HandDraw::~HandDraw(){}
 void HandDraw::draw(){
   if (!this->win)
     return;
+  int size = game->spells_hand->get_cards()->size();
+  if (size != prev_size){
+    prev_size = size;
+    wclear(this->win);
+  }
   int x = 0;
   wattron(this->win, CARD_COLOR);
   for (SpellCardInterface* card: *game->spells_hand->get_cards()){

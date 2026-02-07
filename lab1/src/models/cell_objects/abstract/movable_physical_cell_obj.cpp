@@ -19,5 +19,5 @@ bool MovablePhysicalCellObject::move(Cell* target){
   return false;
 }
 bool MovablePhysicalCellObject::can_move(Cell* target){
-  return (MovableCellObject::can_move(target) && !target->is_busy());
+  return (MovableCellObject::can_move(target) && !target->is_impassable() && !target->is_busy());
 }

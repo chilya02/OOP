@@ -10,6 +10,7 @@ class HandDraw: public AbstractDrawer{
     void draw() final;
   private:
     void draw_card(int, SpellCardInterface* card);
+    int prev_size;
 };
 
 #endif // HAND_DRAW_H

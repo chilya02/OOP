@@ -1,5 +1,7 @@
 #include "../../../include/views/ncurses/game_draw.hpp"
 
+#include "../../../include/models/cards/abstract/movable_damage_card.hpp"
+
 GameDraw::GameDraw(Game* game)
   :AbstractDrawer(game){
   
@@ -28,10 +30,10 @@ void GameDraw::draw(){
       draw_cell(cell);
     }
   }
+  draw_building();
   draw_player();
   //if (this->game->player->can_act())
     draw_area();
-  draw_building();
   draw_enemies();
   wrefresh(this->win);
 }
@@ -92,30 +94,17 @@ void GameDraw::print(int y, int x, const char* text, int attr){
 }
 
 void GameDraw::draw_area(){
-  std::vector<Cell*> res;
-  switch (game->player->get_mode()){
-  //case PlayerMode::Move:
-    //res = game->player->get_cell()->get_free_neighbors();
-    //break;
-  case PlayerMode::Attack:
-    res = game->weapon->get_area();
-    break;
-  case PlayerMode::Cast:
-    break;
-  default:
-    break;
-  }
-  for (auto cell: res){
+  for (auto cell: game->get_attack_area()){
     this->draw_area_cell(cell);
   }
 }
 
 void GameDraw::draw_area_cell(Cell* cell){
-  if (cell->is_impassable())
-    return;
   const char* text = CELL_SYM;
   if (cell->is_slow())
     text = SLOW_SYM;
+  if (cell->is_impassable())
+    text = IMPASSABLE_SYM;
   this->print(cell->get_y(), cell->get_x(), text, COLOR_PAIR(PLAYER_COLOR));
 }
 
@@ -132,8 +121,8 @@ void GameDraw::draw_enemies(){
     if (enemy->get_status() == EntityStatus::Slowed){
       attr = COLOR_PAIR(SLOW_COLOR);
     }
-    if (game->player->get_mode() == PlayerMode::Attack) {
-        for (Cell* damage_cell: game->weapon->get_area()){
+    if (game->player->get_mode() == PlayerMode::Attack || game->player->get_mode() == PlayerMode::Cast) {
+        for (Cell* damage_cell: game->get_attack_area()){
           if (damage_cell == cell){
             attr = COLOR_PAIR(FOCUS_COLOR);
             break;
