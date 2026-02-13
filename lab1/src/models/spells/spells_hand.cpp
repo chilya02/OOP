@@ -1,39 +1,23 @@
 #include "../../../include/models/spells/spells_hand.hpp"
 
 SpellsHand::SpellsHand(int size)
-  :active(false), size(size){
-  this->cards = new std::vector <SpellCardInterface*>;
+  :Menu<SpellCardInterface*>(), active(false), size(size){
 }
 
 SpellsHand::~SpellsHand(){
-  if (this->cards){
-    for (SpellCardInterface* card: *this->cards){
-      delete card;
-    }
-    delete this->cards;
-  }
+
 }
 
 int SpellsHand::get_size(){
   return this->size;
 }
 
-std::vector <SpellCardInterface*>* SpellsHand::get_cards(){
-  return this->cards;
+std::vector <SpellCardInterface*>& SpellsHand::get_cards(){
+  return this->items;
 }
 
 SpellCardInterface* SpellsHand::get_selected_card(){
-  return (*this->cards)[active_index];
-}
-
-void SpellsHand::inc_index(){
-  this->active_index += 1;
-  this->active_index %= this->cards->size();
-}
-
-void SpellsHand::dec_index(){
-  this->active_index -= 1;
-  this->active_index %= this->cards->size();
+  return this->get_selected_item();
 }
 
 bool SpellsHand::is_active(){
@@ -41,6 +25,6 @@ bool SpellsHand::is_active(){
 }
 
 void SpellsHand::remove_selected_card(){
-  this->cards->erase(cards->begin() + this->active_index);
-  this->active_index %= this->cards->size();
+  this->items.erase(items.begin() + this->active_index);
+  this->active_index %= this->items.size();
 }

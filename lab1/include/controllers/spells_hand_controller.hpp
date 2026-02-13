@@ -5,13 +5,14 @@
 #include "../models/spells/spells_hand.hpp"
 #include "../models/cells/game_field.hpp"
 #include "../models/cell_objects/player.hpp"
+#include "menu_controller.hpp"
 
-class SpellsHandController{
+class SpellsHandController: public MenuController{
   public:
     SpellsHandController(SpellsHand* spells_hand, GameField* field, Player* player);
     ~SpellsHandController();
     bool can_cast();
-    bool handle_command(Command command);
+    bool handle_command(Command command) override;
     bool is_active();
     void deactivate();
     void remove_selected_card();

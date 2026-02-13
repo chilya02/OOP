@@ -31,9 +31,8 @@ void GameDraw::draw(){
     }
   }
   draw_building();
+  draw_area();
   draw_player();
-  //if (this->game->player->can_act())
-    draw_area();
   draw_enemies();
   wrefresh(this->win);
 }

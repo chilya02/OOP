@@ -3,6 +3,7 @@
 NcursesViewController::NcursesViewController(Game* game){
   
   start_color();
+  use_default_colors();
   wclear(stdscr);
   
   this->field_drawer = new GameDraw(game);
