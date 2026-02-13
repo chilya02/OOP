@@ -40,7 +40,6 @@ void HandDraw::draw(){
 void HandDraw::draw_card(int x, SpellCardInterface* card){
   mvwprintw(this->win, 0, x, "|------|");
 
-  const char* str = game->spells_hand->get_name(card).c_str();
   std::stringstream ss(game->spells_hand->get_name(card));
   std::string item;
   int count = 0;
