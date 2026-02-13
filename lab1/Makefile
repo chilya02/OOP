@@ -17,6 +17,7 @@ CONTROLLERS = 	movable_damage_controller.o \
 								enemies_controller.o \
 								player_controller.o \
 								weapon_controller.o	\
+								menu_controller.o \
 								command_handler.o \
 								game_process.o
 
