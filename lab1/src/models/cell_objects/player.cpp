@@ -1,6 +1,6 @@
 #include "../../../include/models/cell_objects/player.hpp"
 
-Player::Player(Cell* cell, int damage, int HP, int points):Entity(cell, damage, HP), points(points){
+Player::Player(Cell* cell, int damage, int HP, int points, int coins):Entity(cell, damage, HP), points(points), coins(coins){
   this->mode = PlayerMode::Move;
 }
 Player::~Player(){}
