@@ -1,6 +1,7 @@
 #include "../../../include/views/ncurses/hand_draw.hpp"
 #include "../../../include/views/ncurses/config.hpp"
 
+#include <ncurses.h>
 #include <sstream>
 
 HandDraw::HandDraw(Game* game):
@@ -8,7 +9,7 @@ AbstractDrawer(game), prev_size(0){
   this->scr_height = 6;
   this->scr_width = game->spells_hand->get_size() * 10;
 
-  init_pair(CARD_COLOR, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(CARD_COLOR, COLOR_WHITE, -1);
   init_pair(SELECTED_CARD_COLOR, COLOR_WHITE, COLOR_BLUE);
 }
 
@@ -23,7 +24,7 @@ void HandDraw::draw(){
     wclear(this->win);
   }
   int x = 0;
-  wattron(this->win, CARD_COLOR);
+  wattron(this->win, COLOR_PAIR(CARD_COLOR));
   for (SpellCardInterface* card: game->spells_hand->get_cards()){
     if (game->player->get_mode() == PlayerMode::Cast && card == game->spells_hand->get_selected_card()){
       wattron(this->win, COLOR_PAIR(SELECTED_CARD_COLOR));
@@ -35,6 +36,7 @@ void HandDraw::draw(){
     x += 10;
   }
   wrefresh(this->win);
+
 }
 
 void HandDraw::draw_card(int x, SpellCardInterface* card){

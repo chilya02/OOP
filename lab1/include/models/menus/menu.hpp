@@ -27,6 +27,7 @@ class Menu: public IMenu{
       if (this->names.contains(item)){
         return this->names[item];
       }
+      throw "There is no name";
     }
 
     void add_item(T item , std::string name){
