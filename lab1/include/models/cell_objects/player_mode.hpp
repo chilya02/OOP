@@ -4,6 +4,7 @@
 enum class PlayerMode{
     Move, 
     Attack,
-    Cast
+    Cast,
+    Buy
 };
 #endif // PLAYER_MODE_H

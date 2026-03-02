@@ -12,6 +12,7 @@ enum class Command{
     ChangeRange,
     Move,
     Cast,
+    Buy,
     Escape,
     Undefined
 };

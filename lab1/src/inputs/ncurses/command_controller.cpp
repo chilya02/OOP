@@ -25,6 +25,8 @@ Command NcursesCommandController::get_command(){
       return Command::Move;
     case 'c':
       return Command::Cast;
+    case 'b':
+      return Command::Buy;
     case KEY_UP:
     case 'w':
       return Command::Up;
