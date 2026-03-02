@@ -1,7 +1,7 @@
 #include "../../include/controllers/menu_controller.hpp"
 
 MenuController::MenuController(IMenu& menu, bool vertical)
-  :menu(menu), vertical(vertical){}
+  :vertical(vertical), menu(menu){}
 
 MenuController::~MenuController(){}
 
