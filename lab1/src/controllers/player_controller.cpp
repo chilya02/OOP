@@ -28,5 +28,6 @@ void PlayerController::set_stay(){
 }
 
 void PlayerController::add_points(int count){
-  this->player->points += count;
+  this->player->add_points(count * 10);
+  this->player->add_coins(count * 10);
 }

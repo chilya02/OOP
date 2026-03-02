@@ -12,3 +12,15 @@ PlayerMode Player::get_mode(){
 int Player::get_score(){
   return this->points;
 }
+
+void Player::add_points(int points){
+  this->points += points;
+}
+
+void Player::add_coins(int coins){
+  this->coins += coins;
+}
+
+int Player::get_coins(){
+  return this->coins;
+}

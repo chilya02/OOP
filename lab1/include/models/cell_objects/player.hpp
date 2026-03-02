@@ -10,9 +10,12 @@ class Player final: public Entity{
     ~Player();
     PlayerMode get_mode();
     int get_score();
+    int get_coins();
   private:
     int points;
     int coins;
+    void add_points(int);
+    void add_coins(int);
     PlayerMode mode;
   
   friend class PlayerController;
