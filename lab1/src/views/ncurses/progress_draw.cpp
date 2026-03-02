@@ -36,14 +36,15 @@ void ProgressDraw::draw_player_info(){
   }
   mvwprintw(this->win, 2, 0, "Mode: %s", text);
   mvwprintw(this->win, 3, 0, "Score: %d", this->game->player->get_score());
+  mvwprintw(this->win, 4, 0, "Coins: %d", this->game->player->get_coins());
 }
 
 void ProgressDraw::draw_enemies_HP(){
   int count = 1;
-  mvwprintw(this->win, 5, 0, "Enemies:");
+  mvwprintw(this->win, 6, 0, "Enemies:");
   for (Enemy* enemy: *this->game->enemies){
     if (enemy->is_alive()){
-      mvwprintw(this->win, 5+count, 0, "%d: %d", count, enemy->get_HP());
+      mvwprintw(this->win, 6+count, 0, "%d: %d", count, enemy->get_HP());
       count++;
     }
   }
