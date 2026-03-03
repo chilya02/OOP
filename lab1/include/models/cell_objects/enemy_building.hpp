@@ -7,6 +7,7 @@
 class EnemyBuilding: public PhysicalCellObject{
   public:
     EnemyBuilding(Cell* cell, int period = ENEMY_BUILDING_PERIOD);
+    int get_period();
   private:
     int tick_period; 
   friend class EnemyBuildingController;

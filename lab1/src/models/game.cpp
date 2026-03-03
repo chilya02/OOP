@@ -1,4 +1,5 @@
 #include "../../include/models/game.hpp"
+#include "../../include/models/serializer.hpp"
 #include "../../include/models/cards/abstract/movable_damage_card.hpp"
 #include <iostream>
 
@@ -26,6 +27,11 @@ Game::Game(int height, int width, int period){
 }
 
 Game::~Game(){
+
+  Serializer* s = new Serializer(this);
+  s->save();
+  delete s;
+
   if (this->field)
     delete this->field;
   if (this->player)
@@ -61,6 +67,7 @@ Game* Game::create_user_game(){
 std::vector <Cell*> Game::get_attack_area(){
   switch (this->player->get_mode()){
     case PlayerMode::Move:
+    case PlayerMode::Buy:
       break;
     case PlayerMode::Attack:
       return this->weapon->get_area();
@@ -78,6 +85,7 @@ std::vector <Cell*> Game::get_attack_area(){
 int Game::get_attack_damage(){
   switch (this->player->get_mode()){
   case PlayerMode::Move:
+  case PlayerMode::Buy:
     break;
   case PlayerMode::Attack:
     return this->weapon->get_damage();

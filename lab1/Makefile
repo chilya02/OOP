@@ -10,7 +10,7 @@ INC_DIR = include
 
 COMMON = 				abstract_iowrapper.o
 
-CONTROLLERS = 	movable_damage_controller.o \
+CONTROLLERS = 			movable_damage_controller.o \
 								enemy_building_controller.o \
 								spells_hand_controller.o \
 								movable_controller.o \
@@ -57,6 +57,7 @@ MODELS = 				$(CELL_OBJECTS) \
 								$(SPELLS) \
 								$(CELLS) \
 								$(CARDS) \
+								serializer.o \
 								weapon.o \
 								game.o
 
