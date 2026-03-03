@@ -1,21 +1,55 @@
 #include "../../include/controllers/weapon_controller.hpp"
 
 WeaponController::WeaponController(Weapon* weapon)
-:MovableController(weapon), weapon(weapon){
+:weapon(weapon){
   
 }
-bool WeaponController::handle_command(Command command){
-  if (this->move_obj(command)){
-    return true;
-  }
-  if (command == Command::Ok){
-    if (weapon->get_cell() == weapon->player->get_cell())
-      return false;
-    return true;
-  }
-  return false;
+
+WeaponController::~WeaponController(){}
+
+int WeaponController::get_damage(){
+  return this->weapon->get_damage();
 }
 
-void WeaponController::set_center(){
-  this->weapon->center();
+std::vector<Cell*> WeaponController::get_area(){
+  return this->weapon->get_area();
+}
+
+bool WeaponController::change_mode(){
+  switch (weapon->mode){ 
+    case WeaponMode::Near:
+      weapon->mode = WeaponMode::Far;
+      break;
+    case WeaponMode::Far:
+      weapon->mode = WeaponMode::Near;
+      break;
+    default:
+      return false;
+  }
+  return true;
+}
+
+bool WeaponController::handle_command(Command command){
+  switch (command){
+    case Command::Up:
+      this->weapon->direction = WeaponDirection::Top;
+      return true;
+      break;
+    case Command::Down:
+      this->weapon->direction = WeaponDirection::Bottom;
+      return true;
+      break;
+    case Command::Left:
+      this->weapon->direction = WeaponDirection::Left;
+      return true;
+      break;
+    case Command::Right:
+      this->weapon->direction = WeaponDirection::Right;
+      return true;
+      break;
+    case Command::Ok:
+      return true;
+    default:
+      return false;
+  }
 }

@@ -1,5 +1,4 @@
 #include "../../include/controllers/player_controller.hpp"
-#include "../../include/cell_objects/entity_status.hpp"
 
 PlayerController::PlayerController(Player* player)
 :MovableController(player), player(player){}
@@ -7,13 +6,13 @@ PlayerController::PlayerController(Player* player)
 bool PlayerController::handle_mode(Command command){
   switch (command){
   case Command::Attack:
-    if (this->player->mode == PlayerMode::NearFight)
-      this->player->mode = PlayerMode::FarFight;
-    else 
-      this->player->mode = PlayerMode::NearFight;
+    this->player->mode = PlayerMode::Attack;
     return true;
   case Command::Move:
     this->player->mode = PlayerMode::Move;
+    return true;
+  case Command::Cast:
+    this->player->mode = PlayerMode::Cast;
     return true;
   default:
     return false;
@@ -26,4 +25,9 @@ bool PlayerController::move_player(Command command){
 
 void PlayerController::set_stay(){
   this->player->status = EntityStatus::Stay;
+}
+
+void PlayerController::add_points(int count){
+  this->player->add_points(count * 10);
+  this->player->add_coins(count * 10);
 }

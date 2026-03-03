@@ -1,14 +1,17 @@
 #ifndef WEAPON_CONTROLLER_H
 #define WEAPON_CONTROLLER_H
 
-#include "../cell_objects/weapon.hpp"
-#include "movable_controller.hpp"
+#include "../models/weapon/weapon.hpp"
+#include "../common/game_commands.hpp"
 
-class WeaponController: public MovableController{
+class WeaponController{
   public:
     WeaponController(Weapon* );
-    bool handle_command(Command command);
-    void set_center();
+    ~WeaponController();
+    std::vector<Cell*> get_area();
+    int get_damage();
+    bool handle_command(Command);
+    bool change_mode();
   private:
     Weapon* weapon;
 };

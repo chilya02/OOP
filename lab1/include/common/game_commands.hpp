@@ -9,7 +9,11 @@ enum class Command{
     Down,
     Ok,
     Attack,
+    ChangeRange,
     Move,
+    Cast,
+    Buy,
+    Escape,
     Undefined
 };
 #endif
