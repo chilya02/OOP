@@ -1,5 +1,5 @@
 #include "../../include/models/game.hpp"
-#include "../../include/models/serializer.hpp"
+#include "../../include/common/serializer.hpp"
 #include "../../include/models/cards/abstract/movable_damage_card.hpp"
 #include <iostream>
 
@@ -97,4 +97,10 @@ int Game::get_attack_damage(){
       }
   }
   return 0;
+}
+
+Game::Game(GameField*field, Player*player, std::vector<Enemy*>*enemies, EnemyBuilding* enemy_building)
+: field(field), player(player), enemies(enemies), enemy_building(enemy_building){
+    this->weapon = new Weapon(this->player, this->field);
+    this->spells_hand = new SpellsHand();
 }

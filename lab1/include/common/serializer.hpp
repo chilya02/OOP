@@ -2,7 +2,7 @@
 #define SERIALIZER_H
 
 #include "../../lib/json.hpp"
-#include "game.hpp"
+#include "../models/game.hpp"
 
 #include <fstream>
 
