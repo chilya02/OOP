@@ -8,7 +8,9 @@ OBJ_DIR = obj
 SRC_DIR = src
 INC_DIR = include
 
-COMMON = 				abstract_iowrapper.o
+COMMON = 				abstract_iowrapper.o \
+								serializer.o \
+								loader.o 
 
 CONTROLLERS = 			movable_damage_controller.o \
 								enemy_building_controller.o \
@@ -57,7 +59,6 @@ MODELS = 				$(CELL_OBJECTS) \
 								$(SPELLS) \
 								$(CELLS) \
 								$(CARDS) \
-								serializer.o \
 								weapon.o \
 								game.o
 
@@ -110,27 +111,6 @@ vpath %.hpp $(INC_DIR)/models $(INC_DIR)/models/cards $(INC_DIR)/models/cards/ab
 vpath %.hpp $(INC_DIR)/models/cell_objects $(INC_DIR)/models/cell_objects/abstract
 vpath %.hpp $(INC_DIR)/models/cells $(INC_DIR)/models/spells $(INC_DIR)/models/spells/abstract
 vpath %.hpp $(INC_DIR)/models/weapon $(INC_DIR)/views $(INC_DIR)/views/ncurses $(INC_DIR)/views/ncurses/abstract
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/%.hpp
-# 	$(COMPILE)
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(CONTROLLERS_DIR)/$(ABS_DIR)/%.cpp $(INC_DIR)/$(CONTROLLERS_DIR)/$(ABS_DIR)/%.hpp
-# 	$(COMPILE)
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(COMMON_DIR)/$(ABS_DIR)/%.cpp $(INC_DIR)/$(COMMON_DIR)/$(ABS_DIR)/%.hpp
-# 	$(COMPILE)
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
-# 	$(COMPILE)
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(MODELS_DIR)/$(SPELLS_DIR)/%.cpp $(INC_DIR)/$(MODELS_DIR)/$(SPELLS_DIR)/%.hpp
-# 	$(COMPILE)
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/$(MODELS_DIR)/$(CARDS_DIR)/%.cpp $(INC_DIR)/$(MODELS_DIR)/$(CARDS_DIR)/%.hpp
-# 	$(COMPILE)
-
-#$(OBJ_DIR)/game_field.o: $(addprefix $(INC_DIR)/, cell.hpp impassable_cell.hpp slow_cell.hpp)
-
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
