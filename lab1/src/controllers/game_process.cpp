@@ -1,7 +1,6 @@
 #include "../../include/controllers/game_process.hpp"
 
 #include <iostream>
-#include <fstream>
 
 GameProcess::GameProcess(Game* game, ViewInterface* view, CommandInterface* controller)
 :game(game), view(view), controller(controller){
@@ -61,8 +60,6 @@ bool GameProcess::timer(){
 
 void GameProcess::loop(){
   Command command;
-  std::fstream file;
-  file.open("log.log", std::ios::out);
   view->invalidate();
   while (state != GameState::Exit){
 
@@ -71,7 +68,6 @@ void GameProcess::loop(){
       state = GameState::Quit;
 
     view->check_size();
-    file << (int) state << std::endl;
     switch (state){
 
       case GameState::AwaitPlayer:

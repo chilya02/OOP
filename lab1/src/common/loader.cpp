@@ -20,11 +20,10 @@ bool Loader::can_load(){
 }
 
 Game* Loader::load(){
-    nlohmann::json json = nlohmann::json::parse(this->file);
-
+    nlohmann::json json;
+    file >> json;
     GameField* field = new GameField(json["field"]["height"].get<int>(), json["field"]["width"].get<int>(), false);
     for (auto cell: json["field"]["impassable_cells"]){
-        std::cout << cell;
         Cell** pointer = &(field->cells[cell["y"].get<int>()][cell["x"].get<int>()]);
         *pointer = new ImpassableCell(**pointer);
     }
