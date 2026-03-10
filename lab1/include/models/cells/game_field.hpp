@@ -5,7 +5,7 @@
 
 class GameField{
   public:
-    GameField(int height, int width);
+    GameField(int height, int width, bool spec_cells=true);
     int size();
     Cell* get_cell(int y, int x);
     int get_width();
@@ -17,5 +17,6 @@ class GameField{
     void create_impassable_cells();
     void create_slow_cells();
     Cell** get_random_cell();
+  friend class Loader;
 };
 #endif // GAME_FIELD

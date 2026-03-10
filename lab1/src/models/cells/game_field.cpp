@@ -5,7 +5,7 @@
 
 #include <ctime>
 
-GameField::GameField(int height, int width):width(width), height(height){
+GameField::GameField(int height, int width, bool spec_cells):width(width), height(height){
   if (width < 10 || height < 10 || width > 25 || height > 25){
     throw "Game field should be grater than 10x10 and less then 25x25";
   }
@@ -13,8 +13,10 @@ GameField::GameField(int height, int width):width(width), height(height){
   srand(time(NULL));
   
   this->cells = Cell::create_matrix(height, width);
-  this->create_impassable_cells();
-  this->create_slow_cells();
+  if (spec_cells){
+    this->create_impassable_cells();
+    this->create_slow_cells();
+  }
 }
 
 Cell** GameField::get_random_cell(){

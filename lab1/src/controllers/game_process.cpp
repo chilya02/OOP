@@ -60,7 +60,6 @@ bool GameProcess::timer(){
 
 void GameProcess::loop(){
   Command command;
-
   view->invalidate();
   while (state != GameState::Exit){
 
@@ -69,7 +68,6 @@ void GameProcess::loop(){
       state = GameState::Quit;
 
     view->check_size();
-
     switch (state){
 
       case GameState::AwaitPlayer:

@@ -2,3 +2,4 @@ game
 .vscode
 obj
 .Ds_Store
+data.json

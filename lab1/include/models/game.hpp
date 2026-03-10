@@ -25,6 +25,10 @@ class Game{
     std::vector<Enemy*>* enemies;
     std::vector<Cell*> get_attack_area();
     int get_attack_damage();
+  protected:
+    Game(GameField*, Player*, std::vector<Enemy*>*, EnemyBuilding*);
+
+    friend class Loader;
 };
 
 #endif //GAME_H
