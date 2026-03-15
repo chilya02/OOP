@@ -4,10 +4,10 @@
 #include "config.hpp"
 #include "abstract/abs_drawer.hpp"
 
-class GameDraw final:public AbstractDrawer{
+class FieldDraw final:public AbstractDrawer{
   public:
-    GameDraw(Game* game);
-    ~GameDraw();
+    FieldDraw(Game* game);
+    ~FieldDraw();
     void draw() final;
 
   private:

@@ -24,12 +24,12 @@ CONTROLLERS = 			movable_damage_controller.o \
 								game_process.o
 
 NCURSES =		 		command_controller.o \
-								view_controller.o \
 								progress_draw.o \
 								abs_drawer.o \
-								game_draw.o \
+								field_draw.o \
 								iowrapper.o \
-								hand_draw.o
+								hand_draw.o	\
+								view.o
 
 SPELLS =	 			direct_damage.o	\
 								spells_hand.o \

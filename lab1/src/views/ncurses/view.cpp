@@ -1,12 +1,12 @@
-#include "../../../include/views/ncurses/view_controller.hpp"
+#include "../../../include/views/ncurses/view.hpp"
 
-NcursesViewController::NcursesViewController(Game* game){
+NcursesView::NcursesView(Game* game){
   
   start_color();
   use_default_colors();
   wclear(stdscr);
   
-  this->field_drawer = new GameDraw(game);
+  this->field_drawer = new FieldDraw(game);
   this->hand_drawer = new HandDraw(game);
   this->progress_drawer = new ProgressDraw(game);
 
@@ -19,7 +19,7 @@ NcursesViewController::NcursesViewController(Game* game){
   this->draw();
 }
 
-NcursesViewController::~NcursesViewController(){
+NcursesView::~NcursesView(){
   if (this->field_drawer)
     delete this->field_drawer;
   if (this->progress_drawer)
@@ -27,7 +27,7 @@ NcursesViewController::~NcursesViewController(){
 }
 
 
-void NcursesViewController::draw(){
+void NcursesView::draw(){
   if (!this->is_visible)
     return;
   this->field_drawer->draw();
@@ -37,7 +37,7 @@ void NcursesViewController::draw(){
   wrefresh(stdscr);
 }
 
-void NcursesViewController::del_windows(){
+void NcursesView::del_windows(){
   if (this->is_visible){
     this->field_drawer->del_window();
     this->progress_drawer->del_window();
@@ -46,20 +46,20 @@ void NcursesViewController::del_windows(){
   }
 }
 
-void NcursesViewController::print_size_message(){
+void NcursesView::print_size_message(){
   wclear(stdscr);
   mvwprintw(stdscr, this->row/2, this->col/2 - 7, "Too small size");
   mvwprintw(stdscr, this->row/2+1, this->col/2 - 5, "min: %dx%d", min_height, min_width);
   wrefresh(stdscr);
 }
 
-void NcursesViewController::create_windows(){
+void NcursesView::create_windows(){
   this->field_drawer->create_window(this->field_y, this->field_x);
   this->hand_drawer->create_window(this->field_y+ this->field_drawer->get_height(), this->field_x);
   this->progress_drawer->create_window(this->field_y, PROGRESS_MARGIN_LR);
 }
 
-bool NcursesViewController::calc_coordinates(){
+bool NcursesView::calc_coordinates(){
   int row, col;
 
   getmaxyx(stdscr, row, col);
@@ -98,7 +98,7 @@ bool NcursesViewController::calc_coordinates(){
   return true;
 }
 
-void NcursesViewController::move_field(){
+void NcursesView::move_field(){
   wclear(stdscr);
   wrefresh(stdscr);
   this->field_drawer->move(this->field_y, this->field_x);
@@ -108,14 +108,14 @@ void NcursesViewController::move_field(){
   move(0,0);
 }
 
-void NcursesViewController::check_size(){
+void NcursesView::check_size(){
   if (this->calc_coordinates()){
     if (this->is_visible)
       this->move_field();
   }
 }
 
-void NcursesViewController::invalidate(){
+void NcursesView::invalidate(){
   this->check_size();
   this->draw();
 }

@@ -1,8 +1,8 @@
-#include "../../../include/views/ncurses/game_draw.hpp"
+#include "../../../include/views/ncurses/field_draw.hpp"
 
 #include "../../../include/models/cards/abstract/movable_damage_card.hpp"
 
-GameDraw::GameDraw(Game* game)
+FieldDraw::FieldDraw(Game* game)
   :AbstractDrawer(game){
   
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
@@ -19,9 +19,9 @@ GameDraw::GameDraw(Game* game)
   init_pair(ENEMY_COLOR, COLOR_RED, COLOR_WHITE);
 }
 
-GameDraw::~GameDraw(){}
+FieldDraw::~FieldDraw(){}
 
-void GameDraw::draw(){
+void FieldDraw::draw(){
   if (!this->win)
     return;
   for (int y = 0; y < this->game->field->get_height(); y++){
@@ -37,7 +37,7 @@ void GameDraw::draw(){
   wrefresh(this->win);
 }
 
-void GameDraw::draw_cell(Cell* cell){
+void FieldDraw::draw_cell(Cell* cell){
   const char* text;
   int attr = 0;
   if (cell->is_impassable()){
@@ -59,7 +59,7 @@ void GameDraw::draw_cell(Cell* cell){
   this->print(y, x, text, attr);
 }
 
-void GameDraw::draw_player(){
+void FieldDraw::draw_player(){
   const char* text = PLAYER_SYM;
   int attr = 0;
 
@@ -80,7 +80,7 @@ void GameDraw::draw_player(){
   this->print(y, x, text, attr);
 }
 
-void GameDraw::print(int y, int x, const char* text, int attr){
+void FieldDraw::print(int y, int x, const char* text, int attr){
   if (!this->win)
     return;
   int y_scr = y * CELL_HEIGHT * 2;
@@ -92,13 +92,13 @@ void GameDraw::print(int y, int x, const char* text, int attr){
   wattroff(win, attr);
 }
 
-void GameDraw::draw_area(){
+void FieldDraw::draw_area(){
   for (auto cell: game->get_attack_area()){
     this->draw_area_cell(cell);
   }
 }
 
-void GameDraw::draw_area_cell(Cell* cell){
+void FieldDraw::draw_area_cell(Cell* cell){
   const char* text = CELL_SYM;
   if (cell->is_slow())
     text = SLOW_SYM;
@@ -107,12 +107,12 @@ void GameDraw::draw_area_cell(Cell* cell){
   this->print(cell->get_y(), cell->get_x(), text, COLOR_PAIR(PLAYER_COLOR));
 }
 
-void GameDraw::draw_building(){
+void FieldDraw::draw_building(){
   Cell* cell = this->game->enemy_building->get_cell();
   this->print(cell->get_y(), cell->get_x(), BUILD_SYM, COLOR_PAIR(BUILD_COLOR));
 }
 
-void GameDraw::draw_enemies(){
+void FieldDraw::draw_enemies(){
   int attr = 0;
   for (Enemy* enemy: *game->enemies){
     attr = COLOR_PAIR(ENEMY_COLOR);

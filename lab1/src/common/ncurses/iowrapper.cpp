@@ -1,7 +1,7 @@
 #include "../../../include/common/ncurses/iowrapper.hpp"
 
 #include "../../../include/inputs/ncurses/command_controller.hpp"
-#include "../../../include/views/ncurses/view_controller.hpp"
+#include "../../../include/views/ncurses/view.hpp"
 
 #include <ncurses.h>
 
@@ -9,7 +9,7 @@ NcursesIOWrapper::NcursesIOWrapper(Game* game){
   initscr();
   noecho();
   this->command = new NcursesCommandController();
-  this->view = new NcursesViewController(game);
+  this->view = new NcursesView(game);
 }
 
 NcursesIOWrapper::~NcursesIOWrapper(){

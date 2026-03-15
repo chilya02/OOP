@@ -4,19 +4,19 @@
 #include "../interfaces/view_interface.hpp"
 #include "../../models/game.hpp"
 
-#include "game_draw.hpp"
+#include "field_draw.hpp"
 #include "hand_draw.hpp"
 #include "progress_draw.hpp"
 
-class NcursesViewController final:public ViewInterface{
+class NcursesView final:public ViewInterface{
   public:
-    NcursesViewController(Game* game);
-    ~NcursesViewController() final;
+    NcursesView(Game* game);
+    ~NcursesView() final;
     void invalidate() override;
     void check_size() override;
 
   private:
-    GameDraw* field_drawer;
+    FieldDraw* field_drawer;
     HandDraw* hand_drawer;
     ProgressDraw* progress_drawer;
     bool is_visible;
