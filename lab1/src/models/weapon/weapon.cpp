@@ -1,7 +1,7 @@
 #include "../../../include/models/weapon/weapon.hpp"
 
 Weapon::Weapon(Player* player, GameField* field)
-:direction(WeaponDirection::Top), player(player), field(field){}
+:direction(WeaponDirection::Top), player(player), field(field), mode(WeaponMode::Near){}
 
 Weapon::~Weapon(){}
 
