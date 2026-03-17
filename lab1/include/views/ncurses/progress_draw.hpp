@@ -1,10 +1,10 @@
 #ifndef PROGRESS_DRAW_H
 #define PROGRESS_DRAW_H
 
-#include "abstract/abs_drawer.hpp"
+#include "abstract/abs_game_drawer.hpp"
 #include "config.hpp"
 
-class ProgressDraw final : public AbstractDrawer{
+class ProgressDraw final : public AbstractGameDrawer{
   public:
     ProgressDraw(Game* game);
     ~ProgressDraw();

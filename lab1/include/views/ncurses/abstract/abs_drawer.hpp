@@ -1,27 +1,16 @@
 #ifndef ABS_DRAWER_H
 #define ABS_DRAWER_H
 
-#include "../../../models/game.hpp"
-
 #include <ncurses.h>
 
 class AbstractDrawer{
   public:
-    AbstractDrawer(Game* game);
-    ~AbstractDrawer();
-    void create_window(int y, int x);
-    void del_window();
-    void move(int y, int x);
-    
+    AbstractDrawer();
     virtual void draw() = 0;
+    void move(int y, int x);
 
-    int get_height();
-    int get_width();
-    
   protected:
-    Game* game;
     WINDOW* win;
-    int scr_height;
-    int scr_width;
 };
-#endif // ABS_DRAWER_H
+
+#endif //ABS_DRAWER_H

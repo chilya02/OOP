@@ -1,10 +1,10 @@
-#ifndef GAME_DRAW_H
-#define GAME_DRAW_H
+#ifndef FIELD_DRAW_H
+#define FIELD_DRAW_H
 
 #include "config.hpp"
-#include "abstract/abs_drawer.hpp"
+#include "abstract/abs_game_drawer.hpp"
 
-class FieldDraw final:public AbstractDrawer{
+class FieldDraw final:public AbstractGameDrawer{
   public:
     FieldDraw(Game* game);
     ~FieldDraw();

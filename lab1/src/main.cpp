@@ -1,21 +1,16 @@
-#include "../include/controllers/game_process.hpp"
-#include "../include/models/game.hpp"
 #include "../include/common/ncurses/iowrapper.hpp"
-#include "../include/common/loader.hpp"
+#include "../include/models/app.hpp"
+#include "../include/controllers/app_controller.hpp"
+
 
 int main(){
-    Loader* loader = new Loader();
-    Game* game; 
-    if (loader->can_load()){
-        game = loader->load();
-    } else {
-        game = new Game();
-    }
-    NcursesIOWrapper* io = new NcursesIOWrapper(game);
-    GameProcess* game_process = new GameProcess(game, io);
-    game_process->start();
-    delete game_process;
+    App* app = new App();
+    
+    NcursesIOWrapper* io = new NcursesIOWrapper(app);
+    AppController* controller = new AppController(app, io);
+    
+    delete controller;
     delete io;
-    delete game;
+    delete app;
 }
 

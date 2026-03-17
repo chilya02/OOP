@@ -1,121 +1,51 @@
 #include "../../../include/views/ncurses/view.hpp"
 
-NcursesView::NcursesView(Game* game){
+NcursesView::NcursesView(App* app):app(app), prev_state(app->get_state()){
   
   start_color();
   use_default_colors();
   wclear(stdscr);
-  
-  this->field_drawer = new FieldDraw(game);
-  this->hand_drawer = new HandDraw(game);
-  this->progress_drawer = new ProgressDraw(game);
+  init_pair(DEFAULT_COLOR, COLOR_WHITE, COLOR_BLACK);
+  init_pair(SELECTED_COLOR, COLOR_BLACK, COLOR_WHITE);
 
-  this->min_height = this->field_drawer->get_height() + VIEW_MARGIN_TD + this->hand_drawer->get_height();
-
-  this->min_width = this->field_drawer->get_width() + this->progress_drawer->get_width() + 2 * PROGRESS_MARGIN_LR;
-
-  this->calc_coordinates();
-  
-  this->draw();
+  this->load_menu_draw = new MenuDraw(app->get_load_menu(), "LOAD MENU");
+  this->quit_menu_draw = new MenuDraw(app->get_quit_menu(), "  PAUSE");
 }
 
 NcursesView::~NcursesView(){
-  if (this->field_drawer)
-    delete this->field_drawer;
-  if (this->progress_drawer)
-    delete this->progress_drawer;
-}
-
-
-void NcursesView::draw(){
-  if (!this->is_visible)
-    return;
-  this->field_drawer->draw();
-  this->hand_drawer->draw();
-  this->progress_drawer->draw();
-  move(0, 0);
-  wrefresh(stdscr);
-}
-
-void NcursesView::del_windows(){
-  if (this->is_visible){
-    this->field_drawer->del_window();
-    this->progress_drawer->del_window();
-    this->hand_drawer->del_window();
-    wclear(stdscr);
-  }
-}
-
-void NcursesView::print_size_message(){
-  wclear(stdscr);
-  mvwprintw(stdscr, this->row/2, this->col/2 - 7, "Too small size");
-  mvwprintw(stdscr, this->row/2+1, this->col/2 - 5, "min: %dx%d", min_height, min_width);
-  wrefresh(stdscr);
-}
-
-void NcursesView::create_windows(){
-  this->field_drawer->create_window(this->field_y, this->field_x);
-  this->hand_drawer->create_window(this->field_y+ this->field_drawer->get_height(), this->field_x);
-  this->progress_drawer->create_window(this->field_y, PROGRESS_MARGIN_LR);
-}
-
-bool NcursesView::calc_coordinates(){
-  int row, col;
-
-  getmaxyx(stdscr, row, col);
-  
-  if (this->row == row && this->col == col)
-    return false;
-  
-  this->col = col;
-  this->row = row;
-  
-  int field_width = this->field_drawer->get_width();
-  int field_height = this->field_drawer->get_height();
-
-  this->field_x = (col - field_width) / 2;
-  this->field_y = (row - field_height) / 2;
-
-  int min_field_x = this->progress_drawer->get_width() + 2 * PROGRESS_MARGIN_LR;
-  int min_field_y = VIEW_MARGIN_TD;
-
-  field_x = field_x > min_field_x ? field_x : min_field_x;
-  field_y = field_y > min_field_y ? field_y : min_field_y;
-  
-  if (col < this->min_width || row < this->min_height){
-    if (this->is_visible){
-      del_windows();
-      this->is_visible = false;
-    }
-    this->print_size_message();
-  } else {
-      if (!this->is_visible){
-      this->is_visible = true;
-      this->create_windows();
-    }
-  }
-
-  return true;
-}
-
-void NcursesView::move_field(){
-  wclear(stdscr);
-  wrefresh(stdscr);
-  this->field_drawer->move(this->field_y, this->field_x);
-  this->hand_drawer->move(this->field_y+ this->field_drawer->get_height(), this->field_x);
-  this->progress_drawer->move(this->field_y, PROGRESS_MARGIN_LR);
-  wrefresh(stdscr);
-  move(0,0);
+  if (this->game_drawer)
+    delete this->game_drawer;
+  // if (this->menu_draw)
+  //   delete this->menu_draw;
 }
 
 void NcursesView::check_size(){
-  if (this->calc_coordinates()){
-    if (this->is_visible)
-      this->move_field();
-  }
+  this->get_active_draw()->check_size();
 }
 
 void NcursesView::invalidate(){
-  this->check_size();
-  this->draw();
+  this->get_active_draw()->invalidate();
+}
+
+
+IDraw* NcursesView::get_active_draw(){
+
+  if (this->prev_state != app->get_state()){
+    this->prev_state = app->get_state();
+    wclear(stdscr);
+    wrefresh(stdscr);
+  }
+
+  switch (app->get_state()){
+    case AppState::Load:
+      return this->load_menu_draw;
+    case AppState::Play:
+        if (!this->game_drawer){
+          this->game_drawer = new GameDraw(app->get_game());
+        }
+      return this->game_drawer;
+    case AppState::Quit:
+      return this->quit_menu_draw;  
+  }
+
 }

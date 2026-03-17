@@ -2,15 +2,12 @@
 
 #include <iostream>
 
-GameProcess::GameProcess(Game* game, ViewInterface* view, CommandInterface* controller)
-:game(game), view(view), controller(controller){
+GameProcess::GameProcess(Game* game)
+:game(game){
   this->enemies_controller = new EnemiesController(game->enemies, game->player, game->field);
   this->command_handler = new CommandHandler(game, enemies_controller);
   this->building_controller = new EnemyBuildingController(game->enemies, game->enemy_building);
 }
-
-GameProcess::GameProcess(Game* game, IOWrapperInterface* wrapper)
-:GameProcess(game, wrapper->get_view(), wrapper->get_command()){}
 
 GameProcess::~GameProcess(){
   if (this->building_controller)
@@ -26,9 +23,7 @@ void GameProcess::start(){
     std::cerr << "Game has not configurated" << std::endl;
     exit(0);
   }
-
-  state = GameState::AwaitPlayer;
-  loop();
+  state = GameState::AwaitPlayer;\
 }
 
 void GameProcess::change_state(){
@@ -58,26 +53,20 @@ bool GameProcess::timer(){
    return ((float)(clock() - last_move))/CLOCKS_PER_SEC >= 0.3;
 }
 
-void GameProcess::loop(){
-  Command command;
-  view->invalidate();
-  while (state != GameState::Exit){
-
-    command = controller->get_command();
+bool GameProcess::handle_command(Command command){
     if (command == Command::Quit)
       state = GameState::Quit;
 
-    view->check_size();
+    bool res;
     switch (state){
 
       case GameState::AwaitPlayer:
-
-        if (this->command_handler->handle_command(command))
-          view->invalidate();
+        res = this->command_handler->handle_command(command);
 
         if (!game->player->can_act()){
           this->change_state();
         }
+        return res;
 
         break;
 
@@ -86,7 +75,8 @@ void GameProcess::loop(){
         if (this->timer()){
           this->enemies_controller->act();
           this->change_state();
-          view->invalidate();
+          
+          return true;
         }
 
         break;
@@ -94,12 +84,11 @@ void GameProcess::loop(){
       case GameState::AwaitBuilding:
           this->building_controller->act();
           this->change_state();
-          view->invalidate();
+          return true;
         break;
 
       case GameState::Quit:
 
-        state = GameState::Exit;
         break;  
       
       case GameState::GameOver:
@@ -107,5 +96,5 @@ void GameProcess::loop(){
       case GameState::Exit:
         break;
     }
-  }
+    return false;
 }

@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 #include <string>
-
+#include <iostream>
 #include "interfaces/menu_interface.hpp"
 
 template <typename T>
@@ -17,10 +17,18 @@ class Menu: public IMenu{
         throw "Empty menu";
       return this->items[active_index];
     }
-    std::string get_selected_name(){
+    std::string get_selected_name() override{
       if (this->items.empty())
         throw "Empty menu";
       return this->names[this->get_selected_item()];
+    }
+    
+    std::vector <std::string> get_names() override{
+      std::vector <std::string> res;
+      for (T el: items){
+        res.push_back(get_name(el));
+      }
+      return res;
     }
 
     std::string get_name(T item){
@@ -44,7 +52,14 @@ class Menu: public IMenu{
       if (this->items.empty())
         return;
       this->active_index--;
+      this->active_index += this->items.size();
       this->active_index %= this->items.size();
+    };
+    int size() override{
+      return this->items.size();
+    };
+    int get_selected_index() override{
+      return this->active_index;
     };
   protected:
     int active_index;

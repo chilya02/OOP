@@ -2,36 +2,26 @@
 #define NCURSES_GAME_VIEW_H
 
 #include "../interfaces/view_interface.hpp"
-#include "../../models/game.hpp"
+#include "interfaces/draw_interface.hpp"
+#include "menu_draw.hpp"
+#include "../../models/app.hpp"
 
-#include "field_draw.hpp"
-#include "hand_draw.hpp"
-#include "progress_draw.hpp"
+#include "game_draw.hpp"
 
 class NcursesView final:public ViewInterface{
   public:
-    NcursesView(Game* game);
+    NcursesView(App*);
     ~NcursesView() final;
     void invalidate() override;
     void check_size() override;
 
   private:
-    FieldDraw* field_drawer;
-    HandDraw* hand_drawer;
-    ProgressDraw* progress_drawer;
-    bool is_visible;
-    int col;
-    int row;
-    int field_x;
-    int field_y;
-    int min_width;
-    int min_height;
-    void draw();
-    void print_size_message();
-    void del_windows();
-    void create_windows();
-    bool calc_coordinates();
-    void move_field();
+    IDraw* get_active_draw();
+    GameDraw* game_drawer;
+    MenuDraw* load_menu_draw;
+    MenuDraw* quit_menu_draw;
+    App* app;
+    AppState prev_state;
 };
 
 #endif

@@ -3,9 +3,9 @@
 #include "../../include/models/cards/direct_damage_card.hpp"
 
 SpellsHandController::SpellsHandController(SpellsHand* spells_hand, GameField* field, Player* player)
-  :MenuController(*spells_hand), spells_hand(spells_hand), field(field), player(player){
-    spells_hand->add_item(new AreaDamageCard(field, player), "Area damage");
-    spells_hand->add_item(new DirectDamageCard(field, player), "Direct damage");
+  :MenuController(spells_hand), spells_hand(spells_hand), field(field), player(player){
+    spells_hand->add_item(new AreaDamageCard(field, player), std::string("Area damage"));
+    spells_hand->add_item(new DirectDamageCard(field, player), std::string("Direct damage"));
   }
 
 SpellsHandController::~SpellsHandController(){}

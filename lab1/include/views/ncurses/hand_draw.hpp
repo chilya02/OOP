@@ -1,9 +1,9 @@
 #ifndef HAND_DRAW_H
 #define HAND_DRAW_H 
 
-#include "abstract/abs_drawer.hpp"
+#include "abstract/abs_game_drawer.hpp"
 
-class HandDraw: public AbstractDrawer{
+class HandDraw: public AbstractGameDrawer{
   public:
     HandDraw(Game* game);
     ~HandDraw();

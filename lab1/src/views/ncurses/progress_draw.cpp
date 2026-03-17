@@ -1,7 +1,7 @@
 #include "../../../include/views/ncurses/progress_draw.hpp"
 
 ProgressDraw::ProgressDraw(Game* game)
-:AbstractDrawer(game){
+:AbstractGameDrawer(game){
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
   this->scr_width = 10;
 }

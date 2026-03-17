@@ -5,11 +5,11 @@
 
 #include <ncurses.h>
 
-NcursesIOWrapper::NcursesIOWrapper(Game* game){
+NcursesIOWrapper::NcursesIOWrapper(App* app){
   initscr();
   noecho();
   this->command = new NcursesCommandController();
-  this->view = new NcursesView(game);
+  this->view = new NcursesView(app);
 }
 
 NcursesIOWrapper::~NcursesIOWrapper(){

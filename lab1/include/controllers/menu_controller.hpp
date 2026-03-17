@@ -6,12 +6,12 @@
 
 class MenuController{
   public:
-    MenuController(IMenu&, bool = false);
+    MenuController(IMenu*, bool = false);
     ~MenuController();
     virtual bool handle_command(Command command);
   protected:
     bool vertical;
-    IMenu& menu;
+    IMenu* menu;
 };
 
 #endif

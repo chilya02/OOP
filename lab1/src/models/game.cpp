@@ -1,10 +1,9 @@
 #include "../../include/models/game.hpp"
-#include "../../include/common/serializer.hpp"
 #include "../../include/models/cards/abstract/movable_damage_card.hpp"
 #include <iostream>
 
 Game::Game(int height, int width, int period){
-    try{  
+  try{  
     this->field = new GameField(height, width);
     Cell* player_cell = &(*this->field->get_cell(height - 1, width - 1));
     this->player = new Player(player_cell);
@@ -27,11 +26,6 @@ Game::Game(int height, int width, int period){
 }
 
 Game::~Game(){
-
-  Serializer* s = new Serializer(this);
-  s->save();
-  delete s;
-
   if (this->field)
     delete this->field;
   if (this->player)
@@ -100,7 +94,7 @@ int Game::get_attack_damage(){
 }
 
 Game::Game(GameField*field, Player*player, std::vector<Enemy*>*enemies, EnemyBuilding* enemy_building)
-: field(field), player(player), enemies(enemies), enemy_building(enemy_building){
+: field(field), player(player), enemy_building(enemy_building), enemies(enemies){
     this->weapon = new Weapon(this->player, this->field);
     this->spells_hand = new SpellsHand();
 }

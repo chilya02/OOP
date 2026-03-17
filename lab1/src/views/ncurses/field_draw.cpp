@@ -3,12 +3,11 @@
 #include "../../../include/models/cards/abstract/movable_damage_card.hpp"
 
 FieldDraw::FieldDraw(Game* game)
-  :AbstractDrawer(game){
+  :AbstractGameDrawer(game){
   
   this->scr_height = game->field->get_height() * CELL_HEIGHT * 2;
   this->scr_width = game->field->get_width() * CELL_WIDTH * 2;
   
-  init_pair(DEFAULT_COLOR, COLOR_WHITE, COLOR_BLACK);
   init_pair(CELL_COLOR, COLOR_BLACK, COLOR_GREEN);
   init_pair(IMPASSABLE_COLOR, COLOR_WHITE, COLOR_RED);
   init_pair(SLOW_COLOR, COLOR_WHITE, COLOR_BLUE);

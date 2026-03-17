@@ -5,7 +5,7 @@
 #include <sstream>
 
 HandDraw::HandDraw(Game* game):
-AbstractDrawer(game), prev_size(0){
+AbstractGameDrawer(game), prev_size(0){
   this->scr_height = 6;
   this->scr_width = game->spells_hand->get_size() * 10;
 

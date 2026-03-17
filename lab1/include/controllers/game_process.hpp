@@ -25,22 +25,20 @@ class GameProcess{
   };
 
   public:
-    GameProcess(Game* game, ViewInterface* view, CommandInterface* controller);
-    GameProcess(Game* game, IOWrapperInterface* wrapper);
+    GameProcess(Game* game);
     ~GameProcess();
     void start();
+    bool handle_command(Command);
 
   private:
     Game* game;
     GameState state;
-    ViewInterface* view;
-    CommandInterface* controller;
     CommandHandler* command_handler;
     EnemiesController* enemies_controller;
     EnemyBuildingController* building_controller;
     clock_t last_move;
     bool timer();
     void change_state();
-    void loop();
+    //void loop();
 };
 #endif // GAME_PROCESS_H
