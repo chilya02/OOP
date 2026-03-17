@@ -1,6 +1,6 @@
 #include "../../../include/models/cells/cell.hpp"
 
-Cell::Cell(int y, int x):y(y), x(x){
+Cell::Cell(int y, int x):y(y), x(x), slow(false), impassable(false){
   this->top = NULL;
   this->bottom = NULL;
   this->right = NULL;

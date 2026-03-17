@@ -10,13 +10,12 @@ NcursesView::NcursesView(App* app):app(app), prev_state(app->get_state()){
 
   this->load_menu_draw = new MenuDraw(app->get_load_menu(), "LOAD MENU");
   this->quit_menu_draw = new MenuDraw(app->get_quit_menu(), "  PAUSE");
+  this->game_over_draw = new MenuDraw(app->get_game_over_menu(), "GAME OVER");
 }
 
 NcursesView::~NcursesView(){
   if (this->game_drawer)
     delete this->game_drawer;
-  // if (this->menu_draw)
-  //   delete this->menu_draw;
 }
 
 void NcursesView::check_size(){
@@ -46,6 +45,12 @@ IDraw* NcursesView::get_active_draw(){
       return this->game_drawer;
     case AppState::Quit:
       return this->quit_menu_draw;  
+    case AppState::GameOver:
+        if (this->game_drawer){
+          delete this->game_drawer;
+          this->game_drawer = nullptr;
+        }
+        return this->game_over_draw;
   }
 
 }

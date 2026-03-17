@@ -14,6 +14,7 @@ AppController::AppController(App* app, CommandInterface* controller, ViewInterfa
   }
   this->load_menu_controller = new MenuController(app->load_menu, true);
   this->quit_menu_controller = new MenuController(app->quit_menu, true);
+  this->game_over_menu_controller = new MenuController(app->game_over_menu, true);
   this->view->invalidate();
   loop();
 }
@@ -42,6 +43,32 @@ bool AppController::handle_load(Command command){
     return true;
   }
   return this->load_menu_controller->handle_command(command);
+}
+
+bool AppController::handle_game_over(Command command){
+  if (command == Command::Ok){
+    switch (this->app->game_over_menu->get_selected_item()){
+      case GameOverMenuItems::NewGame:
+        if (this->process){
+          delete this->process;
+        }  
+        if (this->app->game){
+          delete this->app->game;
+        }
+        this->app->game = new Game();
+        this->process = new GameProcess(app->get_game());
+        this->process->start();
+        this->app->state = AppState::Play;
+        break;
+      case GameOverMenuItems::Exit:
+        this->app->state = AppState::Exit;
+        break;
+      default:
+        break;
+    }
+    return true;
+  }
+  return this->game_over_menu_controller->handle_command(command);
 }
 
 bool AppController::handle_quit(Command command){
@@ -84,6 +111,7 @@ void AppController::loop(){
           break;
         case AppState::Load:
         case AppState::Quit:
+        case AppState::GameOver:
           this->app->state = AppState::Exit;
           break;
       }
@@ -95,6 +123,12 @@ void AppController::loop(){
         break;
       case AppState::Play:
         flag = this->process->handle_command(command);
+        if (this->app->game->player->get_HP() == 0){
+          this->app->state = AppState::GameOver;
+        }
+        break;
+      case AppState::GameOver:
+        flag = this->handle_game_over(command);
         break;
       case AppState::Quit:
         flag = flag || this->handle_quit(command); 

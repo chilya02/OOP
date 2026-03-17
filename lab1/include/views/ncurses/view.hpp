@@ -20,6 +20,7 @@ class NcursesView final:public ViewInterface{
     GameDraw* game_drawer;
     MenuDraw* load_menu_draw;
     MenuDraw* quit_menu_draw;
+    MenuDraw* game_over_draw;
     App* app;
     AppState prev_state;
 };

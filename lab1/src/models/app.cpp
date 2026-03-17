@@ -4,6 +4,7 @@
 App::App(){
     this->load_menu = new LoadMenu();
     this->quit_menu = new QuitMenu();
+    this->game_over_menu = new GameOverMenu();
     this->loader = new Loader();
     if (!loader->can_load()){
         this->game = new Game();
@@ -34,4 +35,7 @@ LoadMenu* App::get_load_menu(){
 
 QuitMenu* App::get_quit_menu(){
     return this->quit_menu;
+}
+GameOverMenu* App::get_game_over_menu(){
+    return this->game_over_menu;
 }

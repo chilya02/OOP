@@ -4,6 +4,7 @@
 enum class AppState{
     Load,
     Play,
+    GameOver,
     Quit,
     Exit,
 };

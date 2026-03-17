@@ -63,6 +63,7 @@ MODELS = 				$(CELL_OBJECTS) \
 								$(SPELLS) \
 								$(CELLS) \
 								$(CARDS) \
+								game_over_menu.o \
 								load_menu.o \
 								quit_menu.o \
 								weapon.o \

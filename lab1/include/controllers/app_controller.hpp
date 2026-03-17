@@ -14,10 +14,12 @@ class AppController{
     private:
         bool handle_load(Command);
         bool handle_quit(Command);
+        bool handle_game_over(Command);
         GameProcess* process;
         App* app;
         MenuController* load_menu_controller;
         MenuController* quit_menu_controller;
+        MenuController* game_over_menu_controller;
         ViewInterface* view;
         CommandInterface* controller;
         void loop();
